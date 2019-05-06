@@ -37,6 +37,7 @@ class Alpha extends Migration
             $table->integer('Victoria');
             $table->integer('Empate');
             $table->integer('Derrota');
+            $table->integer('Puntos');
             $table->timestamps();
         });
 
@@ -95,12 +96,12 @@ class Alpha extends Migration
         });
 
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('Id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('Tipo');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->integer('Tipo')->nullable();
             $table->integer('Equipo')->nullable();
             $table->foreign('Tipo')->references('Id')->on('tiposDeUsuarios');
             $table->foreign('Equipo')->references('Id')->on('equipos');
