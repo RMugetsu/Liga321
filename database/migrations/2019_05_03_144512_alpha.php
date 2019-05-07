@@ -45,8 +45,8 @@ class Alpha extends Migration
         Schema::create('partidos', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('Arbitro');
-            $table->integer('Equipo_Local');
-            $table->integer('Equipo_Visitante');
+            $table->integer('Equipo_Local')->unsigned();
+            $table->integer('Equipo_Visitante')->unsigned();
             $table->date('Fecha_Inicio');
             $table->string('Hora_de_Inicio');
             $table->foreign('Equipo_Local')->references('id')->on('equipos');
@@ -58,9 +58,9 @@ class Alpha extends Migration
             $table->string('Nombre');
             $table->string('Apellido');
             $table->integer('Dorsal');
-            $table->integer('Equipo');
+            $table->integer('Equipo')->unsigned();
             $table->integer('Edad');
-            $table->integer('Lesion')->nullable();
+            $table->integer('Lesion')->nullable()->unsigned();
             $table->integer('Partidos_Jugados');
             $table->integer('Posicion');
             $table->foreign('Equipo')->references('id')->on('equipos');
@@ -74,7 +74,7 @@ class Alpha extends Migration
             $table->integer('Jugador_2')->nullable()->unsigned();
             $table->integer('Equipo')->nullable()->unsigned();
             $table->integer('Sancion')->nullable()->unsigned();
-            $table->integer('Partido');
+            $table->integer('Partido')->unsigned();
             $table->foreign('Tipo')->references('id')->on('tiposDeEventos');
             $table->foreign('Jugador_1')->references('id')->on('jugadores');
             $table->foreign('Jugador_2')->references('id')->on('jugadores');
@@ -86,7 +86,7 @@ class Alpha extends Migration
 
         Schema::create('lesiones', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->integer('Evento')->nullable();
+            $table->integer('Evento')->nullable()->unsigned();
             $table->date('Fecha_Inicio')->nullable();
             $table->date('Fecha_Final')->nullable();
             $table->string('Descripcion')->nullable();
@@ -100,8 +100,8 @@ class Alpha extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('Tipo')->nullable();
-            $table->integer('Equipo')->nullable();
+            $table->integer('Tipo')->nullable()->unsigned();
+            $table->integer('Equipo')->nullable()->unsigned();
             $table->foreign('Tipo')->references('id')->on('tiposDeUsuarios');
             $table->foreign('Equipo')->references('id')->on('equipos');
             $table->rememberToken();
@@ -128,18 +128,25 @@ class Alpha extends Migration
      */
     public function down()
     {   
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_resets');
-        Schema::dropIfExists('tiposDeUsuarios');
+        Schema::table('jugadores', function (Blueprint $table) {
+            $table->dropForeign('jugadores_lesion_foreign');
+            $table->dropForeign('jugadores_equipo_foreign');
+        });
+        Schema::table('partidos', function (Blueprint $table) {
+            $table->dropForeign('partidos_equipo_local_foreign');
+            $table->dropForeign('partidos_equipo_visitante_foreign');
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_equipo_foreign');
+        });
         Schema::dropIfExists('lesiones');
         Schema::dropIfExists('eventos');
+        Schema::dropIfExists('jugadores');
         Schema::dropIfExists('tiposDeEventos');
         Schema::dropIfExists('partidos');
-        Schema::dropIfExists('jugadores');
         Schema::dropIfExists('equipos');
-
-
-
-        
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('tiposDeUsuarios');
+        Schema::dropIfExists('password_resets');
     }
 }
