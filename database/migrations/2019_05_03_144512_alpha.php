@@ -35,7 +35,7 @@ class Alpha extends Migration
             $table->string('Entrenador');
             $table->integer('Alineacion');
             $table->integer('Victoria');
-            $table->integer('Empate');
+            $table->integer('Empate')->default(0);
             $table->integer('Derrota');
             $table->integer('Puntos');
             $table->timestamps();
