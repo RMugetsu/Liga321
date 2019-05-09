@@ -15,8 +15,20 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/Calendario', function () {
+Route::get('/calendario', function () {
     return view('calendario');
+});
+
+Route::get('/administracion', function () {
+    return view('calendario');
+});
+
+Route::get('/perfil', function () {
+    return view('perfil');
+});
+
+Route::get('/equipo/:id', function () {
+    return view('equipo');
 });
 
 Route::get('/logged', function () {

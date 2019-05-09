@@ -1,1 +1,1 @@
-@include('home')
+<h2>Calendario</h2>
