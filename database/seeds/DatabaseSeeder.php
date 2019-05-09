@@ -134,7 +134,7 @@ class DatabaseSeeder extends Seeder
             ['Lorenzo','Moron',16,6,25,0,15],
             ['Sergio','Leon',7,6,30,0,16],
             ['Junior','Firpo',20,6,22,0,17],
-            ['Pau','Lopez',13,6,24,0,18],
+            ['Pau','Lopez',13,6,24,0,18], //CAMBIAR REPETIDOO!!!!!
             //sevilla
             //athletic
             //getafe
@@ -149,10 +149,8 @@ class DatabaseSeeder extends Seeder
             //deportivo alaves
             //cd leganes
             //sd eibar
-            //malaga cf
-            //granada cf
-            //elche cf
-            //ud almeria
+
+            //20 equipos en total
         ];
             
             $equipos = [
@@ -176,10 +174,6 @@ class DatabaseSeeder extends Seeder
             ['Deportivo Alaves','Cervantes Ibilbidea, s/n, 01007 Vitoria-Gasteiz, Araba-Estadio de Mendizorroza','Abelardo Fernandez',18],
             ['CD Leganes','Calle Arquitectura, s/n, 28918 Leganes, Madrid-Estadio Municipal Butarque','Mauricio Pellegrino',19],
             ['SD Eibar','Ipurua Kalea, 2, 20600 Eibar, Gipuzkoa-Estadio Municipal de Ipurua','Jose Luis Mendilibar',20],
-            ['Malaga CF','Paseo Martiricos, s/n, 29011 Malaga-Estadio La Rosaleda','Juan Ramon Lopez Muñiz',21],
-            ['Granada CF','Calle Pintor Manuel Maldonado, s/n, 18007 Granada-Estadio Nuevo Los Carmenes','Diego Martinez Penas',22],
-            ['Elche CF','03208 Elche, Alicante-Estadio Manuel Martinez Valero','Jose Rojo Martin',23],
-            ['UD Almeria','Calle Alcalde Santiago Martinez Cabrejas, 5, 04007 Almeria-Estadio de los Juegos Mediterraneos','Fco. Javier Fernandez',24],
             ];
 
 
@@ -239,7 +233,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => 'Admin',
-                'Tipo' => 1 ,
+                'Notificacion' => 1 ,
             ]);
       }
 }
