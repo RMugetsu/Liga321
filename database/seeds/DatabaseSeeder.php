@@ -10,12 +10,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-/*          Administrador,
-			Aficionado,
-			Arbitro,
-			Entrenador,
-			Jugador*/
+    {          
         $roles = ['Administrador', 'Aficionado', 'Arbitro', 'Entrenador', 'Jugador'];
 
         $eventos = ['Cambio De Jugador', 'Posesion', 'Gol', 'Tarjeta Amarilla', 'Tarjeta Roja','Lesion', 'Faltas'];
@@ -181,13 +176,12 @@ class DatabaseSeeder extends Seeder
                 $nombre=$equipos[$i][0];
                 $direccion=$equipos[$i][1];
                 $entrenador=$equipos[$i][2];
-                $alineacion=$equipos[$i][3];
                                 
                 DB::table('equipos')->insert([
                     'Nombre' => $nombre ,
                     'Direccion_del_campo' => $direccion ,
                     'Entrenador' => $entrenador ,
-                    'Alineacion' => $alineacion ,
+                    'Alineacion' => 1,
                     'Victoria' => 0,
                     'Empate' => 0,
                     'Derrota' => 0,
@@ -233,7 +227,68 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => 'Admin',
-                'Notificacion' => 1 ,
+                'notificacion_tipo' => 1,
+                'Tipo' => 1 ,
             ]);
+            
+            DB::table('users')->insert([
+                    'name' => 'Arbitro1',
+                    'email' => 'arbitro1@gmail.com',
+                    'password' => 'Arbitro123',
+                    'notificacion_tipo' => 3,
+                    'Tipo' => 3 ,
+                ]);
+                
+
+            $lista_equipos = array();
+            for ($i=0; $i<sizeof($equipos);$i++){
+                array_push($lista_equipos,$equipos[$i][3]);
+            }
+
+            $partidos = array();
+
+            foreach($lista_equipos as $k){
+                foreach($lista_equipos as $j){
+                    if($k == $j){
+                        continue;
+                    }
+                    $z = array($k,$j);
+                    if(!in_array($z,$partidos)){
+                        $partidos[] = $z;
+                    }
+                }
+            }
+
+            $inicio_liga = "2019-05-22";
+            $weekDay = date('w', strtotime($inicio_liga)); //numero de la semana
+            $fechas = [[$inicio_liga, 19],[$inicio_liga, 21]];
+            $prueba = date('Y-m-d', strtotime($inicio_liga. ' + 1 days'));
+            var_dump($prueba);
+            //var_dump(sizeof($partidos));
+            for($i=0; $i<189;$i++){
+                $dia = end($fechas)[0];
+                if ((date('w', strtotime($dia)))==7){
+                    $nueva_fecha = date('Y-m-d', strtotime($dia. ' + 3 days'));
+                    array_push($fechas, [$nueva_fecha,19]);
+                    array_push($fechas, [$nueva_fecha,21]);
+                }
+                else {
+                    $nueva_fecha = date('Y-m-d', strtotime($dia. ' + 1 days'));
+                    array_push($fechas, [$nueva_fecha,19]);
+                    array_push($fechas, [$nueva_fecha,21]);
+                }
+            }
+
+            for ($i=0;$i<sizeof($partidos);$i++){
+                DB::table('partidos')->insert([
+                    'Arbitro' => 'Arbitro1',
+                    'Equipo_Local' => $partidos[$i][0],
+                    'Equipo_Visitante' => $partidos[$i][1],
+                    'Fecha_Inicio' => $fechas[$i][0],
+                    'Hora_de_Inicio' => $fechas[$i][1],
+                ]);
+            }
+
       }
 }
+

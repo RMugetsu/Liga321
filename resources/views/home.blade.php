@@ -7,7 +7,6 @@
 <body>
 @section('content')
 <div class="container">
-<a class="btn" href="/Calendario">click</a>
 </div>
 </body>
 @endsection

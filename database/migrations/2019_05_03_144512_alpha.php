@@ -63,7 +63,6 @@ class Alpha extends Migration
             $table->integer('Lesion')->nullable()->unsigned();
             $table->integer('Partidos_Jugados');
             $table->integer('Posicion');
-            $table->integer('Usuario')->unsigned();
             $table->foreign('Equipo')->references('id')->on('equipos');
             $table->timestamps();
         });
@@ -98,7 +97,6 @@ class Alpha extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('nickname');
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
@@ -119,7 +117,6 @@ class Alpha extends Migration
 
         Schema::table('jugadores', function (Blueprint $table) {
             $table->foreign('Lesion')->references('id')->on('lesiones');
-            $table->foreign('Usuario')->references('id')->on('users');
         });
     }
 
