@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/Calendario', 'CalendarioController@generarLiga');
+Route::get('/Calendario', function () {
+    return view('calendario');
+});
 
 Route::get('/logged', function () {
     return view('logged');
