@@ -308,40 +308,56 @@ class DatabaseSeeder extends Seeder
                 $equipos = equipos();
                 $temporada = temporada();
 
-                for ($jornada=0; $jornada <sizeof($temporada)/2 ; $jornada++) {
+                for ($jornada=0; $jornada <(sizeof($temporada))/2 ; $jornada++) {
+                    var_dump("for con jornada ".$jornada);
                     for ($partido=0; $partido <sizeof($temporada[$jornada]) ; $partido++) {
+                        var_dump("for con partido  ".$partido);
                         if(sizeof($temporada[$jornada][$partido])==2){
                             for($y=0;$y<sizeof($equipos);$y++){
+                                var_dump("for con equipos ".$equipos[$y]);
                                 //var_dump($equipos[$y]);
                                 if (comprobarJornada($temporada,$jornada, $equipos[$y])){
                                     //var_dump($equipos[$y]);
                                     $equipo1 = $equipos[$y];
                                     
                                     for($x=0;$x<sizeof($equipos);$x++){
+                                        var_dump("for con equipo2 ".$equipos[$x]);
+
                                         if (comprobarEquipos($temporada,$equipo1,$equipos[$x])){
                                             if (comprobarJornada($temporada,$jornada,$equipos[$x])){
                                                 $equipo2 = $equipos[$x];
                                                 array_push($temporada[$jornada][$partido],$equipo1);
                                                 array_push($temporada[$jornada][$partido],$equipo2);
-                                               // var_dump("equip1: ".$equipo1);
-                                              //  var_dump("equipo2: ".$equipo2);
+                                                //var_dump("equipo1: ".$equipo1);
+                                                var_dump("equipo2: ".$equipo2);
                                                 break;
                                             }
+                                           // var_dump ("aqui menos");
+                                        }
+                                        else {
+                                            //var_dump("aqui no entra");
                                         }
                                     }
                                     break;
                                 }
+                                //else 
+                               // { var_dump ("aqui tampoco entra en el if");}
                             }
+                        }
+                        else {
+                           // var_dump("aqui no entra en este if");
                         }
                     }
                 }
                 return $temporada;
             }
 
-            $partidos = generarPartidos();
+            $temporada = generarPartidos();
             for ($i=0; $i<18;$i++){
-                for ($j=0; $j<sizeof($partidos[$i]);$j++){
-                    var_dump($partidos[$i][$j]);
+                for ($j=0; $j<sizeof($temporada[$i]);$j++){
+                    /*var_dump("Posicion: ".$i);
+                    var_dump("Elemento: ".$j);
+                    var_dump ($temporada[$i][$j]);*/
                 }
                 
             }
