@@ -1,5 +1,11 @@
 <?php
 
+//funcion parametro fecha te diga jornada
+//funcion jornada rango de fechas
+//funcion parametro dos equipos, no se repitan por ida/vuelta
+//funcion fecha libre
+//funcion si ese equipo no ha jugado ya esa jornada
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -10,12 +16,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-/*          Administrador,
-			Aficionado,
-			Arbitro,
-			Entrenador,
-			Jugador*/
+    {          
         $roles = ['Administrador', 'Aficionado', 'Arbitro', 'Entrenador', 'Jugador'];
 
         $eventos = ['Cambio De Jugador', 'Posesion', 'Gol', 'Tarjeta Amarilla', 'Tarjeta Roja','Lesion', 'Faltas'];
@@ -153,41 +154,28 @@ class DatabaseSeeder extends Seeder
             //20 equipos en total
         ];
             
-            $equipos = [
-            ['Real Madrid CF','Av. de Concha Espina, 1, 28036 Madrid-Estadio Santiago Bernabeu','Zinedine Zidane',1],
-            ['FC Barcelona','C. Aristides Maillol, 12, 08028 Barcelona-Camp Nou','Ernesto Valverde',2],
-            ['Atletico Madrid','Av. de Luis Aragones, 4, 28022 Madrid-Wanda Metropolitano','Diego Simeone',3],
-            ['Valencia CF','Av. de Suecia, s/n, 46010 Valencia -Estadio de Mestalla','Marcelino Garcia Toral',4],
-            ['Celta de Vigo','Av. de Balaidos, 13, 36210 Vigo, Pontevedra-Estadio de Balaidos','Fran Escriba',5],
-            ['Real Betis','Av de Heliopolis, s/n, 41012 Sevilla-Estadio Benito Villamarin','Quique Setien',6],
-            ['Sevilla FC','Calle Sevilla Futbol Club, s/n, 41005 Sevilla-Estadio Ramon Sanchez-Pizjuan','Joaquin Caparros',7],
-            ['Athletic Club','Rafael Moreno Pitxitxi, s/n, 48013 Bilbo, Bizkaia-San Mames','Gaizka Garitano',8],
-            ['Getafe CF','Av. Teresa de Calcuta, 12, 28903 Getafe, Madrid-Coliseum Alfonso Perez','Jose Bordalas',9],
-            ['Villarreal CF','Carrer Blasco Ibañez, 2, 12540 Vila-real, Castello-Estadio de la Ceramica','Javier Calleja Revilla',10],
-            ['RCD Espanyol','Av. del Baix Llobregat, 100, 08940 Cornella de Llobregat, Barcelona-RCDE Stadium','Rubi',11],
-            ['Real Vallalodid CF', 'Av. Mundial 82, s/n, 47014 Valladolid-Estadio Jose Zorrilla','Sergio Gonzalez Soriano',12],
-            ['Girona FC','Avinguda Montilivi, 141, 17003 Girona-Municipal de Montilivi','Eusebio Sacristan',13],
-            ['Rayo Vallecano','Calle del Payaso Fofo, 0, 28018 Madrid-Estadio de Vallecas','Paco Jemez',14],
-            ['Real Sociedad','1, Anoeta Pasalekua, 20014 Donostia, Gipuzkoa-Estadio de Anoeta','Imanol Alguacil',15],
-            ['Levante UD','Carrer de Sant Vicent de Paül, 44, 46019 Valencia-Estadio Ciudad de Valencia','Paco Lopez',16],
-            ['SD Huesca','Camino de Cocoron, s/n, 22004 Huesca-Estadio El Alcoraz','Francisco Rodriguez Vilchez',17],
-            ['Deportivo Alaves','Cervantes Ibilbidea, s/n, 01007 Vitoria-Gasteiz, Araba-Estadio de Mendizorroza','Abelardo Fernandez',18],
-            ['CD Leganes','Calle Arquitectura, s/n, 28918 Leganes, Madrid-Estadio Municipal Butarque','Mauricio Pellegrino',19],
-            ['SD Eibar','Ipurua Kalea, 2, 20600 Eibar, Gipuzkoa-Estadio Municipal de Ipurua','Jose Luis Mendilibar',20],
-            ];
 
+            function equipos(){
+                $equipos =config('data.equipos');
+                $ids = [];
+                for ($i=0; $i <sizeof($equipos) ; $i++) { 
+                    array_push($ids, $equipos[$i][3]);
+                }
+                return $ids;
+            }
+
+           $equipos = config('data.equipos');
 
             for ($i=0;$i<sizeof($equipos);$i++){
                 $nombre=$equipos[$i][0];
                 $direccion=$equipos[$i][1];
                 $entrenador=$equipos[$i][2];
-                $alineacion=$equipos[$i][3];
                                 
                 DB::table('equipos')->insert([
                     'Nombre' => $nombre ,
                     'Direccion_del_campo' => $direccion ,
                     'Entrenador' => $entrenador ,
-                    'Alineacion' => $alineacion ,
+                    'Alineacion' => 1,
                     'Victoria' => 0,
                     'Empate' => 0,
                     'Derrota' => 0,
@@ -233,7 +221,207 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => 'Admin',
-                'notificacion_tipo' => 1 ,
+                'notificacion_tipo' => 1,
+                'Tipo' => 1 ,
             ]);
+            
+            DB::table('users')->insert([
+                    'name' => 'Arbitro1',
+                    'email' => 'arbitro1@gmail.com',
+                    'password' => 'Arbitro123',
+                    'notificacion_tipo' => 3,
+                    'Tipo' => 3 ,
+                ]);
+                
+
+            $lista_equipos = array();
+            for ($i=0; $i<sizeof($equipos);$i++){
+                array_push($lista_equipos,$equipos[$i][3]);
+            }
+
+            function generar_fechas(){
+                $inicio_liga = "2019-05-22";
+                $weekDay = date('w', strtotime($inicio_liga)); //numero de la semana
+                $fechas = [[$inicio_liga, 19],[$inicio_liga, 21]];
+
+                for($i=0; $i<189;$i++){
+                    $dia = end($fechas)[0];
+                    if ((date('w', strtotime($dia)))==7){
+                        $nueva_fecha = date('Y-m-d', strtotime($dia. ' + 3 days'));
+                        array_push($fechas, [$nueva_fecha,19]);
+                        array_push($fechas, [$nueva_fecha,21]);
+                    }
+                    else {
+                        $nueva_fecha = date('Y-m-d', strtotime($dia. ' + 1 days'));
+                        array_push($fechas, [$nueva_fecha,19]);
+                        array_push($fechas, [$nueva_fecha,21]);
+                    }
+                }
+                return $fechas;
+            }
+
+            function temporada(){
+                $fechas = generar_fechas();
+                $temporada = [];
+                $jornada = [];
+                for($i=0;$i<sizeof($fechas);$i++){
+                    array_push($jornada, $fechas[$i]);
+                    if(sizeof($jornada)==10){
+                        array_push($temporada, $jornada);
+                        $jornada=[];
+                    }
+                }
+                return $temporada;    
+            }
+                        
+           function comprobarJornada($temporada,$jornada,$equipo){
+                for ($i=0; $i <sizeof($temporada[$jornada]) ; $i++) {
+                    if (sizeof($temporada[$jornada][$i])>=3 && $temporada[$jornada][$i][2] != "vacio") {
+                        if ($temporada[$jornada][$i][2]==$equipo || $temporada[$jornada][$i][3]==$equipo){
+                            return false;
+                        }
+                    }  
+                }
+                return true;
+            }
+
+            function comprobarEquipos($temporada,$equipo1,$equipo2){
+                if ($equipo1==$equipo2){
+                    return false;
+                }
+
+                //var_dump("eq1:".$equipo1,"eq2:". $equipo2);
+                for ($i=0; $i<sizeof($temporada);$i++){
+                    for ($j=0; $j<10;$j++){
+                        if (sizeof($temporada[$i][$j])>3 && $temporada[$i][$j][2] != "vacio"){
+                            //var_dump("equipo que ya jugó(local): ".$temporada[$i][$j][2]);
+                            if(($temporada[$i][$j][2]==$equipo1 && $temporada[$i][$j][3]==$equipo2) || ($temporada[$i][$j][2]==$equipo2 && $temporada[$i][$j][3]==$equipo1)){
+                                return false;
+                            }
+                        }  
+                    } 
+                }
+                //var_dump($equipo1);
+                return true;
+            }
+
+            function isPartidoVacio($partido){
+                // var_dump("sizeof de partido".sizeof($partido));
+                // if(sizeof($partido)>2){
+                //     var_dump("partido pos 2 ".$partido[2]);
+                // }
+                return sizeof($partido) == 2 || ($partido[2] =="vacio" && $partido[3] =="vacio");
+            }
+
+            function limpiarPartidosTemporada($jornada){
+                for($partido = 0;$partido<sizeof($jornada);$partido++){
+                    $jornada[$partido][3] = "vacio";
+                    $jornada[$partido][2] = "vacio";
+                };
+
+                return $jornada;
+               
+            }
+
+            function isEquipoActualInEquiposTestados($equipo2Testeados,$equipoActual){
+                for($equipo = 0;$equipo<sizeof($equipo2Testeados);$equipo++){
+                    // var_dump("equipoTestado----->".$equipo2Testeados[$equipo]."---equipoActual--->".$equipoActual);
+                    if ($equipo2Testeados[$equipo]==$equipoActual) {
+                        // var_dump("equipo actual en equipos testados =========================");
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function generarPartidos(){
+                $equipos = equipos();
+                $temporada = temporada();
+                $numJornadas = 12;//sizeof($temporada)/2;
+                $numPartidos = 10; 
+                $numEquipos = sizeof($equipos);
+                $isAsignacionCorrecta = true;
+                $equipo2Testeados = [];
+
+                for ($jornada=0; $jornada <$numJornadas ; $jornada++) {
+                    var_dump("==========================jornada ".$jornada."================");
+                    for ($partido=0; $partido <$numPartidos ; $partido++) {
+                        var_dump("for con partido  ".$partido);
+                        if(isPartidoVacio($temporada[$jornada][$partido])){
+                            for($y=0;$y<$numEquipos;$y++){
+                                //var_dump("for con equipos ".$equipos[$y]);
+                                //var_dump($equipos[$y]);
+                                if (comprobarJornada($temporada,$jornada, $equipos[$y])){
+                                    var_dump("equipo1: ".$equipos[$y]);
+                                    $equipo1 = $equipos[$y];
+                                    
+                                    for($x=0;$x<$numEquipos;$x++){
+                                        $equipo2 = "undefined";
+                                        if (comprobarJornada($temporada,$jornada,$equipos[$x])){
+                                            
+                                            if(sizeof($equipo2Testeados)==0 || !isEquipoActualInEquiposTestados($equipo2Testeados,$equipos[$x]) ) {
+                                                if(comprobarEquipos($temporada,$equipo1,$equipos[$x])){
+                                                    $equipo2 = $equipos[$x];
+                                                    var_dump("equipo2: ".$equipos[$x]);
+                                                    $temporada[$jornada][$partido][2] = $equipo1;
+                                                    $temporada[$jornada][$partido][3] = $equipo2;
+                                                    if($numPartidos-1 == $partido){
+                                                        $equipo2Testeados = [];
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                           // var_dump ("aqui menos");
+                                        }
+                                        else {
+                                            //var_dump("aqui no entra");
+                                        }
+                                    }
+                                    if($equipo2 == "undefined"){
+                                        array_push($equipo2Testeados,$temporada[$jornada][0][3]);
+                                    }
+                                    if($equipo2 == "undefined" && sizeof($equipo2Testeados)>0){
+                                        $temporada[$jornada] = limpiarPartidosTemporada($temporada[$jornada]);
+                                        $jornada = $jornada-1;
+                                        $partido = -1;
+                                        $x = 0;
+                                        $y =0;
+                                    }
+                                    break;
+                                }
+                                //else 
+                               // { var_dump ("aqui tampoco entra en el if");}
+                            }
+                        }
+                        else {
+                           // var_dump("aqui no entra en este if");
+                        }
+                    }
+                }
+                
+                return $temporada;
+            }
+
+            $temporada = generarPartidos();
+            for ($i=0; $i<18;$i++){
+                for ($j=0; $j<sizeof($temporada[$i]);$j++){
+                    /*var_dump("Posicion: ".$i);
+                    var_dump("Elemento: ".$j);
+                    var_dump ($temporada[$i][$j]);*/
+                }
+                
+            }
+
+            /*for ($i=0;$i<sizeof($partidos);$i++){
+                DB::table('partidos')->insert([
+                    'Arbitro' => 'Arbitro1',
+                    'Equipo_Local' => $partidos[$i][0],
+                    'Equipo_Visitante' => $partidos[$i][1],
+                    'Fecha_Inicio' => $fechas[$i][0],
+                    'Hora_de_Inicio' => $fechas[$i][1],
+                ]);
+            }*/
+
       }
 }
+
