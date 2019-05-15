@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script>ajaxEquipos();</script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,10 +63,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+                            <label for="notificacion_tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
 
                             <div class="col-md-6">
-                                <select name="Tipo" id="Tipo">
+                                <select name="notificacion_tipo" id="notificacion_tipo">
                                     <option value="2">Aficionado</option>
                                     <option value="3">Arbitro</option>
                                     <option value="4">Entrenador</option>
@@ -83,7 +84,6 @@
 
                             <div class="col-md-6">
                                 <select name="Equipo" id="Equipo">
-                                    <option value="1">Arbitro</option>
                                     <!-- Bucle con los Equipos de usuarios -->
                                 </select>
                                 @error('Equipo')

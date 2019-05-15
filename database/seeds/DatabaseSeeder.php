@@ -233,7 +233,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => 'Admin',
-                'Notificacion' => 1 ,
+                'notificacion_tipo' => 1 ,
             ]);
       }
 }

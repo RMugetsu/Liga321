@@ -11,8 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+
     <script src="{{ asset('js/nav.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/equipo.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -58,7 +61,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="menuUsuario">
                                     <script>
-                                        menuDeUsuario({{ Auth::user()->Tipo }},"#menuUsuario",{{ Auth::user()->Equipo or "undef" }},{{ Auth::user()->id }});
+                                        var Tipo = "{{ Auth::user()->Tipo}}";
+                                        var Equipo = "{{ Auth::user()->Equipo}}";
+                                            menuDeUsuario((Tipo=="" ? undefined : Tipo ),"#menuUsuario",(Equipo=="" ? undefined : Equipo ),{{ Auth::user()->id }});
                                         ajaxEquipos();
                                     </script>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

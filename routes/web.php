@@ -16,19 +16,17 @@ Route::get('/', function () {
 });
 
 
-Route::get('/Calendario', 'CalendarioController@generarLiga');
+Route::get('/calendario', 'CalendarioController@generarLiga');
 
 Route::get('/administracion', function () {
-    return view('calendario');
+    return view('administracion');
 });
 
-Route::get('/perfil', function () {
-    return view('perfil');
+Route::get('/usuario/{id}', function () {
+    return view('usuario');
 });
 
-Route::get('/equipo/:id', function () {
-    return view('equipo');
-});
+Route::get('/equipo/{id}','EquipoController@obtenerEquipoInfo');
 
 Route::get('/logged', function () {
     return view('logged');
