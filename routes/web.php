@@ -20,9 +20,7 @@ Route::get('/calendario', function () {
     return view('calendario');
 });
 
-Route::get('/administracion', function () {
-    return view('administracion');
-});
+Route::get('/administracion','UsuarioController@obtenerUsuarios');
 
 Route::get('/usuario/{id}', function () {
     return view('usuario');

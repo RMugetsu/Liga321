@@ -19,7 +19,7 @@ for (var i=0;i < parseInt(ultimoDia);i++){
 }
 var diaSemana = 7 - calendario[0].length;
 var diaSemanaTd = "<td></td>".repeat(diaSemana);
-var html="<table border='1' class='table calendario table-striped'><tr><th colspan='7'><h3><button id='anterior' class='btn btn-primary'><span class='glyphicon glyphicon-menu-left'></span></button>&nbsp&nbsp"+moment().add(mes, "month").format("MMMM YYYY")+"&nbsp&nbsp<button id='siguiente' class='btn btn-primary'><span class='glyphicon glyphicon-menu-right'></button></h3></th></tr><tr>"
+var html="<table border='1' class='table calendario table-striped'><tr><th colspan='7'><h3><button id='anterior' class='btn btn-primary'><i class='fas fa-chevron-left'></i></button>&nbsp&nbsp"+moment().add(mes, "month").format("MMMM YYYY")+"&nbsp&nbsp<button id='siguiente' class='btn btn-primary'><i class='fas fa-chevron-right'></i></button></h3></th></tr><tr>"
 
 for (var dia of dias){
   html+="<th>"+dia+"</th>";
