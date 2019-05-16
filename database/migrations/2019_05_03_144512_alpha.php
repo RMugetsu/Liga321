@@ -100,7 +100,7 @@ class Alpha extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('notificacion_tipo');
+            $table->integer('notificacion_tipo')->nullable();
             $table->integer('Tipo')->nullable()->unsigned();
             $table->integer('Equipo')->nullable()->unsigned();
             $table->foreign('Tipo')->references('id')->on('tiposDeUsuarios');
@@ -129,7 +129,6 @@ class Alpha extends Migration
     {   
         Schema::table('jugadores', function (Blueprint $table) {
             $table->dropForeign('jugadores_lesion_foreign');
-            $table->dropForeign('jugadores_usuario_foreign');
             $table->dropForeign('jugadores_equipo_foreign');
         });
         Schema::table('partidos', function (Blueprint $table) {

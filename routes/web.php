@@ -15,9 +15,18 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/Calendario', function () {
-    return view('calendario');
+
+Route::get('/calendario', 'CalendarioController@generarLiga');
+
+Route::get('/administracion', function () {
+    return view('administracion');
 });
+
+Route::get('/usuario/{id}', function () {
+    return view('usuario');
+});
+
+Route::get('/equipo/{id}','EquipoController@obtenerEquipoInfo');
 
 Route::get('/logged', function () {
     return view('logged');

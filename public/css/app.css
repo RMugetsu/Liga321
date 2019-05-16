@@ -1,9 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
 .nav2{
-  background-color: #66ff33 !important
+  background-color: #66ff33 !important;
 }
-
+.Listado{
+  margin-left:40% !important;
+}
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

@@ -11,6 +11,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+<<<<<<< HEAD
+    <script src="{{ asset('js/script.js') }}"></script>
+
+    <script src="{{ asset('js/nav.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/equipo.js') }}"></script>
+=======
+>>>>>>> d8849a6173bfb5488171bf6a57bcaba6f7aa61aa
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -55,13 +63,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="menuUsuario">
-                                    <a class="dropdown-item" href="{{ route('logout') }}">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                        {{ __('Home') }}
-                                    </a>
-
+                                    <script>
+                                        var Tipo = "{{ Auth::user()->Tipo}}";
+                                        var Equipo = "{{ Auth::user()->Equipo}}";
+                                            menuDeUsuario((Tipo=="" ? undefined : Tipo ),"#menuUsuario",(Equipo=="" ? undefined : Equipo ),{{ Auth::user()->id }});
+                                        ajaxEquipos();
+                                    </script>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
