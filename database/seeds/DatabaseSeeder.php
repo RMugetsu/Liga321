@@ -268,6 +268,7 @@ class DatabaseSeeder extends Seeder
                     array_push($jornada, $fechas[$i]);
                     if(sizeof($jornada)==10){
                         array_push($temporada, $jornada);
+                        // var_dump($jornada);
                         $jornada=[];
                     }
                 }
@@ -290,29 +291,42 @@ class DatabaseSeeder extends Seeder
             for ($i = 0; $i < sizeof($jornadas);$i++){
                 
                 if($i%2==0){
-                    $jornadas[$i][0] = $jornadas[$i][0];
-                    array_push($jornadas[$i][1],sizeof($equipos));
+                    array_push($jornadas[$i][0],sizeof($equipos));
                 }else{
-                    $equipoTemporal = $jornadas[$i][0];
-                    $jornadas[$i][0] = sizeof($equipos);
+                    $equipoTemporal = $jornadas[$i][0][0];
+                    $jornadas[$i][0][0] = sizeof($equipos);
                     array_push($jornadas[$i][1],$equipoTemporal);
                 }   
             }
-            var_dump($jornadas[0][0]);
-            var_dump($jornadas[0][1]);
-            var_dump($jornadas[1][0]);
-            var_dump($jornadas[1][1]);
 
-            // $equiposAux = $numJornadas;
-            // for($z = 0; $z<$numJornadas;$z++){
-            //     for($y=0;$y<sizeof($equipos)/2;$y++){
-            //         if( gettype($jornadas[$z][$y])=="integer"){
-            //             $jornadas[$z][$y] = $jornadas[$z][$y]+"-"+$equiposAux;
-            //             $equiposAux--;
-            //             if($equiposAux==0){
-            //                 $equiposAux = $numJornadas;                            
-            //             }
-            //         }
+
+            $equiposAux = $numJornadas;
+            for($z = 0; $z<$numJornadas;$z++){
+                for($y=0;$y<sizeof($equipos)/2;$y++){
+                    if( sizeof($jornadas[$z][$y])==1){
+                        array_push($jornadas[$z][$y],$equiposAux);                        
+                        $equiposAux--;
+                        if($equiposAux==0){
+                            $equiposAux = $numJornadas;                            
+                        }
+                    }
+                }
+            }
+            $temporada = temporada();
+            for($x= 0;$x<2;$x++){
+                for ($i=0; $i <10 ; $i++) { 
+                    var_dump("partido");
+                    var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
+                }
+            }
+
+
+
+
+            // for ($i=0; $i <sizeof($jornadas) ; $i++) {
+            //     var_dump("ronda".$i);
+            //     for ($z=0; $z <sizeof($jornadas[$i]) ; $z++) {
+            //         var_dump($jornadas[$i][$z]);
             //     }
             // }
 
