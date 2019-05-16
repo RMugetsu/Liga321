@@ -11,14 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-<<<<<<< HEAD
     <script src="{{ asset('js/script.js') }}"></script>
 
     <script src="{{ asset('js/nav.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/equipo.js') }}"></script>
-=======
->>>>>>> d8849a6173bfb5488171bf6a57bcaba6f7aa61aa
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
