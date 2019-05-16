@@ -23,9 +23,4 @@ $("#calendario").on("click", "#siguiente", function(){
 .table {
   text-align: center;
 }
-<<<<<<< HEAD
-*/
-</script>
-=======
 </style>
->>>>>>> d8849a6173bfb5488171bf6a57bcaba6f7aa61aa
