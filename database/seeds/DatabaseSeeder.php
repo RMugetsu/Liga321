@@ -278,6 +278,7 @@ class DatabaseSeeder extends Seeder
                 for ($i=0; $i <sizeof($temporada[$jornada]) ; $i++) {
                     if (sizeof($temporada[$jornada][$i])>=3) {
                         if ($temporada[$jornada][$i][2]==$equipo || $temporada[$jornada][$i][3]==$equipo){
+                            var_dump("ya tiene partido");
                             return false;
                         }
                     }  
@@ -286,6 +287,7 @@ class DatabaseSeeder extends Seeder
             }
 
             function comprobarEquipos($temporada,$equipo1,$equipo2){
+                
                 if ($equipo1==$equipo2){
                     return false;
                 }
@@ -295,6 +297,7 @@ class DatabaseSeeder extends Seeder
                     for ($j=0; $j<9;$j++){
                         if (sizeof($temporada[$i][$j])>3){
                             if(($temporada[$i][$j][2]==$equipo1 && $temporada[$i][$j][3]==$equipo2) || ($temporada[$i][$j][2]==$equipo2 && $temporada[$i][$j][3]==$equipo1)){
+                                var_dump("ya han jugado");
                                 return false;
                             }
                         }  
@@ -308,7 +311,8 @@ class DatabaseSeeder extends Seeder
                 $equipos = equipos();
                 $temporada = temporada();
 
-                for ($jornada=0; $jornada <(sizeof($temporada))/2 ; $jornada++) {
+                
+                for ($jornada=0; $jornada <(sizeof($temporada)/2)-1 ; $jornada++) {
                     var_dump("for con jornada ".$jornada);
                     for ($partido=0; $partido <sizeof($temporada[$jornada]) ; $partido++) {
                         var_dump("for con partido  ".$partido);
@@ -323,15 +327,16 @@ class DatabaseSeeder extends Seeder
                                     for($x=0;$x<sizeof($equipos);$x++){
                                         var_dump("for con equipo2 ".$equipos[$x]);
 
-                                        if (comprobarEquipos($temporada,$equipo1,$equipos[$x])){
-                                            if (comprobarJornada($temporada,$jornada,$equipos[$x])){
+                                        if ((comprobarEquipos($temporada,$equipo1,$equipos[$x])) && (comprobarJornada($temporada,$jornada,$equipos[$x]))){
+                                            
+                                                var_dump("he entrado en el segundo if");
                                                 $equipo2 = $equipos[$x];
                                                 array_push($temporada[$jornada][$partido],$equipo1);
                                                 array_push($temporada[$jornada][$partido],$equipo2);
                                                 //var_dump("equipo1: ".$equipo1);
                                                 var_dump("equipo2: ".$equipo2);
                                                 break;
-                                            }
+                                            
                                            // var_dump ("aqui menos");
                                         }
                                         else {
