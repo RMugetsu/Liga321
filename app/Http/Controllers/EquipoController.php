@@ -20,7 +20,7 @@ class EquipoController extends Controller
         $equipoSeleccionado = equipo::where('id',$id)->get();
         $jugadores = jugadore::where('Equipo',$id)->get();
         $entrenador = "vacio" ;
-        return view("equipo", compact('equipoSeleccionado','jugadores','entrenador'));        
+        return view("equipo", compact('equipoSeleccionado','jugadores'))->with('entrenador', $entrenador);        
     }
 
     public function obtenerEquipoSiendoEntrenador($id){
