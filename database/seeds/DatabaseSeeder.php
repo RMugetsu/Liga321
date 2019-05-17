@@ -340,7 +340,7 @@ class DatabaseSeeder extends Seeder
             function generarPartidos(){
                 $equipos = equipos();
                 $temporada = temporada();
-                $numJornadas = 12;//sizeof($temporada)/2;
+                $numJornadas = 1;//sizeof($temporada)/2;
                 $numPartidos = 10; 
                 $numEquipos = sizeof($equipos);
                 $isAsignacionCorrecta = true;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\equipo;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function obtenerDatosInicio(){
+        $equipos_ranking = equipo::select('id','Nombre','Logo','Victoria','Empate','Derrota','Puntos')->paginate(10);        
+        //return $equipos_ranking;
+        return view("home", compact('equipos_ranking'));   
+        
     }
 }

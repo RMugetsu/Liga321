@@ -17,9 +17,9 @@ function menuDeUsuario(tipo,padre,equipo,id){
 }
 function generarLinks(ruta,id){
     if (id==undefined){
-        var a = $("<a>").addClass("dropdown-item").attr("href",ruta).text(ruta);
+        var a = $("<a>").addClass("dropdown-item").attr("href","/"+ruta).text(ruta);
     }else{
-        var a = $("<a>").addClass("dropdown-item").attr("href",ruta+"/"+id).text(ruta);
+        var a = $("<a>").addClass("dropdown-item").attr("href","/"+ruta+"/"+id).text(ruta);
     }
     return a;
     

@@ -1,0 +1,51 @@
+.nav2{
+    background-color: #66ff33 !important;
+  }
+
+  .Listado{
+    margin-left:40% !important;
+  }
+
+.fila:hover{
+    color: green !important;
+    background-color: #EDF9D8;
+}
+
+.ranking {
+    text-align: center;
+}
+
+.pagelinks {
+    /* align-content: center;
+    align-items: center;
+    align-self: center;
+    box-align: center; */
+    text-align: center;
+    margin-left: 42%;
+}
+
+/*
+.table-fixed {
+    width: 100%;
+    text-align: center;
+}
+
+thead, tbody {
+    height:510px;
+    overflow-y: auto;
+    width: 278.6%;
+}
+
+
+
+tbody,tr,td{
+    display:block;
+  }
+
+tbody td{
+      float:left;
+    }
+  
+  tr {
+    float:left;
+  }*/

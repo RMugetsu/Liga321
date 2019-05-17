@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@obtenerDatosInicio');
 
+/*Route::get('/', function () {
+    return view('home');
+});*/
 
 Route::get('/calendario', function () {
     return view('calendario');
