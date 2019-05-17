@@ -22,5 +22,23 @@ class EquipoController extends Controller
         return view("equipo", compact('equipoSeleccionado','jugadores'));        
     }
 
+    public function obtenerEquipoSiendoEntrenador($id){
+        $equipoSeleccionado = equipo::where('id',$id)->get();
+        $jugadores = jugadore::where('Equipo',$id)->get();
+        return view("equipo", compact('equipoSeleccionado','jugadores'));
+    }
+
+    public function obtenerUsuario($id){
+        $Tipo_usuario = auth()->user()->Tipo;
+        if ($Tipo_usuario==4){
+            $Equipo = auth()->user()->Equipo;
+            if ($Equipo == $id){
+                return self::obtenerEquipoSiendoEntrenador($id);        
+            }
+        }
+        else {
+            return self::obtenerEquipoInfo($id);        
+        }
+    }
 
 }
