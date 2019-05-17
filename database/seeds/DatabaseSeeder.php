@@ -315,11 +315,36 @@ class DatabaseSeeder extends Seeder
                 }
             }
             $temporada = temporada();
-            for($x= 0;$x<2;$x++){
+            for($x= 0;$x<19;$x++){
                 for ($i=0; $i <10 ; $i++) { 
-                    //var_dump("partido");
-                    //var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
+                    var_dump("partido");
+                    var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
+                    DB::table('partidos')->insert([
+                        'Arbitro' => 'Arbitro1',
+                        'Equipo_Local' => $jornadas[$x][$i][0],
+                        'Equipo_Visitante' => $jornadas[$x][$i][1],
+                        'Fecha_Inicio' => $temporada[$x][$i][0],
+                        'Hora_de_Inicio' => $temporada[$x][$i][1],
+                    ]);
                 }
+            }
+            $num = 18;
+            
+            for($x= 19;$x<38;$x++){
+                $numPartido =9;
+                for ($i=0; $i <10 ; $i++) { 
+                    var_dump("partido");
+                    var_dump("local->".$jornadas[$num][$numPartido][0]."---visitante->".$jornadas[$num][$numPartido][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
+                    DB::table('partidos')->insert([
+                        'Arbitro' => 'Arbitro1',
+                        'Equipo_Local' => $jornadas[$num][$numPartido][0],
+                        'Equipo_Visitante' => $jornadas[$num][$numPartido][1],
+                        'Fecha_Inicio' => $temporada[$x][$i][0],
+                        'Hora_de_Inicio' => $temporada[$x][$i][1],
+                    ]);
+                    $numPartido--;
+                }
+                $num--;
             }
 
 
@@ -476,15 +501,7 @@ class DatabaseSeeder extends Seeder
                 
             // }
 
-            /*for ($i=0;$i<sizeof($partidos);$i++){
-                DB::table('partidos')->insert([
-                    'Arbitro' => 'Arbitro1',
-                    'Equipo_Local' => $partidos[$i][0],
-                    'Equipo_Visitante' => $partidos[$i][1],
-                    'Fecha_Inicio' => $fechas[$i][0],
-                    'Hora_de_Inicio' => $fechas[$i][1],
-                ]);
-            }*/
+           
             
       }
 }
