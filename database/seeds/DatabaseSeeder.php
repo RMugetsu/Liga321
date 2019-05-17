@@ -246,8 +246,12 @@ class DatabaseSeeder extends Seeder
 
                 for($i=0; $i<189;$i++){
                     $dia = end($fechas)[0];
-                    if ((date('w', strtotime($dia)))==7){
-                        $nueva_fecha = date('Y-m-d', strtotime($dia. ' + 3 days'));
+                    //var_dump((date('w', strtotime($dia))));
+                    if ((date('w', strtotime($dia)))==6){
+                        array_push($fechas, [date('Y-m-d', strtotime($dia. ' + 1 days')),19]);
+                        array_push($fechas, [date('Y-m-d', strtotime($dia. ' + 1 days')),21]);
+                        $nueva_fecha = date('Y-m-d', strtotime($dia. ' + 4 days'));
+                        //var_dump($nueva_fecha);
                         array_push($fechas, [$nueva_fecha,19]);
                         array_push($fechas, [$nueva_fecha,21]);
                     }
@@ -315,8 +319,8 @@ class DatabaseSeeder extends Seeder
             $temporada = temporada();
             for($x= 0;$x<2;$x++){
                 for ($i=0; $i <10 ; $i++) { 
-                    var_dump("partido");
-                    var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
+                    //var_dump("partido");
+                    //var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
                 }
             }
 
@@ -483,7 +487,7 @@ class DatabaseSeeder extends Seeder
                     'Hora_de_Inicio' => $fechas[$i][1],
                 ]);
             }*/
-
+            var_dump(generar_fechas());
       }
 }
 
