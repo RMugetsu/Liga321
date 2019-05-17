@@ -17,8 +17,10 @@
 </div>
 
 <script>
+    var entrenador = '{{$entrenador}}' ;
     var equipo = {!! json_encode($equipoSeleccionado->toArray(), JSON_HEX_TAG) !!} ;
     var jugadores = {!! json_encode($jugadores->toArray(), JSON_HEX_TAG) !!} ;
+    console.log(entrenador);
     var Tipo = $("#navbarDropdown");
     console.log(equipo,jugadores);
     generarCabeceraEquipo(equipo[0],".Cabecera");
