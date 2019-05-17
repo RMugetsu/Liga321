@@ -31,28 +31,7 @@ table, tr, td, th {
 .tablajugadores {
   height: 60%;
 }
-/*
-.table-fixed {
-    width: 100%;
-    text-align: center;
+
+.Resultado {
+  background: pink;
 }
-
-thead, tbody {
-    height:510px;
-    overflow-y: auto;
-    width: 278.6%;
-}
-
-
-
-tbody,tr,td{
-    display:block;
-  }
-
-tbody td{
-      float:left;
-    }
-  
-  tr {
-    float:left;
-  }*/
