@@ -487,7 +487,7 @@ class DatabaseSeeder extends Seeder
                     'Hora_de_Inicio' => $fechas[$i][1],
                 ]);
             }*/
-            var_dump(generar_fechas());
+            //var_dump(generar_fechas());
       }
 }
 

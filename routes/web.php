@@ -29,6 +29,8 @@ Route::get('/usuario/{id}', function () {
 
 Route::get('/equipo/{id}','EquipoController@obtenerEquipoInfo');
 
+Route::get('/jugador/{id}','JugadorController@obtenerJugadorInfo');
+
 Route::get('/logged', function () {
     return view('logged');
 });

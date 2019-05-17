@@ -11,6 +11,10 @@
     background-color: #EDF9D8;
 }
 
+table, tr, td, th {
+  text-align: center;
+}
+
 .ranking {
     text-align: center;
 }
@@ -24,6 +28,9 @@
     margin-left: 42%;
 }
 
+.tablajugadores {
+  height: 60%;
+}
 /*
 .table-fixed {
     width: 100%;

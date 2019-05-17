@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="Cabecera"></div>
         </div>
-            <div class="Listado">
+        <div class="col-md-6">
+            <div class="Listado"></div>
         </div>
     </div>
 </div>
