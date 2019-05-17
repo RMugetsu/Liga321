@@ -9,8 +9,10 @@ class UsuarioController extends Controller
 {
     //
     public function obtenerUsuarios(){
-        $usuarios = User::get(['name','notificacion_tipo','Tipo']);
+        $usuarios = User::where("Tipo",'!=',1)->orWhereNull("Tipo")->get(['name','notificacion_tipo','Tipo']);
         return $usuarios;
+        return view("administracion", compact('equipoSeleccionado','jugadores'));        
+
     }
     public function modificarTipo(Request $request){
 

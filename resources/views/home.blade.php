@@ -1,6 +1,5 @@
 @include('layouts.app')
 
-
 @section('content')
 <script>
     $(document).ready(function(){
