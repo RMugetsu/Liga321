@@ -64,13 +64,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if ($data['notificacion_tipo']==2) {
+        $temp = $data['notificacion_tipo'];
+        return $temp;
+        if ($temp==2) {
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'Equipo' => $data['Equipo'],
-                'Tipo' =>  $data['notificacion_tipo']
+                'Tipo' =>  $temp,
             ]);
         }
         return User::create([
