@@ -31,3 +31,14 @@ table, tr, td, th {
 .tablajugadores {
   height: 60%;
 }
+
+a:hover {
+  color: #C53473;
+  text-decoration: none !important;
+
+}
+
+input {
+  padding-left: 5%;
+  padding-right: 5%;
+}

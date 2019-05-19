@@ -23,9 +23,7 @@ Route::get('/calendario', function () {
 
 Route::get('/administracion','UsuarioController@obtenerUsuarios');
 
-Route::get('/usuario/{id}', function () {
-    return view('usuario');
-});
+Route::get('/usuario/{id}', 'UsuarioController@perfilUsuario');
 
 Route::get('/equipo/{id}','EquipoController@obtenerUsuario');
 
@@ -40,3 +38,7 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('home', 'HomeController@index')->name('home');
+
+Route::get('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
+
+Route::get('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');

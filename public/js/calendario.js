@@ -1,4 +1,5 @@
 function tabla(mes){
+  console.log("esta haciendo calendario");
 $("#calendario").empty();
 
 var semana = 0;

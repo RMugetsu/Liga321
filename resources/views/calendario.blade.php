@@ -1,4 +1,4 @@
-@include('home')
+@include('layouts.app')
 
 <div id="calendario"></div>
 <script>
