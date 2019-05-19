@@ -1,22 +1,34 @@
-@include('home')
+@include('layouts.app')
 
-<div id="calendario"></div>
+<?php $equipos =config('data.equipos'); ?>
+   
+<div id="calendario"><p id="prueba"></p></div>
+
 <script>
+
+var equipos = {!! json_encode($equipos) !!}
+
 var mes = 0;
 
-tabla(mes);
+var partidos = {!! json_encode($partidos->toArray(), JSON_HEX_TAG) !!} ;
+
+tabla(mes,partidos,equipos);
 
 $("#calendario").on("click", "#anterior", function(){
   mes -=1
-  tabla(mes);
+  tabla(mes,partidos,equipos);
 })
 
 $("#calendario").on("click", "#siguiente", function(){
   mes +=1
-  tabla(mes);
+  tabla(mes,partidos,equipos);
 })
+  
 
+//var enlace = $("<a>").attr("href","/").text("hola");
+//$("#prueba").append(enlace);
 </script>
+
 
 
 <style>

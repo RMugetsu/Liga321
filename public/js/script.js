@@ -1,3 +1,49 @@
+var global_countTime;
+
+$('#form').submit(function(e){
+    console.log("ha entrado al submit");
+    e.preventDefault();
+    if(checkNulls()){
+        console.log("ha visto checknulls");
+		var ruta = $("input[name='ruta']").val() ;
+        $.ajax({
+			url: ruta, 
+			type: 'POST', 
+			dataType: 'html', 
+			data: $('#form').first().serialize(), 
+			success: function() {
+                $('#modalPsw').modal('toggle');
+                $('#modalSatisfactorio').modal('toggle');
+			},
+			error: function(e) {
+				console.log("error");
+				console.log(e);
+				createError("Error del servidor.");
+			}
+	  }); 
+    }
+});
+
+function checkNulls(){
+    let control = true;
+    $('#form .input').each(function(){
+        if($(this).val() === ""){
+            $(this).css('border','1px solid red');
+            control = false;
+        }else if($(this).children("option:selected").val() === ""){
+			$(this).css('border','1px solid red');
+            control = false;
+		}
+    })
+
+    if(control){
+        return true;
+    }else{
+        createError("Todos los campos son obligatorios.","blank");
+        return false;
+    }
+}
+
 function generarTablas(padre,data,ruta,iconos){
 
     var cabecera = obtenerCabecera(data);
@@ -66,5 +112,26 @@ function redirigir(event){
     window.location = event.data.url;
 }
 
+function createError(Message, elements){
+        $('.Error').hide();
+        $('<div>')
+        .attr({class:'Error'})
+        .text(Message)
+        .appendTo('.ErrorContainer');
+        if (elements != undefined){
+            for (var i=0;i<elements.length;i++){
+                elements[i].css("background-color","#F3A1B3");
+            }
+        }
+        $('.ErrorContainer').show();
+        setTimer();
+}
 
-//mes actual en espanyol: month = moment().locale("es").format('MMMM');
+function setTimer(){
+	clearTimeout(global_countTime);
+	global_countTime =	setTimeout(function (){
+        var errorContainer = $('.ErrorContainer');
+        errorContainer.hide();
+        errorContainer.empty();
+	}, 5000);
+}

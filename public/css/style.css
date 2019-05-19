@@ -32,6 +32,32 @@ table, tr, td, th {
   height: 60%;
 }
 
-.Resultado {
-  background: pink;
+a:hover {
+  color: #C53473;
+  text-decoration: none !important;
+
+}
+
+input {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.calendario td{
+  width: 1%;
+}
+
+.calendario th{
+  height: 1px;
+}
+
+.calendario {
+  height: 100%;
+}
+
+#calendario {
+  height: 85%;
+}
+html, body {
+  height: 100%;
 }

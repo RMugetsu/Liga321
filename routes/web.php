@@ -17,17 +17,15 @@ Route::get('/', 'HomeController@obtenerDatosInicio');
     return view('home');
 });*/
 
-Route::get('/calendario', function () {
-    return view('calendario');
-});
+Route::get('/calendario', 'CalendarioController@recogerDatos');
 
 Route::get('/administracion','UsuarioController@obtenerUsuarios');
 
-Route::get('/usuario/{id}', function () {
-    return view('usuario');
-});
+Route::get('/usuario/{id}', 'UsuarioController@perfilUsuario');
 
 Route::get('/equipo/{id}','EquipoController@obtenerUsuario');
+
+Route::get('/partido/{id}','PartidoController@obtenerInfoPartido');
 
 Route::get('/jugador/{id}','JugadorController@obtenerJugadorInfo');
 
@@ -43,5 +41,6 @@ Route::get('home', 'HomeController@index')->name('home');
 
 Route::get('/modificarUsuario','UsuarioController@modificarTipo');
 
+Route::get('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 
-
+Route::get('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');

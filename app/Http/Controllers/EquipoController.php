@@ -19,13 +19,15 @@ class EquipoController extends Controller
     public function obtenerEquipoInfo($id){
         $equipoSeleccionado = equipo::where('id',$id)->get();
         $jugadores = jugadore::where('Equipo',$id)->get();
-        return view("equipo", compact('equipoSeleccionado','jugadores'));        
+        $entrenador = "vacio" ;
+        return view("equipo", compact('equipoSeleccionado','jugadores'))->with('entrenador', $entrenador);        
     }
 
     public function obtenerEquipoSiendoEntrenador($id){
         $equipoSeleccionado = equipo::where('id',$id)->get();
         $jugadores = jugadore::where('Equipo',$id)->get();
-        return view("equipo", compact('equipoSeleccionado','jugadores'));
+        $entrenador = $id ;
+        return view("equipo", compact('equipoSeleccionado','jugadores'))->with('entrenador', $entrenador);    
     }
 
     public function obtenerUsuario($id){
