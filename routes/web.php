@@ -17,9 +17,7 @@ Route::get('/', 'HomeController@obtenerDatosInicio');
     return view('home');
 });*/
 
-Route::get('/calendario', function () {
-    return view('calendario');
-});
+Route::get('/calendario', 'CalendarioController@recogerDatos');
 
 Route::get('/administracion','UsuarioController@obtenerUsuarios');
 

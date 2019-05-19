@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
-                'password' => 'Admin',
+                'password' => Hash::make('Admin'),
                 'notificacion_tipo' => 1,
                 'Tipo' => 1 ,
             ]);

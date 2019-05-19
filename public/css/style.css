@@ -42,3 +42,23 @@ input {
   padding-left: 5%;
   padding-right: 5%;
 }
+
+.calendario td{
+  width: 1%;
+}
+
+.calendario tr{
+  height: 85px;
+}
+
+.calendario th{
+  height: 20px;
+}
+
+.calendario {
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+}
