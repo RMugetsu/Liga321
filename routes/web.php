@@ -25,6 +25,8 @@ Route::get('/usuario/{id}', 'UsuarioController@perfilUsuario');
 
 Route::get('/equipo/{id}','EquipoController@obtenerUsuario');
 
+Route::get('/partido/{id}','PartidoController@obtenerInfoPartido');
+
 Route::get('/jugador/{id}','JugadorController@obtenerJugadorInfo');
 
 Route::get('/logged', function () {
