@@ -7,6 +7,7 @@
 //funcion si ese equipo no ha jugado ya esa jornada
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -220,7 +221,7 @@ class DatabaseSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
-                'password' => 'Admin',
+                'password' => Hash::make('Admin'),
                 'notificacion_tipo' => 1,
                 'Tipo' => 1 ,
             ]);
@@ -228,7 +229,7 @@ class DatabaseSeeder extends Seeder
             DB::table('users')->insert([
                     'name' => 'Arbitro1',
                     'email' => 'arbitro1@gmail.com',
-                    'password' => 'Arbitro123',
+                    'password' => Hash::make('Arbitro123'),
                     'notificacion_tipo' => 3,
                     'Tipo' => 3 ,
                 ]);
@@ -317,8 +318,8 @@ class DatabaseSeeder extends Seeder
             $temporada = temporada();
             for($x= 0;$x<19;$x++){
                 for ($i=0; $i <10 ; $i++) { 
-                    var_dump("partido");
-                    var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
+                    // var_dump("partido");
+                    // var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
                     DB::table('partidos')->insert([
                         'Arbitro' => 'Arbitro1',
                         'Equipo_Local' => $jornadas[$x][$i][0],
@@ -350,16 +351,16 @@ class DatabaseSeeder extends Seeder
 
 
 
-            // for ($i=0; $i <sizeof($jornadas) ; $i++) {
-            //     var_dump("ronda".$i);
-            //     for ($z=0; $z <sizeof($jornadas[$i]) ; $z++) {
-            //         var_dump($jornadas[$i][$z]);
-            //     }
-            // }
+        // for ($i=0; $i <sizeof($jornadas) ; $i++) {
+        //     var_dump("ronda".$i);
+        //     for ($z=0; $z <sizeof($jornadas[$i]) ; $z++) {
+        //         var_dump($jornadas[$i][$z]);
+        //     }
+        // }
 
-            // for ($i=0; $i <sizeof($jornadas); $i++) {
-            //     var_dump($jornada[$i]);
-            // }
+        // for ($i=0; $i <sizeof($jornadas); $i++) {
+        //     var_dump($jornada[$i]);
+        // }
 
 
                         
