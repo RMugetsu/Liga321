@@ -2,7 +2,7 @@
 
 <?php $equipos =config('data.equipos'); ?>
    
-<div id="calendario"></div>
+<div id="calendario"><p id="prueba"></p></div>
 
 <script>
 
@@ -24,7 +24,11 @@ $("#calendario").on("click", "#siguiente", function(){
   tabla(mes,partidos,equipos);
 })
   
+
+//var enlace = $("<a>").attr("href","/").text("hola");
+//$("#prueba").append(enlace);
 </script>
+
 
 
 <style>

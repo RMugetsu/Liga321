@@ -36,10 +36,10 @@ function tabla(mes, partidos, equipos){
     }
       for (var dia of calendario[semana]){
         if (semana==0){
-        html+="<td>"+dia+"\n</td>";
+        html+="<td>"+dia+"<br></td>";
         }
         else{
-        html+="<td>"+dia+"</td>";
+        html+="<td>"+dia+"<br></td>";
       }
     }
   //objeto moment del ultimo dia del mes
@@ -65,7 +65,7 @@ function tabla(mes, partidos, equipos){
 function insertarPartidos(mes, partidos, equipos){
 
   var calendario = $(".calendario");
-  for (var i=0; i<partidos.length;i++){
+  for (var i=0; i<partidos.length;i+=2){
     var fecha_partido = partidos[i]['Fecha_Inicio'];
     mes_partido = fecha_partido.slice(5,-3);
     dia_partido = fecha_partido.slice(8)
@@ -80,25 +80,43 @@ function insertarPartidos(mes, partidos, equipos){
 
      var equipo_local = equipos[(partidos[i]['Equipo_Local'])-1][0];
      var equipo_visitante = equipos[(partidos[i]['Equipo_Visitante'])-1][0];
-     var partido = "\n\n"+equipo_local +" - "+ equipo_visitante ;
+     //var partido = "\n\n"+equipo_local +" - "+ equipo_visitante ;
+    //var partido = $("<a>").attr("href","/equipo/1");
+    var partido = document.createElement('a');
+    partido.innerHTML = equipo_local +" - "+equipo_visitante;
+    partido.href = "/partido/"+partidos[i]['id'] ;
 
      var equipo_local2 = equipos[(partidos[i+1]['Equipo_Local'])-1][0];
      var equipo_visitante2 = equipos[(partidos[i+1]['Equipo_Visitante'])-1][0];
-     var partido2 = "\n\n"+equipo_local2 +" - "+ equipo_visitante2 ;
+    // var partido2 = "\n\n"+equipo_local2 +" - "+ equipo_visitante2 ;
+    var partido2 = document.createElement('a');
+    partido2.innerHTML = equipo_local2 +" - "+equipo_visitante2;
+    partido2.href = "/partido/"+partidos[i+1]['id'] ;
 
       
       var lista_td = $("td");
       for (var dia=0;dia<lista_td.length;dia++){
         var dia_td = $("td")[dia].innerText;
-        //  console.log(td);
-      var celda = $("td").get(dia);
-    
-        if (dia_td == dia_partido){
-console.log(celda);
-          //partido.insertBefore(celda);
-          celda.append(partido);
-          celda.append(partido2);
+        if(dia_td[0]=="0"){
+          dia_td=dia_td[1];
         }
+        else {
+          dia_td=dia_td[0]+dia_td[1];
+        }
+        //  console.log(td);
+          var celda = $("td").get(dia);
+    
+          if (dia_td == dia_partido){
+            //partido.insertBefore(celda);
+          /*  celda.append(partido);
+            celda.append(partido2);
+            */
+            var br = document.createElement('br');
+            celda.appendChild(partido);
+            celda.appendChild(br);
+            celda.appendChild(partido2);
+
+          }
       }
 
     };

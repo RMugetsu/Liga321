@@ -47,18 +47,17 @@ input {
   width: 1%;
 }
 
-.calendario tr{
-  height: 85px;
-}
-
 .calendario th{
-  height: 20px;
+  height: 1px;
 }
 
 .calendario {
   height: 100%;
 }
 
+#calendario {
+  height: 85%;
+}
 html, body {
   height: 100%;
 }
