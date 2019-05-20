@@ -126,6 +126,11 @@
     </div>
 
     <script>
+
+        $("input[name='email']").on("keyup", function() {
+            $("button[type='submit']").prop("disabled",false);
+        }
+
         $("input[name='password2']").on("keyup", function() {
             var psw1 = $("input[name='password']").val();
             var psw2 = $("input[name='password2']").val();

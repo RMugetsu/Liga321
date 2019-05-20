@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {          
-        $roles = ['Administrador', 'Aficionado', 'Arbitro', 'Entrenador', 'Jugador'];
+        $roles = ['Administrador', 'Aficionado', 'arbitro', 'entrenador', 'Jugador'];
 
         $eventos = ['Cambio De Jugador', 'Posesion', 'Gol', 'Tarjeta Amarilla', 'Tarjeta Roja','Lesion', 'Faltas'];
 
@@ -136,9 +136,45 @@ class DatabaseSeeder extends Seeder
             ['Lorenzo','Moron',16,6,25,0,15],
             ['Sergio','Leon',7,6,30,0,16],
             ['Junior','Firpo',20,6,22,0,17],
-            ['Pau','Lopez',13,6,24,0,18], //CAMBIAR REPETIDOO!!!!!
+            ['Julio','Alonso',30,6,20,0,18], 
             //sevilla
+            ['Tomas','Vaclik',1,7,30,0,1], //portero1
+            ['Juan','Soriano',13,7,21,0,2], //portero2
+            ['Pablo','Sarabia',17,7,27,0,3],
+            ['Andre','Silva',12,7,23,0,4],
+            ['Wissam','Ben Yedder',9,7,28,0,5],
+            ['Quincy','Promes',21,7,27,0,6],
+            ['Munir','El Haddadi',19,7,23,0,7],
+            ['Ever','Banega',10,7,30,0,8],
+            ['Jesus','Navas',16,7,33,0,9],
+            ['Sergio','Escudero',18,7,29,0,10],
+            ['Maxime','Gonalons',15,7,30,0,11],
+            ['Franco','Vazquez',22,7,30,0,12],
+            ['Simon','Kjaer',4,7,30,0,13],
+            ['Roque','Mesa',7,7,29,0,14],
+            ['Aleix','Vidal',11,7,29,0,15],
+            ['Sergi','Gomez',3,7,27,0,16],
+            ['Ibrahim','Amadou',5,7,26,0,17],
+            ['Daniel','Carriço',6,7,30,0,18], 
             //athletic
+            ['Alex','Remiro',1,8,24,0,1], //portero1
+            ['Unai','Simon',25,8,21,0,2], //portero2
+            ['Iñaki','Williams',9,8,24,0,3],
+            ['Aritz','Aduriz',20,8,38,0,4],
+            ['Markel','Susaeta',14,8,31,0,5],
+            ['Mikel','Rico',17,8,34,0,6],
+            ['Iker','Muniain',10,8,26,0,7],
+            ['Raul','Garcia',22,8,32,0,8],
+            ['Kenan','Kodro',2,8,25,0,9],
+            ['Ibai','Gomez',19,8,29,0,10],
+            ['Iñigo','Martinez',4,8,28,0,11],
+            ['Beñat','Etxebarria',7,8,32,0,12],
+            ['Ander','Iturraspe',8,8,30,0,13],
+            ['Dani','Garcia',16,8,28,0,14],
+            ['Yuri','Berchiche',12,8,29,0,15],
+            ['Oscar','de Marcos',18,8,27,0,16],
+            ['','Amadou',5,8,26,0,17],
+            ['Daniel','Carriço',6,8,30,0,18],
             //getafe
             //villareal
             //rcd espanyol
@@ -173,14 +209,14 @@ class DatabaseSeeder extends Seeder
                 $entrenador=$equipos[$i][2];
                                 
                 DB::table('equipos')->insert([
-                    'Nombre' => $nombre ,
-                    'Direccion_del_campo' => $direccion ,
-                    'Entrenador' => $entrenador ,
-                    'Alineacion' => 1,
-                    'Victoria' => 0,
-                    'Empate' => 0,
-                    'Derrota' => 0,
-                    'Puntos' => 0,
+                    'nombre' => $nombre ,
+                    'direcciondelcampo' => $direccion ,
+                    'entrenador' => $entrenador ,
+                    'alineacion' => 1,
+                    'victoria' => 0,
+                    'empate' => 0,
+                    'derrota' => 0,
+                    'puntos' => 0,
                 ]);
             }
 
@@ -195,26 +231,26 @@ class DatabaseSeeder extends Seeder
                                 
                                 
                 DB::table('jugadores')->insert([
-                    'Nombre' => $nombre ,
-                    'Apellido' => $apellido ,
-                    'Dorsal' => $dorsal ,
+                    'nombre' => $nombre ,
+                    'apellido' => $apellido ,
+                    'dorsal' => $dorsal ,
                     'equipo' => $idequipo ,
-                    'Edad' => $edad ,
-                    'Partidos_Jugados' => $partidosJugados ,
-                    'Posicion' => $posicion ,
+                    'edad' => $edad ,
+                    'partidosjugados' => $partidosJugados ,
+                    'posicion' => $posicion ,
                 ]);
 
             }
             
             for ($i=0;$i<sizeof($roles);$i++){
                 DB::table('tiposDeUsuarios')->insert([
-                    'Rol' => $roles[$i]
+                    'rol' => $roles[$i]
                 ]);
             }
 
             for ($i=0;$i<sizeof($eventos);$i++){
                 DB::table('tiposDeEventos')->insert([
-                    'Evento' => $eventos[$i]
+                    'evento' => $eventos[$i]
                 ]);
             }
 
@@ -227,9 +263,9 @@ class DatabaseSeeder extends Seeder
             ]);
             
             DB::table('users')->insert([
-                    'name' => 'Arbitro1',
+                    'name' => 'arbitro1',
                     'email' => 'arbitro1@gmail.com',
-                    'password' => Hash::make('Arbitro123'),
+                    'password' => Hash::make('arbitro123'),
                     'notificaciontipo' => 3,
                     'tipo' => 3 ,
                 ]);
@@ -321,11 +357,11 @@ class DatabaseSeeder extends Seeder
                     // var_dump("partido");
                     // var_dump("local->".$jornadas[$x][$i][0]."---visitante->".$jornadas[$x][$i][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
                     DB::table('partidos')->insert([
-                        'Arbitro' => 'Arbitro1',
-                        'Equipo_Local' => $jornadas[$x][$i][0],
-                        'Equipo_Visitante' => $jornadas[$x][$i][1],
-                        'Fecha_Inicio' => $temporada[$x][$i][0],
-                        'Hora_de_Inicio' => $temporada[$x][$i][1],
+                        'arbitro' => 'arbitro1',
+                        'equipolocal' => $jornadas[$x][$i][0],
+                        'equipovisitante' => $jornadas[$x][$i][1],
+                        'fechainicio' => $temporada[$x][$i][0],
+                        'horadeinicio' => $temporada[$x][$i][1],
                     ]);
                 }
             }
@@ -337,11 +373,11 @@ class DatabaseSeeder extends Seeder
                     var_dump("partido");
                     var_dump("local->".$jornadas[$num][$numPartido][0]."---visitante->".$jornadas[$num][$numPartido][1]."-----dia->".$temporada[$x][$i][0]."----hora->".$temporada[$x][$i][1]);
                     DB::table('partidos')->insert([
-                        'Arbitro' => 'Arbitro1',
-                        'Equipo_Local' => $jornadas[$num][$numPartido][0],
-                        'Equipo_Visitante' => $jornadas[$num][$numPartido][1],
-                        'Fecha_Inicio' => $temporada[$x][$i][0],
-                        'Hora_de_Inicio' => $temporada[$x][$i][1],
+                        'arbitro' => 'arbitro1',
+                        'equipolocal' => $jornadas[$num][$numPartido][0],
+                        'equipovisitante' => $jornadas[$num][$numPartido][1],
+                        'fechainicio' => $temporada[$x][$i][0],
+                        'horadeinicio' => $temporada[$x][$i][1],
                     ]);
                     $numPartido--;
                 }
@@ -375,7 +411,7 @@ class DatabaseSeeder extends Seeder
         //         return true;
         //     }
 
-        //     function comprobarEquipos($temporada,$equipo1,$equipo2){
+        //     function comprobarequipos($temporada,$equipo1,$equipo2){
         //         if ($equipo1==$equipo2){
         //             return false;
         //         }
@@ -413,7 +449,7 @@ class DatabaseSeeder extends Seeder
                
         //     }
 
-        //     function isEquipoActualInEquiposTestados($equipo2Testeados,$equipoActual){
+        //     function isequipoActualInequiposTestados($equipo2Testeados,$equipoActual){
         //         for($equipo = 0;$equipo<sizeof($equipo2Testeados);$equipo++){
         //             // var_dump("equipoTestado----->".$equipo2Testeados[$equipo]."---equipoActual--->".$equipoActual);
         //             if ($equipo2Testeados[$equipo]==$equipoActual) {
@@ -429,7 +465,7 @@ class DatabaseSeeder extends Seeder
         //         $temporada = temporada();
         //         $numJornadas = 1;//sizeof($temporada)/2;
         //         $numPartidos = 10; 
-        //         $numEquipos = sizeof($equipos);
+        //         $numequipos = sizeof($equipos);
         //         $isAsignacionCorrecta = true;
         //         $equipo2Testeados = [];
 
@@ -438,19 +474,19 @@ class DatabaseSeeder extends Seeder
         //             for ($partido=0; $partido <$numPartidos ; $partido++) {
         //                 var_dump("for con partido  ".$partido);
         //                 if(isPartidoVacio($temporada[$jornada][$partido])){
-        //                     for($y=0;$y<$numEquipos;$y++){
+        //                     for($y=0;$y<$numequipos;$y++){
         //                         //var_dump("for con equipos ".$equipos[$y]);
         //                         //var_dump($equipos[$y]);
         //                         if (comprobarJornada($temporada,$jornada, $equipos[$y])){
         //                             var_dump("equipo1: ".$equipos[$y]);
         //                             $equipo1 = $equipos[$y];
                                     
-        //                             for($x=0;$x<$numEquipos;$x++){
+        //                             for($x=0;$x<$numequipos;$x++){
         //                                 $equipo2 = "undefined";
         //                                 if (comprobarJornada($temporada,$jornada,$equipos[$x])){
                                             
-        //                                     if(sizeof($equipo2Testeados)==0 || !isEquipoActualInEquiposTestados($equipo2Testeados,$equipos[$x]) ) {
-        //                                         if(comprobarEquipos($temporada,$equipo1,$equipos[$x])){
+        //                                     if(sizeof($equipo2Testeados)==0 || !isequipoActualInequiposTestados($equipo2Testeados,$equipos[$x]) ) {
+        //                                         if(comprobarequipos($temporada,$equipo1,$equipos[$x])){
         //                                             $equipo2 = $equipos[$x];
         //                                             var_dump("equipo2: ".$equipos[$x]);
         //                                             $temporada[$jornada][$partido][2] = $equipo1;
@@ -495,7 +531,7 @@ class DatabaseSeeder extends Seeder
             // $temporada = generarPartidos();
             // for ($i=0; $i<18;$i++){
             //     for ($j=0; $j<sizeof($temporada[$i]);$j++){
-            //         /*var_dump("Posicion: ".$i);
+            //         /*var_dump("posicion: ".$i);
             //         var_dump("Elemento: ".$j);
             //         var_dump ($temporada[$i][$j]);*/
             //     }

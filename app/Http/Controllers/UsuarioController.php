@@ -38,7 +38,7 @@ class UsuarioController extends Controller
             ->update(['password' => Hash::make($contraseña)]);
     }
 
-    public function modificarEmail($id){
+    public function modificaremail($id){
         $email = $request->input('email');
         DB::table('users')
         ->where('id', $id)

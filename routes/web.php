@@ -46,3 +46,7 @@ Route::get('/modificarUsuario','UsuarioController@modificartipo');
 Route::get('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 
 Route::get('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');
+
+Route::get('/prueba', function () {
+    return view('auth.passwords.reset');
+});

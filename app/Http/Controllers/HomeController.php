@@ -33,4 +33,11 @@ class HomeController extends Controller
         return view("home", compact('equipos_ranking'));   
         
     }
+
+    public function obtenerDatosApi(){
+        $equipos_ranking = equipo::select('id','Nombre','Logo','Victoria','Empate','Derrota','Puntos')->paginate(10);        
+        //return $equipos_ranking;
+        return $equipos_ranking;   
+        
+    }
 }

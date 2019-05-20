@@ -16,81 +16,81 @@ class Alpha extends Migration
         //
         Schema::create('tiposDeUsuarios', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->string('Rol');
+            $table->string('rol');
             $table->timestamps();
         });
 
         Schema::create('tiposDeEventos', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->string('Evento');
+            $table->string('evento');
             $table->timestamps();
         });
 
         Schema::create('equipos', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->string('Nombre');
-            $table->string('Logo')->nullable();
-            $table->string('Equipacion_1')->nullable();
-            $table->string('Equipacion_2')->nullable();
-            $table->string('Direccion_del_campo');
-            $table->string('Entrenador');
-            $table->integer('Alineacion');
-            $table->integer('Victoria');
-            $table->integer('Empate')->default(0);
-            $table->integer('Derrota');
-            $table->integer('Puntos');
+            $table->string('nombre');
+            $table->string('logo')->nullable();
+            $table->string('equipacion1')->nullable();
+            $table->string('equipacion2')->nullable();
+            $table->string('direcciondelcampo');
+            $table->string('entrenador');
+            $table->integer('alineacion');
+            $table->integer('victoria');
+            $table->integer('empate')->default(0);
+            $table->integer('derrota');
+            $table->integer('puntos');
             $table->timestamps();
         });
 
         Schema::create('partidos', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->string('Arbitro');
-            $table->integer('Equipo_Local')->unsigned();
-            $table->integer('Equipo_Visitante')->unsigned();
-            $table->date('Fecha_Inicio');
-            $table->string('Hora_de_Inicio');
-            $table->foreign('Equipo_Local')->references('id')->on('equipos');
-            $table->foreign('Equipo_Visitante')->references('id')->on('equipos');
+            $table->string('arbitro');
+            $table->integer('equipolocal')->unsigned();
+            $table->integer('equipovisitante')->unsigned();
+            $table->date('fechainicio');
+            $table->string('horadeinicio');
+            $table->foreign('equipolocal')->references('id')->on('equipos');
+            $table->foreign('equipovisitante')->references('id')->on('equipos');
             $table->timestamps();
         });
         Schema::create('jugadores', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->string('Nombre');
-            $table->string('Apellido');
-            $table->integer('Dorsal');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->integer('dorsal');
             $table->integer('equipo')->unsigned();
-            $table->integer('Edad');
-            $table->integer('Lesion')->nullable()->unsigned();
-            $table->integer('Partidos_Jugados');
-            $table->integer('Posicion');
+            $table->integer('edad');
+            $table->integer('lesion')->nullable()->unsigned();
+            $table->integer('partidos_Jugados');
+            $table->integer('posicion');
             $table->foreign('equipo')->references('id')->on('equipos');
             $table->timestamps();
         });
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->integer('tipo')->unsigned();
-            $table->integer('Minuto');
-            $table->integer('Jugador_1')->nullable()->unsigned();
-            $table->integer('Jugador_2')->nullable()->unsigned();
+            $table->integer('minuto');
+            $table->integer('jugador1')->nullable()->unsigned();
+            $table->integer('jugador2')->nullable()->unsigned();
             $table->integer('equipo')->nullable()->unsigned();
-            $table->integer('Sancion')->nullable()->unsigned();
-            $table->integer('Partido')->unsigned();
+            $table->integer('sancion')->nullable()->unsigned();
+            $table->integer('partido')->unsigned();
             $table->foreign('tipo')->references('id')->on('tiposDeEventos');
-            $table->foreign('Jugador_1')->references('id')->on('jugadores');
-            $table->foreign('Jugador_2')->references('id')->on('jugadores');
+            $table->foreign('jugador1')->references('id')->on('jugadores');
+            $table->foreign('jugador2')->references('id')->on('jugadores');
             $table->foreign('equipo')->references('id')->on('equipos');
-            $table->foreign('Sancion')->references('id')->on('eventos');
-            $table->foreign('Partido')->references('id')->on('partidos');
+            $table->foreign('sancion')->references('id')->on('eventos');
+            $table->foreign('partido')->references('id')->on('partidos');
             $table->timestamps();
         });
 
         Schema::create('lesiones', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->integer('Evento')->nullable()->unsigned();
-            $table->date('Fecha_Inicio')->nullable();
-            $table->date('Fecha_Final')->nullable();
-            $table->string('Descripcion')->nullable();
-            $table->foreign('Evento')->references('id')->on('eventos');
+            $table->integer('evento')->nullable()->unsigned();
+            $table->date('fechainicio')->nullable();
+            $table->date('fechafinal')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->foreign('evento')->references('id')->on('eventos');
             $table->timestamps();
         });
 
@@ -128,7 +128,7 @@ class Alpha extends Migration
         });
 
         Schema::table('jugadores', function (Blueprint $table) {
-            $table->foreign('Lesion')->references('id')->on('lesiones');
+            $table->foreign('lesion')->references('id')->on('lesiones');
         });
     }
 
