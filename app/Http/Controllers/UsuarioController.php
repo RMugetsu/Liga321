@@ -26,7 +26,7 @@ class UsuarioController extends Controller
 
     public function perfilUsuario($id){
         $id_equipo = auth()->user()->equipo ;
-        $equipo = equipo::where("id",'=',$id_equipo)->get(['nombre','id']);
+        $equipo = equipo::where("id",'=',$id)->get(['nombre','id']);
         return view("usuario", compact('equipo'));        
 
     }

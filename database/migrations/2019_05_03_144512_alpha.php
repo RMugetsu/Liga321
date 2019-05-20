@@ -100,6 +100,11 @@ class Alpha extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('notificaciontipo')->nullable();
+            $table->integer('tipo')->nullable()->unsigned();
+            $table->integer('equipo')->nullable()->unsigned();
+            $table->foreign('tipo')->references('id')->on('tiposDeUsuarios');
+            $table->foreign('equipo')->references('id')->on('equipos');
             $table->rememberToken();
             $table->timestamps();
         });

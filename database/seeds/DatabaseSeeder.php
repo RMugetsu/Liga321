@@ -258,7 +258,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('Admin'),
-                'notificacion_tipo' => 1,
+                'notificaciontipo' => 1,
                 'tipo' => 1 ,
             ]);
             
@@ -266,7 +266,7 @@ class DatabaseSeeder extends Seeder
                     'name' => 'arbitro1',
                     'email' => 'arbitro1@gmail.com',
                     'password' => Hash::make('arbitro123'),
-                    'notificacion_tipo' => 3,
+                    'notificaciontipo' => 3,
                     'tipo' => 3 ,
                 ]);
                 
