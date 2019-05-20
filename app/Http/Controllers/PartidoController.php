@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use app\User;
 use App\equipo;
 use App\partido;
+use App\jugadore;
 
 
 
@@ -18,8 +19,10 @@ class PartidoController extends Controller
         return view("partido",compact('partido','equipos'));
     }
 
-    public function infoJugadores($id1, $id2){
-        $jugadores1 = jugadore::where("Equipo","=")
+    public function infoJugadores($id){
+        $jugadores = jugadore::where("Equipo","=",$id)->get();
+        
+        return $jugadores;
     }
 
 }

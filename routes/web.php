@@ -39,6 +39,12 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('home', 'HomeController@index')->name('home');
 
+Route::get('/modificarUsuario','UsuarioController@modificarTipo');
+
 Route::get('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 
 Route::get('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');
+
+Route::get('/prueba', function () {
+    return view('auth.passwords.reset');
+});

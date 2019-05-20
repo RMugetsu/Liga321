@@ -19,4 +19,20 @@
     var equipos_partido = equipo1 + " - " + equipo2 ;
     div_titulo.append($("<h2>").text(equipos_partido));
 
+
+    var jugadores_local = traerDatosJugadores(partido['Equipo_Local']);
+    var jugadores_visitante = traerDatosJugadores(partido['Equipo_Visitante']);
+
+    function traerDatosJugadores(id){
+        $.ajax({
+        url: "/api/partido/informacionjugadores/"+id,
+        })
+        .done(function( data ) {
+            if ( console && console.log ) {
+            console.log( "Sample of data:", data.slice( 0, 100 ) );
+            }
+        });
+   }
+    
+
     </script>

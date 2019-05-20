@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/registro.js') }}"></script>
     
     <script src="{{ asset('js/nav.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>

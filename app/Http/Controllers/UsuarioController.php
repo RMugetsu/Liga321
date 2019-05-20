@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\equipo;
 
@@ -11,18 +12,21 @@ class UsuarioController extends Controller
 {
     //
     public function obtenerUsuarios(){
-        $usuarios = User::where("Tipo",'!=',1)->orWhereNull("Tipo")->get(['name','notificacion_tipo','Tipo']);
-        return $usuarios;
-        return view("administracion", compact('equipoSeleccionado','jugadores'));        
+        $usuarios = User::where("tipo",'!=',1)->orWherenull("tipo")->get(['id','name','notificacion_tipo','tipo']);
+        return view("administracion", compact('usuarios'));        
 
     }
-    public function modificarTipo(Request $request){
 
+    public function modificartipo($data){
+        User::where('id',$data['id'])->update([
+            "tipo"=>$data['tipo'],
+        ]);
+        return true;
     }
 
     public function perfilUsuario($id){
-        $id_equipo = auth()->user()->Equipo ;
-        $equipo = Equipo::where("id",'=',$id_equipo)->get(['Nombre','id']);
+        $id_equipo = auth()->user()->equipo ;
+        $equipo = equipo::where("id",'=',$id_equipo)->get(['nombre','id']);
         return view("usuario", compact('equipo'));        
 
     }
@@ -34,7 +38,7 @@ class UsuarioController extends Controller
             ->update(['password' => Hash::make($contraseña)]);
     }
 
-    public function modificarEmail($id){
+    public function modificaremail($id){
         $email = $request->input('email');
         DB::table('users')
         ->where('id', $id)
