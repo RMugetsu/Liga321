@@ -67,9 +67,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="menuUsuario">
                                     <script>
-                                        var Tipo = "{{ Auth::user()->Tipo}}";
-                                        var Equipo = "{{ Auth::user()->Equipo}}";
-                                            menuDeUsuario((Tipo=="" ? undefined : Tipo ),"#menuUsuario",(Equipo=="" ? undefined : Equipo ),{{ Auth::user()->id }});
+                                        var tipo = "{{ Auth::user()->tipo}}";
+                                        var equipo = "{{ Auth::user()->equipo}}";
+                                            menuDeUsuario((tipo=="" ? undefined : tipo ),"#menuUsuario",(equipo=="" ? undefined : equipo ),{{ Auth::user()->id }});
                                         ajaxEquipos();
                                     </script>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

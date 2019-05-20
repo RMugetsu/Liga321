@@ -52,7 +52,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'notificacion_tipo' => ['required']
+            'notificaciontipo' => ['required']
         ]);
     }
 
@@ -64,21 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if ($data['notificacion_tipo']==2) {
+        if ($data['notificaciontipo']==2) {
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'Equipo' => $data['Equipo'],
-                'tipo' =>  $data['notificacion_tipo'],
+                'equipo' => $data['equipo'],
+                'tipo' =>  2,
             ]);
         }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'Equipo' => $data['Equipo'],
-            'notificacion_tipo' =>  $data['notificacion_tipo']
+            'equipo' => $data['equipo'],
+            'tipo' =>  2,
+            'notificaciontipo' =>  $data['notificaciontipo']
         ]);
     }
 }

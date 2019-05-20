@@ -80,7 +80,7 @@ function generarTablas(padre,data,ruta,iconos){
             
            if( y!="id" ) {
                 $(fila).append($("<td>").text(data[x][y]))
-                if (y=="Tipo"){
+                if (y=="tipo"){
                     var tipo = data[x][y];
                 }
            }

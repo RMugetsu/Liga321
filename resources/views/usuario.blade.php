@@ -7,8 +7,8 @@
         <div class="col-md-6">
             <div class="col-md-12">
                 <h5>Nombre: <?php echo (auth()->user()->name);
-                if((auth()->user()->Tipo) != null){ 
-                    echo ("  (". auth()->user()->Tipo .")");
+                if((auth()->user()->tipo) != null){ 
+                    echo ("  (". auth()->user()->tipo .")");
                     }?> 
                 </h5><br>
             </div>
@@ -18,7 +18,7 @@
             </div>
 
             <div class="col-md-12">
-                <h5 class="h5equipo"> <?php echo("<a href='/equipo/".$equipo[0]['id']."'>")?>Tu Equipo: <?php echo($equipo[0]["Nombre"])?></a></h5>
+                <h5 class="h5equipo"> <?php echo("<a href='/equipo/".$equipo[0]['id']."'>")?>Tu equipo: <?php echo($equipo[0]["Nombre"])?></a></h5>
                 <br>
             </div>
         </div>

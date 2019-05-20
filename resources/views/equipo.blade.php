@@ -21,7 +21,7 @@
     console.log(entrenador);
     var equipo = {!! json_encode($equipoSeleccionado->toArray(), JSON_HEX_TAG) !!} ;
     var jugadores = {!! json_encode($jugadores->toArray(), JSON_HEX_TAG) !!} ;
-    var Tipo = $("#navbarDropdown");
+    var tipo = $("#navbarDropdown");
 
     if (entrenador == "vacio"){
         generarCabeceraEquipo(equipo[0],".Cabecera");

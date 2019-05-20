@@ -12,7 +12,7 @@ class UsuarioController extends Controller
 {
     //
     public function obtenerUsuarios(){
-        $usuarios = User::where("tipo",'!=',1)->orWherenull("tipo")->get(['id','name','notificacion_tipo','tipo']);
+        $usuarios = User::where("tipo",'!=',1)->orWhereNull("tipo")->get(['id','name','notificaciontipo','tipo']);
         return view("administracion", compact('usuarios'));        
 
     }
@@ -26,7 +26,7 @@ class UsuarioController extends Controller
 
     public function perfilUsuario($id){
         $id_equipo = auth()->user()->equipo ;
-        $equipo = equipo::where("id",'=',$id)->get(['nombre','id']);
+        $equipo = equipo::where("id",'=',$id_equipo)->get(['Nombre','id']);
         return view("usuario", compact('equipo'));        
 
     }

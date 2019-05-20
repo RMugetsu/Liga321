@@ -61,7 +61,7 @@ class Alpha extends Migration
             $table->integer('equipo')->unsigned();
             $table->integer('edad');
             $table->integer('lesion')->nullable()->unsigned();
-            $table->integer('partidosjugados');
+            $table->integer('partidos_Jugados');
             $table->integer('posicion');
             $table->foreign('equipo')->references('id')->on('equipos');
             $table->timestamps();
@@ -108,6 +108,18 @@ class Alpha extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Schema::create('Usuarios',function (Blueprint $table){
+        //     $table->increments('id')->unique();
+        //     $table->string('Nombre');
+        //     $table->string('password');
+        //     $table->integer('notificaciontipo')->nullable();
+        //     $table->integer('tipo')->nullable()->unsigned();
+        //     $table->integer('equipo')->nullable()->unsigned();
+        //     $table->foreign('tipo')->references('id')->on('tiposDeUsuarios');
+        //     $table->foreign('equipo')->references('id')->on('equipos');
+        //     $table->timestamps();
+        // });
         
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
@@ -144,7 +156,7 @@ class Alpha extends Migration
         Schema::dropIfExists('tiposDeEventos');
         Schema::dropIfExists('partidos');
         Schema::dropIfExists('equipos');
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('usuarios');
         Schema::dropIfExists('tiposDeUsuarios');
         Schema::dropIfExists('password_resets');
     }
