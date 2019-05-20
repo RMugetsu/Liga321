@@ -17,11 +17,13 @@ class UsuarioController extends Controller
 
     }
 
-    public function modificartipo($data){
-        User::where('id',$data['id'])->update([
-            "tipo"=>$data['tipo'],
+    public function modificartipo($id){
+        $tipo=$_POST['tipo'];
+        User::where('id',$id)->update([
+            "tipo"=>$tipo
         ]);
-        return true;
+        $usuarios = User::where("tipo",'!=',1)->orWhereNull("tipo")->get(['id','name','notificaciontipo','tipo']);
+        return view("administracion", compact('usuarios'));
     }
 
     public function perfilUsuario($id){

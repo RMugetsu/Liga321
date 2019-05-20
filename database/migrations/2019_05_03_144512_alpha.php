@@ -61,7 +61,7 @@ class Alpha extends Migration
             $table->integer('equipo')->unsigned();
             $table->integer('edad');
             $table->integer('lesion')->nullable()->unsigned();
-            $table->integer('partidos_Jugados');
+            $table->integer('partidosjugados');
             $table->integer('posicion');
             $table->foreign('equipo')->references('id')->on('equipos');
             $table->timestamps();
