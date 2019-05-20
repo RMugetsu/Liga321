@@ -198,7 +198,7 @@ class DatabaseSeeder extends Seeder
                     'Nombre' => $nombre ,
                     'Apellido' => $apellido ,
                     'Dorsal' => $dorsal ,
-                    'Equipo' => $idequipo ,
+                    'equipo' => $idequipo ,
                     'Edad' => $edad ,
                     'Partidos_Jugados' => $partidosJugados ,
                     'Posicion' => $posicion ,
@@ -222,16 +222,16 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('Admin'),
-                'notificacion_tipo' => 1,
-                'Tipo' => 1 ,
+                'notificaciontipo' => 1,
+                'tipo' => 1 ,
             ]);
             
             DB::table('users')->insert([
                     'name' => 'Arbitro1',
                     'email' => 'arbitro1@gmail.com',
                     'password' => Hash::make('Arbitro123'),
-                    'notificacion_tipo' => 3,
-                    'Tipo' => 3 ,
+                    'notificaciontipo' => 3,
+                    'tipo' => 3 ,
                 ]);
                 
 

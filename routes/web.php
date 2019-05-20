@@ -37,9 +37,11 @@ Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout');
 
+Route::post('registrar', 'UsuarioController@registro');
+
 Route::get('home', 'HomeController@index')->name('home');
 
-Route::get('/modificarUsuario','UsuarioController@modificarTipo');
+Route::get('/modificarUsuario','UsuarioController@modificartipo');
 
 Route::get('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 

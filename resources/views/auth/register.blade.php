@@ -63,15 +63,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="notificacion_tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+                            <label for="notificaciontipo" class="col-md-4 col-form-label text-md-right">{{ __('tipo') }}</label>
 
                             <div class="col-md-6">
-                                <select name="notificacion_tipo" id="notificacion_tipo">
+                                <select name="notificaciontipo" id="notificaciontipo">
                                     <option value="2">Aficionado</option>
                                     <option value="3">Arbitro</option>
                                     <option value="4">Entrenador</option>
                                 </select>
-                                @error('Tipo')
+                                @error('tipo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -80,13 +80,13 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="Equipo" class="col-md-4 col-form-label text-md-right">{{ __('Equipo') }}</label>
+                            <label for="equipo" class="col-md-4 col-form-label text-md-right">{{ __('equipo') }}</label>
 
                             <div class="col-md-6">
-                                <select name="Equipo" id="Equipo">
+                                <select name="equipo" id="equipo">
                                     <!-- Bucle con los Equipos de usuarios -->
                                 </select>
-                                @error('Equipo')
+                                @error('equipo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
