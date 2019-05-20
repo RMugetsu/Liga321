@@ -12,8 +12,14 @@ use App\partido;
 class PartidoController extends Controller
 {
     public function obtenerInfoPartido($id){
-        $partidos = partido::where("id",'=',$id)->get();
-        return view("partido",compact('partidos'));
+        $partido = partido::where("id",'=',$id)->get();
+        $equipos = equipo::get(['id','Nombre']);
+
+        return view("partido",compact('partido','equipos'));
+    }
+
+    public function infoJugadores($id1, $id2){
+        $jugadores1 = jugadore::where("Equipo","=")
     }
 
 }

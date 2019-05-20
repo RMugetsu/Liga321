@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\User;
+use App\User;
 use App\equipo;
 
 

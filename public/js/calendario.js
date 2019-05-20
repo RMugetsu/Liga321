@@ -69,7 +69,6 @@ function insertarPartidos(mes, partidos, equipos){
     var fecha_partido = partidos[i]['Fecha_Inicio'];
     mes_partido = fecha_partido.slice(5,-3);
     dia_partido = fecha_partido.slice(8)
-    //console.log(dia_partido);
     if(mes_partido[0]=="0"){
       mes_partido=mes_partido[1];
     }
@@ -80,15 +79,12 @@ function insertarPartidos(mes, partidos, equipos){
 
      var equipo_local = equipos[(partidos[i]['Equipo_Local'])-1][0];
      var equipo_visitante = equipos[(partidos[i]['Equipo_Visitante'])-1][0];
-     //var partido = "\n\n"+equipo_local +" - "+ equipo_visitante ;
-    //var partido = $("<a>").attr("href","/equipo/1");
     var partido = document.createElement('a');
     partido.innerHTML = equipo_local +" - "+equipo_visitante;
     partido.href = "/partido/"+partidos[i]['id'] ;
 
      var equipo_local2 = equipos[(partidos[i+1]['Equipo_Local'])-1][0];
      var equipo_visitante2 = equipos[(partidos[i+1]['Equipo_Visitante'])-1][0];
-    // var partido2 = "\n\n"+equipo_local2 +" - "+ equipo_visitante2 ;
     var partido2 = document.createElement('a');
     partido2.innerHTML = equipo_local2 +" - "+equipo_visitante2;
     partido2.href = "/partido/"+partidos[i+1]['id'] ;
@@ -103,14 +99,9 @@ function insertarPartidos(mes, partidos, equipos){
         else {
           dia_td=dia_td[0]+dia_td[1];
         }
-        //  console.log(td);
           var celda = $("td").get(dia);
     
           if (dia_td == dia_partido){
-            //partido.insertBefore(celda);
-          /*  celda.append(partido);
-            celda.append(partido2);
-            */
             var br = document.createElement('br');
             celda.appendChild(partido);
             celda.appendChild(br);
@@ -120,13 +111,6 @@ function insertarPartidos(mes, partidos, equipos){
       }
 
     };
-         // console.log(moment().add(mes, "month").format('MMMM'));
     
   }
 }
-
-
-/*//{id: 373, Arbitro: "Arbitro1", Equipo_Local: 8, Equipo_Visitante: 13, Fecha_Inicio: "2020-02-06", Hora_de_Inicio}
-  for (var i=0; i<partidos.length;i++){
-    console.log(partidos[i]);
-  }*/
