@@ -14,7 +14,7 @@ class PartidoController extends Controller
 {
     public function obtenerInfoPartido($id){
         $partido = partido::where("id",'=',$id)->get();
-        $equipos = equipo::get(['id','Nombre']);
+        $equipos = equipo::get(['id','nombre']);
 
         return view("partido",compact('partido','equipos'));
     }
