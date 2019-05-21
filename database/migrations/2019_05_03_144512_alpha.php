@@ -108,18 +108,6 @@ class Alpha extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
-        // Schema::create('Usuarios',function (Blueprint $table){
-        //     $table->increments('id')->unique();
-        //     $table->string('Nombre');
-        //     $table->string('password');
-        //     $table->integer('notificaciontipo')->nullable();
-        //     $table->integer('tipo')->nullable()->unsigned();
-        //     $table->integer('equipo')->nullable()->unsigned();
-        //     $table->foreign('tipo')->references('id')->on('tiposDeUsuarios');
-        //     $table->foreign('equipo')->references('id')->on('equipos');
-        //     $table->timestamps();
-        // });
         
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();

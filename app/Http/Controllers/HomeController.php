@@ -28,14 +28,14 @@ class HomeController extends Controller
     }
 
     public function obtenerDatosInicio(){
-        $equipos_ranking = equipo::select('id','Nombre','Logo','Victoria','Empate','Derrota','Puntos')->paginate(10);        
+        $equipos_ranking = equipo::select('id','nombre','logo','victoria','empate','derrota','puntos')->paginate(10);        
         //return $equipos_ranking;
         return view("home", compact('equipos_ranking'));   
         
     }
 
     public function obtenerDatosApi(){
-        $equipos_ranking = equipo::select('id','Nombre','Logo','Victoria','Empate','Derrota','Puntos')->paginate(10);        
+        $equipos_ranking = equipo::select('id','nombre','logo','victoria','empate','derrota','puntos')->paginate(10);        
         //return $equipos_ranking;
         return $equipos_ranking;   
         

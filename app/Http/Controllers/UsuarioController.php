@@ -23,12 +23,12 @@ class UsuarioController extends Controller
             "tipo"=>$tipo
         ]);
         $usuarios = User::where("tipo",'!=',1)->orWhereNull("tipo")->get(['id','name','notificaciontipo','tipo']);
-        return view("administracion", compact('usuarios'));
+        return $usuarios;
     }
 
     public function perfilUsuario($id){
         $id_equipo = auth()->user()->equipo ;
-        $equipo = equipo::where("id",'=',$id_equipo)->get(['Nombre','id']);
+        $equipo = equipo::where("id",'=',$id_equipo)->get(['nombre','id']);
         return view("usuario", compact('equipo'));        
 
     }
