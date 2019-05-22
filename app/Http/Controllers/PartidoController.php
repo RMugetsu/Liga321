@@ -14,13 +14,17 @@ class PartidoController extends Controller
 {
     public function obtenerInfoPartido($id){
         $partido = partido::where("id",'=',$id)->get();
-        $equipos = equipo::get(['id','nombre']);
 
-        return view("partido",compact('partido','equipos'));
+        return view("partido",compact('partido'));
+    }
+
+    public function obtenerNombreDelEquipo($id){
+        $equipo = equipo::where("id",$id)->get();
+        return $equipo;
     }
 
     public function infoJugadores($id){
-        $jugadores = jugadore::where("Equipo","=",$id)->get();
+        $jugadores = jugadore::where("equipo",$id)->orderBy('posicion', 'asc')->get();
         
         return $jugadores;
     }
