@@ -1,28 +1,28 @@
 var global_countTime;
 
-$('#form').submit(function(e){
-    console.log("ha entrado al submit");
-    e.preventDefault();
-    if(checkNulls()){
-        console.log("ha visto checknulls");
-		var ruta = $("input[name='ruta']").val() ;
-        $.ajax({
-			url: ruta, 
-			type: 'POST', 
-			dataType: 'html', 
-			data: $('#form').first().serialize(), 
-			success: function() {
-                $('#modalPsw').modal('toggle');
-                $('#modalSatisfactorio').modal('toggle');
-			},
-			error: function(e) {
-				console.log("error");
-				console.log(e);
-				createError("Error del servidor.");
-			}
-	  }); 
-    }
-});
+// $('#form').submit(function(e){
+//     console.log("hola");
+//     e.preventDefault();
+//     if(checkNulls()){
+//         console.log("ha visto checknulls");
+// 		var ruta = $("input[name='ruta']").val() ;
+//         $.ajax({
+// 			url: ruta, 
+// 			type: 'POST', 
+// 			dataType: 'html', 
+// 			data: $('#form').first().serialize(), 
+// 			success: function() {
+//                 $('#modalPsw').modal('toggle');
+//                 $('#modalSatisfactorio').modal('toggle');
+// 			},
+// 			error: function(e) {
+// 				console.log("error");
+// 				console.log(e);
+// 				createError("Error del servidor.");
+// 			}
+// 	  }); 
+//     }
+// });
 
 function checkNulls(){
     let control = true;
