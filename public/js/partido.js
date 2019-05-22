@@ -1,18 +1,20 @@
 function generarPlantilla(jugadores){
-    console.log(plantilla);
     var plantilla = $("<div>").addClass("col-md-6");
     for(var x = 0; x<12;x++){
-        $(plantilla).append($("<button>").text(jugadores[x]['nombre']).attr({"posicion":jugadores[x][posicion],"id":jugadores[x]["id"],}));
+        $(plantilla).append($("<button>").text(jugadores[x]['nombre']+jugadores[x]['apellido']).attr({"posicion":jugadores[x]["posicion"],"id":jugadores[x]["id"],}));
     }
     console.log(plantilla);
     $(".plantillas").append(plantilla);
 }
-function traerDatosJugadores(id){
+function traerDatosJugadores(id,id2){
+    var urlDestino2 = "/api/partido/informacionjugadores/"+id+"/"+id2;
     $.ajax({
-    url: "/api/partido/informacionjugadores/"+id,
+    url: urlDestino2,
     })
     .done(function( data ) {
-        generarPlantilla(data)
+        console.log(data);
+        generarPlantilla(data[0]);
+        generarPlantilla(data[1]);
     }).fail(function(error){
         console.log(error);
     });
@@ -20,31 +22,33 @@ function traerDatosJugadores(id){
 
 function mostrarEquipoEnElTitulo(nombre,padre,id,num){
     console.log(nombre,padre,id,num);
-     var equipo =$("<label>").text(nombre);
-     console.log(equipo);
-     $(padre).append(equipo);
-     if(num=="1"){
-         $(padre).append($("label").text("0").attr("id",id));
-         $(padre).append($("label").text(" - "));
-     }else if(num=="2"){
-         $(padre).append($("label").text("0").attr("id",id));
-     }
- }
+    if(num=="1"){
+        $(padre).append($("<label>").text(nombre));
+        $(padre).append($("<label>").text(" 0 ").attr("id",id));
+        $(padre).append($("<label>").text(" - "));
+    }else if(num=="2"){
+        $(padre).append($("<label>").text(" 0 ").attr("id",id));
+        $(padre).append($("<label>").text(nombre));
+    }
+}
 
-function obtenerNombreEquipo(id,padre,num){
+function obtenerNombreEquipo(id,id2,padre){
+    var urlDestino = "/api/info/Equipo/"+id+"/"+id2;
      $.ajax({
-             url:"/api/info/Equipo/"+id,
-             },
+             url:urlDestino,
+     }
      ).done(function(res){
-         mostrarEquipoEnElTitulo(res[0]['nombre'],padre,id,num);
+        console.log(res);
+        mostrarEquipoEnElTitulo(res[0][0]['nombre'],padre,id,1);
+        mostrarEquipoEnElTitulo(res[1][0]['nombre'],padre,id,2);
      }).fail(function(error){
          console.log(error);
      });
  };
 
- function obtenerNombreEquipo(id,padre,num){
+ function obtenerEventosPartido(){
     $.ajax({
-            url:"/api/eventosParido/",
+            url:"/api/eventosPartido/",
             },
     ).done(function(res){
         mostrarEventos(res);
@@ -60,12 +64,8 @@ function comprobarDiaDelPartido(fecha,fechaActual){
                 console.log("se juega el partido hoy");
                 return true;
             }
-            console.log(fecha[1],fechaActual[1]);
-            console.log("1");
             return false;
         }
-        console.log(fecha[0],fechaActual[0]);
-        console.log("2");
         return false;
     }
 };
