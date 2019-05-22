@@ -1,5 +1,4 @@
 function menuDeUsuario(tipo,padre,equipo,id){
-    console.log(tipo,padre,equipo,id);
     if(tipo=="1"){
         link = generarLinks("administracion");
         $(padre).append(link);
@@ -13,7 +12,6 @@ function menuDeUsuario(tipo,padre,equipo,id){
     $(padre).append(link);
     link = generarLinks("logout");
     $(padre).append(link);
-    console.log($("#navbarDropdown"));
 }
 function generarLinks(ruta,id){
     if (id==undefined){

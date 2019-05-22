@@ -20,4 +20,9 @@ Route::get('/equipo','EquipoController@equiposNombres');
 
 Route::get('/', 'HomeController@obtenerDatosInicio');
 
-Route::get('/partido/informacionjugadores/{id}', 'PartidoController@infoJugadores');
+Route::get('/info/Equipo/{id}/{id2}','PartidoController@obtenerNombreDelEquipo');
+
+Route::get('/eventos/partido','PartidoController@obtenerEventos');
+
+Route::get('/partido/informacionjugadores/{id}/{id2}', 'PartidoController@infoJugadores');
+
