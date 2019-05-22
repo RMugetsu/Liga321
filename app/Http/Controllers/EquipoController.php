@@ -9,7 +9,7 @@ use App\jugadore;
 class EquipoController extends Controller
 {
     public function equiposNombres(Request $request){
-        $nombres = equipo::get(['id','Nombre']);
+        $nombres = equipo::get(['id','nombre']);
         return $nombres;
     }
     public function obtenerEquipo($id){

@@ -43,10 +43,7 @@ Route::get('home', 'HomeController@index')->name('home');
 
 Route::get('/modificarUsuario','UsuarioController@modificartipo');
 
-Route::get('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 
-Route::get('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');
+Route::post('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 
-Route::get('/prueba', function () {
-    return view('auth.passwords.reset');
-});
+Route::post('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');

@@ -36,6 +36,6 @@ function ajaxEquipos(){
 
 function agregarOpcionesDeEquipo(equipos){
     for(var i = 0; i<equipos.length;i++){
-        $("#equipo").append($("<option>").attr("value",equipos[i]['id']).text(equipos[i]['Nombre']));
+        $("#equipo").append($("<option>").attr("value",equipos[i]['id']).text(equipos[i]['nombre']));
     }
 }
