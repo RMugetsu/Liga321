@@ -6,12 +6,12 @@ function generarListaJugadores(jugadores,padre){
 
     $(thead).append($("<th>").text("Dorsal"));
     $(thead).append($("<th>").text("Nombre"));
-    $(thead).append($("<th>").text("Partidos_Jugados"));
+    $(thead).append($("<th>").text("Partidos Jugados"));
     for(var i= 0; i<jugadores.length;i++){
         var fila = $("<tr>");
-        $(fila).append($("<td>").text(jugadores[i]["Dorsal"]));
-        $(fila).append($("<td>").text(jugadores[i]["Nombre"]));
-        $(fila).append($("<td>").text(jugadores[i]["Partidos_Jugados"]));
+        $(fila).append($("<td>").text(jugadores[i]["dorsal"]));
+        $(fila).append($("<td>").text(jugadores[i]["nombre"]));
+        $(fila).append($("<td>").text(jugadores[i]["partidosjugados"]));
         $(fila).addClass("fila");
         $(fila).on("click",{url: "/jugador/"+jugadores[i]["id"]},redirigir);
 
@@ -22,8 +22,8 @@ function generarListaJugadores(jugadores,padre){
 function generarCabeceraEquipo(equipoInfo,padre){
     console.log(equipoInfo["Nombre"]);
     var logo = $("<div>").addClass("col md 2").append($("<img>").attr("src",""));
-    var Nombre = $("<h2>").text(equipoInfo["Nombre"]);
-    var Campo = $("<div>").addClass("col md 8").text(equipoInfo["Direccion_del_campo"]);
+    var Nombre = $("<h2>").text(equipoInfo["nombre"]);
+    var Campo = $("<div>").addClass("col md 8").text(equipoInfo["direcciondelcampo"]);
     //var Nombre = $("<div>").addClass("col md 8").text(equipoInfo["Nombre"]+","+equipoInfo["Direccion_del_campo"]);
     var Equipacion = $("<div>").addClass("col md 2");
     $(padre).append(logo);

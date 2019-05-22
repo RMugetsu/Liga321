@@ -135,3 +135,57 @@ function setTimer(){
         errorContainer.empty();
 	}, 5000);
 }
+
+
+function generarListadoDeUsuarios(usuarios){
+    var tabla = $("<table>").attr("class","table ranking table-fixed");
+        var thead = $("<thead>").attr("class","thead-dark");
+        $(thead).append($("<th>").text("Nombre"));
+        $(thead).append($("<th>").text("tipo Por Confirmar"));
+        $(thead).append($("<th>").text("tipo"));
+        $(thead).append($("<th>").text("Opciones"));
+        $(tabla).append(thead);
+        $("#tabla").append(tabla);
+    for (listaUsuarios in usuarios){
+        var fila =$("<tr>");
+        $(fila).append($("<td>").text(usuarios[listaUsuarios]["name"]));
+        $(fila).append($("<td>").text(usuarios[listaUsuarios]["notificaciontipo"]));
+        $(fila).append($("<td>").text(usuarios[listaUsuarios]["tipo"]));
+        if(usuarios[listaUsuarios]["tipo"]==undefined){
+            var opciones = $("<td>");
+            var aceptar = $("<button>").addClass("btn btn-success")
+                                        .text("Confirmar")
+                                        .on( "click",
+                                        {tipo:usuarios[listaUsuarios]["notificaciontipo"],  id:usuarios[listaUsuarios]["id"]}
+                                        ,modificartipo);
+            var denegar = $("<button>").addClass("btn btn-danger")
+                                        .text("Denegar")
+                                        .on( "click",
+                                        {tipo: 2,  id:usuarios[listaUsuarios]["id"]}
+                                        ,modificartipo);
+            $(opciones).append(aceptar);
+            $(opciones).append(denegar);
+            $(fila).append(opciones)
+        }
+        $(tabla).append(fila);
+        
+    }
+}
+
+function modificartipo(event){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'modificarUsuario/'+event.data.id,
+        type:"post",
+        data:{
+            _token:  token,
+            tipo: event.data.tipo,
+        },
+    })
+    .done(function(usuarios){
+        $("#tabla").empty();
+        generarListadoDeUsuarios(usuarios);
+    }).fail(function(error){
+        console.log(error)
+    });
+}

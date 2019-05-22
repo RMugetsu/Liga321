@@ -19,7 +19,6 @@
     <script src="{{ asset('js/equipo.js') }}"></script>
     <script src="{{ asset('js/calendario.js') }}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -67,7 +66,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="menuUsuario">
                                     <script>
                                         var tipo = "{{ Auth::user()->tipo}}";
-                                        var equipo = "{{ Auth::user()->equipo}}";
+                                        var equipo = "{{ Auth::user()->Equipo}}";
                                             menuDeUsuario((tipo=="" ? undefined : tipo ),"#menuUsuario",(equipo=="" ? undefined : equipo ),{{ Auth::user()->id }});
                                         ajaxEquipos();
                                     </script>

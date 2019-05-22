@@ -80,13 +80,13 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="equipo" class="col-md-4 col-form-label text-md-right">{{ __('equipo') }}</label>
+                            <label for="Equipo" class="col-md-4 col-form-label text-md-right">{{ __('Equipo') }}</label>
 
                             <div class="col-md-6">
                                 <select name="equipo" id="equipo">
                                     <!-- Bucle con los Equipos de usuarios -->
                                 </select>
-                                @error('equipo')
+                                @error('Equipo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

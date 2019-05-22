@@ -41,7 +41,7 @@ Route::post('registrar', 'UsuarioController@registro');
 
 Route::get('home', 'HomeController@index')->name('home');
 
-Route::get('/modificarUsuario','UsuarioController@modificartipo');
+Route::post('/modificarUsuario/{id}','UsuarioController@modificartipo');
 
 
 Route::post('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');

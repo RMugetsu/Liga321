@@ -66,7 +66,7 @@ function insertarPartidos(mes, partidos, equipos){
 
   var calendario = $(".calendario");
   for (var i=0; i<partidos.length;i+=2){
-    var fecha_partido = partidos[i]['Fecha_Inicio'];
+    var fecha_partido = partidos[i]['fechainicio'];
     mes_partido = fecha_partido.slice(5,-3);
     dia_partido = fecha_partido.slice(8)
     if(mes_partido[0]=="0"){
@@ -77,14 +77,14 @@ function insertarPartidos(mes, partidos, equipos){
     }
     if (mes_partido-1 == moment().add(mes, "month").month()){
 
-     var equipo_local = equipos[(partidos[i]['Equipo_Local'])-1][0];
-     var equipo_visitante = equipos[(partidos[i]['Equipo_Visitante'])-1][0];
+     var equipo_local = equipos[(partidos[i]['equipolocal'])-1][0];
+     var equipo_visitante = equipos[(partidos[i]['equipovisitante'])-1][0];
     var partido = document.createElement('a');
     partido.innerHTML = equipo_local +" - "+equipo_visitante;
     partido.href = "/partido/"+partidos[i]['id'] ;
 
-     var equipo_local2 = equipos[(partidos[i+1]['Equipo_Local'])-1][0];
-     var equipo_visitante2 = equipos[(partidos[i+1]['Equipo_Visitante'])-1][0];
+     var equipo_local2 = equipos[(partidos[i+1]['equipolocal'])-1][0];
+     var equipo_visitante2 = equipos[(partidos[i+1]['equipovisitante'])-1][0];
     var partido2 = document.createElement('a');
     partido2.innerHTML = equipo_local2 +" - "+equipo_visitante2;
     partido2.href = "/partido/"+partidos[i+1]['id'] ;
