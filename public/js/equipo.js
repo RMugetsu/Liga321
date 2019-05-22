@@ -20,7 +20,6 @@ function generarListaJugadores(jugadores,padre){
     $(padre).append(tablaJugadores);
 }
 function generarCabeceraEquipo(equipoInfo,padre){
-    console.log(equipoInfo["Nombre"]);
     var logo = $("<div>").addClass("col md 2").append($("<img>").attr("src",""));
     var Nombre = $("<h2>").text(equipoInfo["nombre"]);
     var Campo = $("<div>").addClass("col md 8").text(equipoInfo["direcciondelcampo"]);

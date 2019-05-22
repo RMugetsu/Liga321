@@ -66,7 +66,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" id="menuUsuario">
                                     <script>
                                         var tipo = "{{ Auth::user()->tipo}}";
-                                        var equipo = "{{ Auth::user()->Equipo}}";
+                                        var equipo = "{{ Auth::user()->equipo}}";
                                             menuDeUsuario((tipo=="" ? undefined : tipo ),"#menuUsuario",(equipo=="" ? undefined : equipo ),{{ Auth::user()->id }});
                                         ajaxEquipos();
                                     </script>

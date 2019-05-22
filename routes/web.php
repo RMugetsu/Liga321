@@ -13,9 +13,7 @@
 
 Route::get('/', 'HomeController@obtenerDatosInicio');
 
-/*Route::get('/', function () {
-    return view('home');
-});*/
+Route::get('/Inicio', 'HomeController@obtenerDatosAjax');
 
 Route::get('/calendario', 'CalendarioController@recogerDatos');
 
@@ -47,3 +45,7 @@ Route::post('/modificarUsuario/{id}','UsuarioController@modificartipo');
 Route::post('/usuario/modificar/{id}', 'UsuarioController@modificarContraseña');
 
 Route::post('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');
+
+Route::post('/guardarAlineacion/{id}', 'EquipoController@guardarAlineacion');
+
+Route::post('/cambiarPosicionJugador/{id}', 'EquipoController@cambiarPosicionJugador');

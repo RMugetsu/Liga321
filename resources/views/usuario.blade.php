@@ -145,7 +145,6 @@
         var ruta = $("input[name='ruta']").val();
 
         $("#btn-email").click(function() {
-            console.log("v2 "+new_email);
             $.ajax({
                 url: ruta,
                 type: "post",
@@ -180,7 +179,6 @@
 
         var rutaPsw = $("input[name='rutaPsw']").val();
         $("#btn-psw").click(function() {
-            console.log("v2 "+new_psw);
             $.ajax({
                 url: rutaPsw,
                 type: "post",
@@ -190,8 +188,7 @@
                 }
             }).done(function() {
                 console.log("bien!");
-                $('#modalPsw').modal('hide');
-                $('#modalSatisfactorio').modal('toggle');
+               
             }).fail(function() {
                     console.log( "error" );
                 });

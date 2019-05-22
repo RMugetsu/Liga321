@@ -45,7 +45,7 @@ function checkNulls(){
 }
 
 function generarTablas(padre,data,ruta,iconos){
-
+    console.log("datatabla: "+data);
     var cabecera = obtenerCabecera(data);
     var controlDeCabecera = 0;
     var tabla = $("<table>").attr("class","table ranking table-fixed");
@@ -98,7 +98,7 @@ function generarTablas(padre,data,ruta,iconos){
 }
 
 function obtenerCabecera(data){
-    
+    console.log("data: "+data);
     var cabecera =[];
 
     for (x in data[0]){
@@ -189,3 +189,66 @@ function modificartipo(event){
         console.log(error)
     });
 }
+
+
+function crearPaginado(parent,info){
+    console.log(info);
+    var divPaginado = $("<div>");
+    for (var i = 1; i<= info.last_page; i++) {
+        if (i==1 && info.current_page!=1) {
+            var inicioPaginado = $("<a>").text("<").attr("href",info.current_page-1).addClass("paginacion btn btn-default");
+            $(divPaginado).append(inicioPaginado);
+        }else if(i==1 && info.current_page==1){
+            var inicioPaginado = $("<a>").text("<").addClass("btn btn-default");
+            $(divPaginado).append(inicioPaginado);
+        }
+        if( i==info.current_page){
+            var paginaIntermedia = $("<a>").text(i).attr("href",i).addClass("paginacion btn btn-default active");
+        $(divPaginado).append(paginaIntermedia);
+        }else{
+            var paginaIntermedia = $("<a>").text(i).attr("href",i).addClass("paginacion btn btn-default");
+        $(divPaginado).append(paginaIntermedia);
+        }
+        if (i==info.last_page && info.current_page!=info.last_page){
+            var finalPaginado = $("<a>").text(">").attr("href",info.current_page+1).addClass("paginacion btn btn-default");
+            $(divPaginado).append(finalPaginado);
+        }else if(info.current_page==info.last_page && i==info.last_page){
+            var finalPaginado = $("<a>").text(">").addClass("btn btn-default");
+            $(divPaginado).append(finalPaginado);
+        }
+    }
+    $(parent).append(divPaginado);
+}
+
+function ajaxRanking(page){
+    //var valorFiltrado = $("input[type=text][name=filtro]").val();
+    $.ajax({
+            url:"/Inicio",
+            data: {
+                page:page,
+                // filtro: valorFiltrado
+            },
+        })
+        .done(function(res){
+            $('#ranking').empty();
+            $("#RankingPaginado").empty();
+            console.log("ajax data: "+res);
+            generarTablas("#ranking",res.data,"/equipo/"); //crear tabla nuevo contenido
+            //AsignarLinks();
+            crearPaginado("#RankingPaginado",res);
+            $(document).ready(function(){
+                $(".paginacion").on('click',function(e){
+                    e.preventDefault();
+                    ajaxRanking($(this).attr('href'));
+                });
+                // $("input[type=submit]").on('click',function(a){
+                //     a.preventDefault();
+                //     ajaxRanking("1");
+                // });
+                //$("input[type=text][name=filtro]").val(valorFiltrado);
+            });
+        })
+        .fail(function(jqXHR,textStatus){
+            console.log("fail: "+textStatus);
+        });  
+    }
