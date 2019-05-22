@@ -20,5 +20,7 @@ Route::get('/equipo','EquipoController@equiposNombres');
 
 Route::get('/', 'HomeController@obtenerDatosInicio');
 
+Route::get('/info/Equipo/{id}','PartidoController@obtenerNombreDelEquipo');
+
 Route::get('/partido/informacionjugadores/{id}', 'PartidoController@infoJugadores');
 

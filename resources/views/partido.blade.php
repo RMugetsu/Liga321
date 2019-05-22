@@ -2,18 +2,14 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 tituloPartido">
-        </div>
-        <div class="col-md-12 contenido">
+        <div class="col-md-12 tituloPartido"></div>
+            <label for="" id="tiempoDelPartido">44</label>
+            <button onclick="sumarMinuto()" class="btn">sumar</button>
 
-        </div>
+        <div class="col-md-12 plantillas"></div>
     </div>
 </div>
 <script>
-    var partido = {!! json_encode($partido->toArray(), JSON_HEX_TAG) !!}[0] ;
-    var equipos = {!! json_encode($equipos->toArray(), JSON_HEX_TAG) !!} ;
-    console.log(equipos);
-
     var div_titulo = $(".tituloPartido");
     var gollocal = 0;
     var golvisitante = 0;
@@ -76,20 +72,19 @@
         var mensaje = "El partido se jugará el " +fecha[2]+" de "+fecha[1]+" del "+fecha[0]+ " a las "+ hora+":00H";
         $(".contenido").append($("<h2>").text(mensaje));
     }
-
-    var jugadores_local = traerDatosJugadores(partido['equipolocal']);
-    var jugadores_visitante = traerDatosJugadores(partido['equipovisitante']);
-
-    function traerDatosJugadores(id){
-        $.ajax({
-        url: "/api/partido/informacionjugadores/"+id,
-        })
-        .done(function( data ) {
-            if ( console && console.log ) {
-            console.log( "Sample of data:", data.slice( 0, 100 ) );
-            }
-        });
-   }
-    
-
-    </script>
+    var partido = {!! json_encode($partido->toArray(), JSON_HEX_TAG) !!}[0] ;
+    var fecha =  partido['fechainicio'];
+    var hora =  partido['horadeinicio'];
+    var momento  =  new moment();
+    var fechaActual = momento.format("L");
+    var horaActual = parseInt(momento.format("H"),10);
+    $( document ).ready(function() {
+    tiempoDelPartido()
+        //comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual);
+        obtenerNombreEquipo(partido['equipolocal'],".tituloPartido",1);
+        obtenerNombreEquipo(partido['equipovisitante'],".tituloPartido",2);
+        traerDatosJugadores(partido['equipolocal'])
+        traerDatosJugadores(partido['equipovisitante'])
+    });
+</script>
+>>>>>>> 20f5d301980510a76fb1c9b90215327010a033fc

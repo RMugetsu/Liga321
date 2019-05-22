@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\equipo;
+use DB;
 
 
 class UsuarioController extends Controller
@@ -33,14 +34,14 @@ class UsuarioController extends Controller
 
     }
     
-    public function modificarContraseña($id){
+    public function modificarContraseña(request $request, $id){
         $contraseña = $request->input('password');
         DB::table('users')
             ->where('id', $id)
             ->update(['password' => Hash::make($contraseña)]);
     }
 
-    public function modificaremail($id){
+    public function modificarEmail(request $request, $id){
         $email = $request->input('email');
         DB::table('users')
         ->where('id', $id)

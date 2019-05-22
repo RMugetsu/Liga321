@@ -17,6 +17,7 @@
     <script src="{{ asset('js/nav.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/equipo.js') }}"></script>
+    <script src="{{ asset('js/partido.js') }}"></script>
     <script src="{{ asset('js/calendario.js') }}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- Fonts -->

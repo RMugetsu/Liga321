@@ -1,5 +1,4 @@
 function menuDeUsuario(tipo,padre,equipo,id){
-    console.log(tipo,padre,equipo,id);
     if(tipo=="1"){
         link = generarLinks("administracion");
         $(padre).append(link);
@@ -13,7 +12,6 @@ function menuDeUsuario(tipo,padre,equipo,id){
     $(padre).append(link);
     link = generarLinks("logout");
     $(padre).append(link);
-    console.log($("#navbarDropdown"));
 }
 function generarLinks(ruta,id){
     if (id==undefined){
@@ -35,7 +33,6 @@ function ajaxEquipos(){
 };
 
 function agregarOpcionesDeEquipo(equipos){
-    console.log("esto si que va");
     for(var i = 0; i<equipos.length;i++){
         $("#equipo").append($("<option>").attr("value",equipos[i]['id']).text(equipos[i]['nombre']));
     }
