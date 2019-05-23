@@ -48,7 +48,7 @@ function generarTablas(padre,data,ruta,iconos){
     console.log("datatabla: "+data);
     var cabecera = obtenerCabecera(data);
     var controlDeCabecera = 0;
-    var tabla = $("<table>").attr("class","table ranking table-fixed");
+    var tabla = $("<table>").attr("class","table table-dark table-striped ranking table-fixed");
     var thead = $("<thead>").attr("class","thead-dark");
 
     $(tabla).append(thead);

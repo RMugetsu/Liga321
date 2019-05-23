@@ -1,6 +1,16 @@
-.nav2{
-    background-color: #66ff33 !important;
+.nav2 {
+   /* background-color: #66ff33 !important;*/
+   background-color: #2C3034 !important;
+   color: white !important;
   }
+
+.nav2 a {
+  color: white !important;
+}
+
+.dropdown-menu {
+  background-color: #4F5052;
+}
 
   .Listado{
     margin-left:40% !important;
@@ -8,7 +18,7 @@
 
 .fila:hover{
     color: green !important;
-    background-color: #EDF9D8;
+    background-color: #EDF9D8 !important;
 }
 
 table, tr, td, th {
@@ -57,7 +67,46 @@ input {
 
 #calendario {
   height: 85%;
+  width: 85%;
+  align-self: center;
+  margin-left: 8%;
+  background-color: white !important;
 }
+
+.tituloCalendario {
+  background-color: #43463E !important;
+  color: white;
+
+}
+  /*color: white;
+}
+
+.partidoscalendario {
+  /*color: white;
+
+}*/
+
 html, body {
   height: 100%;
+  background-image: url("/img/prueba.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat
+}
+
+#RankingPaginado  {
+  width: 30%;
+  background-color: rgb(44, 48, 52, 0.9);
+  color: white;
+}
+
+#RankingPaginado  a {
+   color: white;
+}
+
+#RankingPaginado  a.paginacion:hover {
+  color: #69EC70;
+}
+
+#RankingPaginado a.active{
+  color: palevioletred;
 }

@@ -13,7 +13,7 @@
 </script>
 <div class="container">
     <div class="row">
-    <div class="col-md-6">
+    <div align="center" class="col-md-6">
         <div id="ranking"></div>
         <!--<div class="pagelinks">{{$equipos_ranking->links()}}</div>-->
         <div align="center" id="RankingPaginado"></div>
