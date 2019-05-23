@@ -25,7 +25,7 @@
                         echo ("<option value=".$j.">".$j."</option>");
                     }
                     echo ("</select>");
-                    echo ("<label>&nbsp". $jugadores[$i]['nombre'] ."&nbsp". $jugadores[$i]['apellido'] ." </label><br>");
+                    echo ("<label><b>&nbsp". $jugadores[$i]['nombre'] ."&nbsp". $jugadores[$i]['apellido'] ." </b></label><br>");
 
                 }
                 ?>

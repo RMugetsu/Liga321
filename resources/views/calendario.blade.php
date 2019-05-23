@@ -2,7 +2,7 @@
 
 <?php $equipos =config('data.equipos'); ?>
    
-<div id="calendario"></div>
+<div id="calendario" align="center"></div>
 
 <script>
 
