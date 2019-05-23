@@ -23,7 +23,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Confirmar Evento</button>
+                        <button type="button" class="btn btn-primary" id="confirmar" disabled>Confirmar Evento</button>
                     </div>
                     </div>
                 </div>
@@ -46,7 +46,6 @@
         if(tipo==3){
             obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
             traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);
-            obtenerEventosPartido();
         }
     });
 </script>

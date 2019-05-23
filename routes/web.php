@@ -49,3 +49,9 @@ Route::post('/usuario/modificarEmail/{id}', 'UsuarioController@modificarEmail');
 Route::post('/guardarAlineacion/{id}', 'EquipoController@guardarAlineacion');
 
 Route::post('/cambiarPosicionJugador/{id}', 'EquipoController@cambiarPosicionJugador');
+
+
+// Partido Eventos
+
+
+Route::post('/intercambio','PartidoController@intercambioJugadores');

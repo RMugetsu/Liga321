@@ -3,7 +3,7 @@ function generarPlantilla(jugadores){
     for(var x = 0; x<11;x++){
         $(plantilla).append($("<button>").text(jugadores[x]['nombre']+" "+jugadores[x]['apellido'])
         .attr({"posicion":jugadores[x]["posicion"],
-        "id":jugadores[x]["id"],"type":"button","data-toggle":"modal",
+        "class":jugadores[x]["id"],"type":"button","data-toggle":"modal",
         "data-target":"#exampleModal"}).addClass("btn")
         .on("click",{nombre:jugadores[x]['nombre']+" "+jugadores[x]['apellido'],posicion:jugadores[x]["posicion"],id:jugadores[x]["id"]},
         abrirModal)
@@ -89,24 +89,27 @@ function confirmarEvento(){
 
 }
 function abrirModal(event){
+    $(".modalEventos").empty();
+    obtenerEventosPartido();
     $("#nombreJugador").text(event.data.nombre).attr({"modal-posicion-jugador":event.data.posicion,"modal-id-jugador":event.data.id});
-    $($(this).attr("data-target")).modal("show");
+    console.log(this);
+    $($(this).attr("data-target")).modal('show');
 }
 
 function generarBotonesDeEventosModal(eventos){
     var padre =$(".modalEventos");
     eventos.forEach(evento => {
         if(evento["evento"] == "Cambio De Jugador"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",cambiarDeJugador);
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},cambiarDeJugador);
             $(padre).append(botonDeEvento);
         }else if(evento["evento"] == "Gol"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",golesRealizados);
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},golesRealizados);
             $(padre).append(botonDeEvento);
         }else if(evento["evento"] == "Faltas"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",faltasRealizadas);
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},faltasRealizadas);
             $(padre).append(botonDeEvento);
         }else if(evento["evento"] == "Otros"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",otrosEventos);
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},otrosEventos);
             $(padre).append(botonDeEvento);
         }
     });
@@ -123,21 +126,18 @@ function obtenerEventosPartido(){
     });
 };
 
-function cambiarDeJugador(){
+function cambiarDeJugador(event){
+    $("#nombreJugador").attr("eventoId",event.data.id);
     $(".modalEventos").empty();
     var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
     var posicionJugador1 = $("#nombreJugador").attr("modal-posicion-jugador");
-    traerSuplentes(idJugador1,posicionJugador1);
+    traerSuplentes(idJugador1);
 
 }
-function traerSuplentes(id,posc){
-    var urlSuplente = "/eventos/partido/suplente";
+function traerSuplentes(id){
+    var urlSuplente = "/api/eventos/partido/suplente/"+id;
     $.ajax({
         url: urlSuplente,
-        data:{
-            id : id,
-            posicion : posc, 
-            }
         })
         .done(function( data ) {
             generarSuplentes(data);
@@ -146,9 +146,53 @@ function traerSuplentes(id,posc){
         });
 }
 function generarSuplentes(suplentes){
+    var selectSuplentes = $("<select>").attr("id","listaSuplentes").on("change",asignarParametrosARealizarCambios);
     suplentes.forEach(suplente => {
-        console.log(suplente);
+        var opcion = $("<option>").text(suplente["nombre"]).attr({"idJugador":suplente['id'],"posicionJugador":suplente["posicion"]});
+        $(selectSuplentes).append(opcion);
     });
+    $(".modalEventos").append($("<h4>").text("Jugadores Suplentes"));
+    $(".modalEventos").append(selectSuplentes);
+}
+function realizarCambio(event){
+    var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
+    var posicionJugador1 = $("#nombreJugador").attr("modal-posicion-jugador");
+    var tipoDeEvento = $("#nombreJugador").attr("eventoId");
+    var tiempo = $("#tiempoDelPartido").text();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        type:"post",
+        url: "/intercambio",
+        data:{
+            _token:  token,
+            idp: partido["id"],
+            id1:idJugador1,
+            posc1:posicionJugador1,
+            id2: event.data.id,
+            posc2: event.data.posc,
+            num : tiempo,
+            evento : tipoDeEvento,
+        }
+        })
+        .done(function( data ) {
+            remplazarBotonDeJugador(data[0],idJugador1,posicionJugador1);
+        }).fail(function(error){
+            console.log(error);
+        });
+    
+}
+function asignarParametrosARealizarCambios(){
+    var elegido = $("option:contains("+this.value+")");
+    console.log(elegido.attr("posicionJugador"));
+    var posicion = elegido.attr("posicionJugador");
+    var identificadorJugador = elegido.attr("idJugador");
+    $("#confirmar").on("click",
+        {
+            posc : posicion,
+            id : identificadorJugador,
+        },
+        realizarCambio);
+    $("#confirmar").attr("disabled", false);
 }
 function golesRealizados(){
 
@@ -158,4 +202,16 @@ function faltasRealizadas(){
 }
 function otrosEventos(){
 
+}
+function remplazarBotonDeJugador(data,id,posicion){
+    var entraJugador = $("<button>").text(data['nombre']+" "+data['apellido'])
+        .attr({"posicion":data["posicion"],
+        "class":data["id"],"type":"button","data-toggle":"modal",
+        "data-target":"#exampleModal"}).addClass("btn")
+        .on("click",{nombre:data['nombre']+" "+data['apellido'],posicion:data["posicion"],id:data["id"]},
+        abrirModal);
+    var saleJugador = $("."+id+"[posicion='"+posicion+"']");
+    console.log(saleJugador);
+    $(saleJugador).replaceWith(entraJugador);
+    $("#confirmar").off("click",realizarCambio);
 }
