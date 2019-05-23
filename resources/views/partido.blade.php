@@ -18,9 +18,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <!-- <span id="modal-myvalue"></span> -->
-                    <span id="modal-myvar"></span>
-                    <!-- <span id="modal-bb"></span> -->
+                        <h3>Eventos: </h3>
+                        <div class="modalEventos"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

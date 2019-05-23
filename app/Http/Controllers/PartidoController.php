@@ -41,4 +41,9 @@ class PartidoController extends Controller
         $eventos = tiposDeEvento::get();
         return $eventos;
     }
+    public function suplentes(array $data){
+        $equipo = jugadore::where("id",$data["id"])->get(["equipo"]);
+        $suplentes =  jugadore::where("id",$equipo[0]["equipo"])->where("posc","<",$data["posicion"])->get();
+        return $suplentes;
+    }
 }

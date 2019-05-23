@@ -45,23 +45,11 @@ function obtenerNombreEquipo(id,id2,padre){
      }
      ).done(function(res){
         mostrarEquipoEnElTitulo(res[0][0]['nombre'],padre,id,1);
-        mostrarEquipoEnElTitulo(res[1][0]['nombre'],padre,id,2);
+        mostrarEquipoEnElTitulo(res[1][0]['nombre'],padre,id2,2);
      }).fail(function(error){
          console.log(error);
      });
  };
-
- function obtenerEventosPartido(){
-    $.ajax({
-            url:"/api/eventos/partido",
-            },
-    ).done(function(res){
-        console.log(res);
-        generarBotonesDeEventos(res);
-    }).fail(function(error){
-        console.log(error);
-    });
-};
 
 function comprobarDiaDelPartido(fecha,fechaActual){
     if(fecha[0]==fechaActual[2]){
@@ -87,7 +75,6 @@ function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
 
 function tiempoDelPartido() {
     setInterval(sumarMinuto, 60000);
-
     };
 
 function sumarMinuto(){
@@ -101,42 +88,74 @@ function sumarMinuto(){
 function confirmarEvento(){
 
 }
-function generarBotonesDeEventos(eventos){
-    var padre =$(".modal-body")
+function abrirModal(event){
+    $("#nombreJugador").text(event.data.nombre).attr({"modal-posicion-jugador":event.data.posicion,"modal-id-jugador":event.data.id});
+    $($(this).attr("data-target")).modal("show");
+}
+
+function generarBotonesDeEventosModal(eventos){
+    var padre =$(".modalEventos");
     eventos.forEach(evento => {
-        var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn");
-        $(padre).append(botonDeEvento);
+        if(evento["evento"] == "Cambio De Jugador"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",cambiarDeJugador);
+            $(padre).append(botonDeEvento);
+        }else if(evento["evento"] == "Gol"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",golesRealizados);
+            $(padre).append(botonDeEvento);
+        }else if(evento["evento"] == "Faltas"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",faltasRealizadas);
+            $(padre).append(botonDeEvento);
+        }else if(evento["evento"] == "Otros"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").attr("evento",evento["id"]).on("click",otrosEventos);
+            $(padre).append(botonDeEvento);
+        }
     });
 }
 
-function abrirModal(event){
-    console.log("Pase por aqui");
-    $("#nombreJugador").text(event.data.nombre);
-    $(".modal-body").append($("<label>").text(event.data.posicion).attr("modal-posicion-jugador",1).hide());
-    $(".modal-body").append($("<label>").text(event.data.id).attr("modal-id-jugador",1).hide());
-    $($(this).attr("data-target")).modal("show");
+function obtenerEventosPartido(){
+    $.ajax({
+            url:"/api/eventos/partido",
+            },
+    ).done(function(res){
+        generarBotonesDeEventosModal(res);
+    }).fail(function(error){
+        console.log(error);
+    });
+};
+
+function cambiarDeJugador(){
+    $(".modalEventos").empty();
+    var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
+    var posicionJugador1 = $("#nombreJugador").attr("modal-posicion-jugador");
+    traerSuplentes(idJugador1,posicionJugador1);
+
 }
-//TESTEO
-var ATTRIBUTES = ['myvalue', 'myvar', 'bb'];
-function accionBotonJugador(){
-    $('[data-toggle="modal"]').on('click', function (e) {
-        // convert target (e.g. the button) to jquery object
-        var $target = $(e.target);
-        console.log($target)
-        // modal targeted by the button
-        var modalSelector = $target.data('target');
-        console.log($modalSelector)
-        // iterate over each possible data-* attribute
-        ATTRIBUTES.forEach(function (attributeName) {
-          // retrieve the dom element corresponding to current attribute
-          var $modalAttribute = $(modalSelector + ' #modal-' + attributeName);
-          var dataValue = $target.data(attributeName);
-          
-          // if the attribute value is empty, $target.data() will return undefined.
-          // In JS boolean expressions return operands and are not coerced into
-          // booleans. That way is dataValue is undefined, the left part of the following
-          // Boolean expression evaluate to false and the empty string will be returned
-          $modalAttribute.text(dataValue || '');
+function traerSuplentes(id,posc){
+    var urlSuplente = "/eventos/partido/suplente";
+    $.ajax({
+        url: urlSuplente,
+        data:{
+            id : id,
+            posicion : posc, 
+            }
+        })
+        .done(function( data ) {
+            generarSuplentes(data);
+        }).fail(function(error){
+            console.log(error);
         });
-      });
+}
+function generarSuplentes(suplentes){
+    suplentes.forEach(suplente => {
+        console.log(suplente);
+    });
+}
+function golesRealizados(){
+
+}
+function faltasRealizadas(){
+
+}
+function otrosEventos(){
+
 }
