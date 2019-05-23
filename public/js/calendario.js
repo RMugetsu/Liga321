@@ -19,7 +19,7 @@ function tabla(mes, partidos, equipos){
   }
   var diaSemana = 7 - calendario[0].length;
   var diaSemanaTd = "<td></td>".repeat(diaSemana);
-  var html="<table border='1' align='center' class='table calendario '><tr class='tituloCalendario'><th colspan='7'><h3><button id='anterior' class='btn btn-primary'><i class='fas fa-chevron-left'></i></button>&nbsp&nbsp"+moment().add(mes, "month").format("MMMM YYYY")+"&nbsp&nbsp<button id='siguiente' class='btn btn-primary'><i class='fas fa-chevron-right'></i></button></h3></th></tr><tr>"
+  var html="<table border='1' align='center' class='table table-sm calendario '><tr class='tituloCalendario'><th colspan='7'><h3><button id='anterior' class='btn btn-primary'><i class='fas fa-chevron-left'></i></button>&nbsp&nbsp"+moment().add(mes, "month").format("MMMM YYYY")+"&nbsp&nbsp<button id='siguiente' class='btn btn-primary'><i class='fas fa-chevron-right'></i></button></h3></th></tr><tr>"
 
   for (var dia of dias){
     html+="<th>"+dia+"</th>";

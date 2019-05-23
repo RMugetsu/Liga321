@@ -1,12 +1,14 @@
 function generarListaJugadores(jugadores,padre){
     console.log(jugadores);
-    var tablaJugadores = $("<table>").attr("class","table table-sm tablajugadores");
+    var tablaJugadores = $("<table>").attr("class","table table-striped table-dark table-sm tablajugadores");
     var thead = $("<thead>").attr("class","thead-dark");
     $(tablaJugadores).append(thead);
 
     $(thead).append($("<th>").text("Dorsal"));
     $(thead).append($("<th>").text("Nombre"));
     $(thead).append($("<th>").text("Partidos Jugados"));
+    var tbody = $("<tbody>");
+    $(tablaJugadores).append(tbody);
     for(var i= 0; i<jugadores.length;i++){
         var fila = $("<tr>");
         $(fila).append($("<td>").text(jugadores[i]["dorsal"]));
@@ -15,7 +17,7 @@ function generarListaJugadores(jugadores,padre){
         $(fila).addClass("fila");
         $(fila).on("click",{url: "/jugador/"+jugadores[i]["id"]},redirigir);
 
-        $(tablaJugadores).append(fila);
+        $(tbody).append(fila);
     }
     $(padre).append(tablaJugadores);
 }

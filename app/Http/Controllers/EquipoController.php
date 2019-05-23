@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\equipo;
 use App\jugadore;
+use App\partido;
 use DB;
 
 class EquipoController extends Controller
@@ -19,14 +20,17 @@ class EquipoController extends Controller
     }
     public function obtenerEquipoInfo($id){
         $equipoSeleccionado = equipo::where('id',$id)->get();
-        $jugadores = jugadore::where('equipo',$id)->get();
+        $jugadores = jugadore::where('equipo',$id)->orderby('posicion')->get();
         $entrenador = "vacio" ;
-        return view("equipo", compact('equipoSeleccionado','jugadores'))->with('entrenador', $entrenador);        
+        $id_partido = partido::where('equipolocal', $id)->orWhere('equipovisitante', $id)->orderby('id','DESC')->take(1)->get();
+        $partido = DB::table('eventos')->where('partido', $id_partido[0]['id'])->get();
+        return $partido;
+        return view("equipo", compact('equipoSeleccionado','jugadores','partido'))->with('entrenador', $entrenador);        
     }
 
     public function obtenerEquipoSiendoEntrenador($id){
         $equipoSeleccionado = equipo::where('id',$id)->get();
-        $jugadores = jugadore::where('equipo',$id)->get();
+        $jugadores = jugadore::where('equipo',$id)->orderby('posicion')->get();
         $entrenador = $id ;
         return view("equipo", compact('equipoSeleccionado','jugadores'))->with('entrenador', $entrenador);    
     }
@@ -56,10 +60,21 @@ class EquipoController extends Controller
     }
 
     public function cambiarPosicionJugador(request $request, $id){
+        $antiguaPosicion = jugadore::where('id',$id)->get('posicion');
+        $antiguaPosicion = $antiguaPosicion[0]['posicion'] ;
         $posicion = $request->input('posicion');
+        $id_repetido = $request->input('repetido');
+
         DB::table('jugadores')
         ->where('id', $id)
         ->update(['posicion' => $posicion]);
+
+        DB::table('jugadores')
+        ->where('id', $id_repetido)
+        ->update(['posicion' => $antiguaPosicion]);
+
+        return $antiguaPosicion ;
+
     }
 
 }
