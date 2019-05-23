@@ -1,9 +1,17 @@
 function generarPlantilla(jugadores){
-    var plantilla = $("<div>").addClass("col-md-6");
-    for(var x = 0; x<12;x++){
-        $(plantilla).append($("<button>").text(jugadores[x]['nombre']+jugadores[x]['apellido']).attr({"posicion":jugadores[x]["posicion"],"id":jugadores[x]["id"],}));
+    var plantilla = $("<div>").addClass("col-md-5");
+    for(var x = 0; x<11;x++){
+        $(plantilla).append($("<button>").text(jugadores[x]['nombre']+" "+jugadores[x]['apellido'])
+        .attr({"posicion":jugadores[x]["posicion"],
+        "id":jugadores[x]["id"],"type":"button","data-toggle":"modal",
+        "data-target":"#exampleModal"}).addClass("btn")
+        .on("click",{nombre:jugadores[x]['nombre']+" "+jugadores[x]['apellido'],posicion:jugadores[x]["posicion"],id:jugadores[x]["id"]},
+        abrirModal)
+        );
+        if(x%2==1){
+            $(plantilla).append($("<br>"));
+        }
     }
-    console.log(plantilla);
     $(".plantillas").append(plantilla);
 }
 function traerDatosJugadores(id,id2){
@@ -12,7 +20,6 @@ function traerDatosJugadores(id,id2){
     url: urlDestino2,
     })
     .done(function( data ) {
-        console.log(data);
         generarPlantilla(data[0]);
         generarPlantilla(data[1]);
     }).fail(function(error){
@@ -21,14 +28,13 @@ function traerDatosJugadores(id,id2){
 };
 
 function mostrarEquipoEnElTitulo(nombre,padre,id,num){
-    console.log(nombre,padre,id,num);
     if(num=="1"){
-        $(padre).append($("<label>").text(nombre));
-        $(padre).append($("<label>").text(" 0 ").attr("id",id));
-        $(padre).append($("<label>").text(" - "));
+        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido"));
+        $(padre).append($("<label>").text(" 0 ").attr("id",id).addClass("titularDelPartido"));
+        $(padre).append($("<label>").text(" - ").addClass("titularDelPartido"));
     }else if(num=="2"){
-        $(padre).append($("<label>").text(" 0 ").attr("id",id));
-        $(padre).append($("<label>").text(nombre));
+        $(padre).append($("<label>").text(" 0 ").attr("id",id).addClass("titularDelPartido"));
+        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido"));
     }
 }
 
@@ -38,7 +44,6 @@ function obtenerNombreEquipo(id,id2,padre){
              url:urlDestino,
      }
      ).done(function(res){
-        console.log(res);
         mostrarEquipoEnElTitulo(res[0][0]['nombre'],padre,id,1);
         mostrarEquipoEnElTitulo(res[1][0]['nombre'],padre,id,2);
      }).fail(function(error){
@@ -48,19 +53,20 @@ function obtenerNombreEquipo(id,id2,padre){
 
  function obtenerEventosPartido(){
     $.ajax({
-            url:"/api/eventosPartido/",
+            url:"/api/eventos/partido",
             },
     ).done(function(res){
-        mostrarEventos(res);
+        console.log(res);
+        generarBotonesDeEventos(res);
     }).fail(function(error){
         console.log(error);
     });
 };
 
 function comprobarDiaDelPartido(fecha,fechaActual){
-    if(parseInt(fecha[0],10)===parseInt(fechaActual[0],10)){
+    if(fecha[0]==fechaActual[2]){
         if(fecha[1]==fechaActual[1]){
-            if("21"==fechaActual[1]){
+            if(fecha[2]===fechaActual[0]){
                 console.log("se juega el partido hoy");
                 return true;
             }
@@ -69,6 +75,8 @@ function comprobarDiaDelPartido(fecha,fechaActual){
         return false;
     }
 };
+
+
 function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
     if (comprobarDiaDelPartido(fecha,fechaActual)){
         if(hora>horaActual){
@@ -89,3 +97,46 @@ function sumarMinuto(){
         clearInterval()
     }
 };
+
+function confirmarEvento(){
+
+}
+function generarBotonesDeEventos(eventos){
+    var padre =$(".modal-body")
+    eventos.forEach(evento => {
+        var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn");
+        $(padre).append(botonDeEvento);
+    });
+}
+
+function abrirModal(event){
+    console.log("Pase por aqui");
+    $("#nombreJugador").text(event.data.nombre);
+    $(".modal-body").append($("<label>").text(event.data.posicion).attr("modal-posicion-jugador",1).hide());
+    $(".modal-body").append($("<label>").text(event.data.id).attr("modal-id-jugador",1).hide());
+    $($(this).attr("data-target")).modal("show");
+}
+//TESTEO
+var ATTRIBUTES = ['myvalue', 'myvar', 'bb'];
+function accionBotonJugador(){
+    $('[data-toggle="modal"]').on('click', function (e) {
+        // convert target (e.g. the button) to jquery object
+        var $target = $(e.target);
+        console.log($target)
+        // modal targeted by the button
+        var modalSelector = $target.data('target');
+        console.log($modalSelector)
+        // iterate over each possible data-* attribute
+        ATTRIBUTES.forEach(function (attributeName) {
+          // retrieve the dom element corresponding to current attribute
+          var $modalAttribute = $(modalSelector + ' #modal-' + attributeName);
+          var dataValue = $target.data(attributeName);
+          
+          // if the attribute value is empty, $target.data() will return undefined.
+          // In JS boolean expressions return operands and are not coerced into
+          // booleans. That way is dataValue is undefined, the left part of the following
+          // Boolean expression evaluate to false and the empty string will be returned
+          $modalAttribute.text(dataValue || '');
+        });
+      });
+}

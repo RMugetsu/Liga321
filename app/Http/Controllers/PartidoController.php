@@ -7,6 +7,7 @@ use app\User;
 use App\equipo;
 use App\partido;
 use App\jugadore;
+use App\tiposdeevento;
 
 
 
@@ -36,4 +37,8 @@ class PartidoController extends Controller
         return $jugadores;
     }
 
+    public function obtenerEventos(){
+        $eventos = tiposDeEvento::get();
+        return $eventos;
+    }
 }

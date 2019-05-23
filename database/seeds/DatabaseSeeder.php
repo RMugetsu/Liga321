@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             ['Raphael','Varane',5,1,26,0,7],
             ['Jesus','Vallejo',3,1,22,0,8],
             ['Nacho','Fernandez',6,1,29,0,9],
-            ['alvaro','Odriozola',19,1,23,0,10],
+            ['Alvaro','Odriozola',19,1,23,0,10],
             ['Sergio','Reguilon',23,1,22,0,11],
             ['Vinicius','Junior',28,1,18,0,12],
             ['Karim','Benzema',9,1,31,0,13],
@@ -460,13 +460,13 @@ class DatabaseSeeder extends Seeder
             }
             
             for ($i=0;$i<sizeof($roles);$i++){
-                DB::table('tiposDeUsuarios')->insert([
+                DB::table('tiposdeusuarios')->insert([
                     'rol' => $roles[$i]
                 ]);
             }
 
             for ($i=0;$i<sizeof($eventos);$i++){
-                DB::table('tiposDeEventos')->insert([
+                DB::table('tiposdeeventos')->insert([
                     'evento' => $eventos[$i]
                 ]);
             }
