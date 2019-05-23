@@ -14,13 +14,13 @@ class Alpha extends Migration
     public function up()
     {
         //
-        Schema::create('tiposDeUsuarios', function (Blueprint $table) {
+        Schema::create('tiposdeusuarios', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('rol');
             $table->timestamps();
         });
 
-        Schema::create('tiposDeEventos', function (Blueprint $table) {
+        Schema::create('tiposdeeventos', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->string('evento');
             $table->timestamps();
@@ -75,7 +75,7 @@ class Alpha extends Migration
             $table->integer('equipo')->nullable()->unsigned();
             $table->integer('sancion')->nullable()->unsigned();
             $table->integer('partido')->unsigned();
-            $table->foreign('tipo')->references('id')->on('tiposDeEventos');
+            $table->foreign('tipo')->references('id')->on('tiposdeeventos');
             $table->foreign('jugador1')->references('id')->on('jugadores');
             $table->foreign('jugador2')->references('id')->on('jugadores');
             $table->foreign('equipo')->references('id')->on('equipos');
@@ -103,7 +103,7 @@ class Alpha extends Migration
             $table->integer('notificaciontipo')->nullable();
             $table->integer('tipo')->nullable()->unsigned();
             $table->integer('equipo')->nullable()->unsigned();
-            $table->foreign('tipo')->references('id')->on('tiposDeUsuarios');
+            $table->foreign('tipo')->references('id')->on('tiposdeusuarios');
             $table->foreign('equipo')->references('id')->on('equipos');
             $table->rememberToken();
             $table->timestamps();
@@ -141,11 +141,11 @@ class Alpha extends Migration
         Schema::dropIfExists('lesiones');
         Schema::dropIfExists('eventos');
         Schema::dropIfExists('jugadores');
-        Schema::dropIfExists('tiposDeEventos');
+        Schema::dropIfExists('tiposdeeventos');
         Schema::dropIfExists('partidos');
         Schema::dropIfExists('equipos');
         Schema::dropIfExists('usuarios');
-        Schema::dropIfExists('tiposDeUsuarios');
+        Schema::dropIfExists('tiposdeusuarios');
         Schema::dropIfExists('password_resets');
     }
 }
