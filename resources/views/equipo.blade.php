@@ -20,20 +20,31 @@
             <div class="Listado">
             @if($entrenador!="vacio")
                 <?php 
-
                 for ($i=0;$i<sizeof($jugadores);$i++){                    
-                    echo ("<select onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
-                    echo ("<option value='".$jugadores[$i]['posicion']."'>".$jugadores[$i]['posicion']."</option>");
-                    for ($j=1;$j<12;$j++){
-                        echo ("<option value=".$j.">".$j."</option>");
+                    if ($jugadores[$i]['posicion'] < 12) {
+                        echo ("<select onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
+                    } else {
+                        echo ("<select style='background-color: #ECCEFF;' onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
+                    }
+                        echo ("<option value='".$jugadores[$i]['posicion']."'>".$jugadores[$i]['posicion']."</option>");
+                    for ($j=1;$j<19;$j++){
+                        if ($j<12) {
+                            echo ("<option class='convocado' value=".$j.">".$j."</option>");
+                        }
+                        else {
+                            echo ("<option class='sustituto' value=".$j.">".$j."</option>");
+                        }
                     }
                     echo ("</select>");
                     echo ("<label><b>&nbsp". $jugadores[$i]['nombre'] ."&nbsp". $jugadores[$i]['apellido'] ." </b></label><br>");
 
                 }
                 ?>
-                
             @endif
+            @if($entrenador=="vacio")
+            <?php echo($partido);?>
+            @endif
+
             </div>
         </div>
     </div>
@@ -47,21 +58,40 @@
     function cambiarPosicion(id){
         var ruta = "/cambiarPosicionJugador/"+id ;
         var valor_select_cambiado = $("#"+id+" option:selected").val();
+        var cambioRepetido = "";
+        for (var i=0; i<19; i++){
+            var valor = $("#"+i+" option:selected").val();
+            if (valor == valor_select_cambiado){
+                if (i!=id){
+                    cambioRepetido = i ;
+                }
+            }
+        }
+        
+        var antiguaPosicion = "";
+
         $.ajax({
                 url: ruta,
                 type: "post",
                 data: {
                     _token: '{!! csrf_token() !!}',
                     posicion: valor_select_cambiado,
+                    repetido: cambioRepetido,
                 }
-            }).done(function() {
+            }).done(function(res) {
                 console.log("bieen");
+                antiguaPosicion = res;
+                $("#"+cambioRepetido+" option[value='"+ antiguaPosicion +"']").attr("selected",true);
+
             }).fail(function(e) {
                 console.log("error" );
                 console.log(e );
             });
 
+
+
     }
+
     var alineacion = "";
     var entrenador = '{{$entrenador}}' ;
     console.log("entrenador: "+entrenador);
