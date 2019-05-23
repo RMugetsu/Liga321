@@ -213,5 +213,6 @@ function remplazarBotonDeJugador(data,id,posicion){
     var saleJugador = $("."+id+"[posicion='"+posicion+"']");
     console.log(saleJugador);
     $(saleJugador).replaceWith(entraJugador);
+    $("#confirmar").modal("hide");
     $("#confirmar").off("click",realizarCambio);
 }
