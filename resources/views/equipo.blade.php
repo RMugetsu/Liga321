@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    <?php
+        $alineacion = ['1-3-1-3-3', '1-3-3-1-3', '1-3-3-3-1','1-3-4-3','1-4-1-3-2','1-4-1-4-1','1-4-2-2-2','1-4-2-3-1','1-4-3-2-1','1-4-3-3','1-4-4-1-1','1-4-4-2','1-4-5-1'];
+    ?>
     <div class="row">
         <div class="col-md-6">
             <div class="Cabecera"></div>
@@ -38,6 +41,8 @@
 </div>
 
 <script>
+    var lista_alineacion = @json($alineacion);
+    
 
     function cambiarPosicion(id){
         var ruta = "/cambiarPosicionJugador/"+id ;
@@ -68,6 +73,18 @@
     if (entrenador == "vacio"){
        
         generarListaJugadores(jugadores,".Listado");
+    }
+
+    else {
+
+        var num_alineacion = (equipo[0]['alineacion'])-1;
+        var imagen = $("<img>").attr("src","/img/"+lista_alineacion[num_alineacion]+".PNG");
+        imagen.attr("width","80%");
+        imagen.attr("id","imgAlineacion");
+        var div = $("<div>").attr("align","center");
+        div.attr("class","imagenAlineacion col-md-12");
+        div.append(imagen);
+        $(".cuadroGuardarAlineacion").append(div);
     }
 
     $( ".alineacion" ).change(function() {

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container userPage">
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12">
@@ -15,11 +15,11 @@
             </div>
 
             <div class="col-md-12">
-                <h5 class="h5equipo"> <?php echo("<a href='/equipo/".$equipo[0]['id']."'>")?>Tu equipo: <?php echo($equipo[0]["Nombre"])?></a></h5>
+                <h5 class="h5equipo"> <?php echo("<a href='/equipo/".$equipo[0]['id']."'>")?>Tu equipo: <?php echo($equipo[0]["nombre"])?></a></h5>
                 <br>
             </div>
         </div>
-        <div align="center" class="col-md-6">
+        <div align="right" class="col-md-6">
             <div class="col-md-12">
                 <a href="#modalMail" data-toggle="modal" class="btn btn-success">Modificar e-mail</a>
             </div>

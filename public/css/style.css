@@ -110,3 +110,15 @@ html, body {
 #RankingPaginado a.active{
   color: palevioletred;
 }
+
+
+.imagenAlineacion {
+  margin-top: 5%;
+}
+
+.userPage {
+  background-color: rgb(255,255,255,0.9);
+  padding-top: 5%;
+  padding-bottom: 5%;
+  box-shadow: 3px 5px rgb(79, 80, 82, 0.6);
+}
