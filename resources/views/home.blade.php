@@ -16,7 +16,7 @@
     <div class="col-md-6">
         <div id="ranking"></div>
         <!--<div class="pagelinks">{{$equipos_ranking->links()}}</div>-->
-        <div id="RankingPaginado"></div>
+        <div align="center" id="RankingPaginado"></div>
 
     </div>
     <div class="col-md-6"></div>

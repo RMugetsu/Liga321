@@ -59,11 +59,10 @@ function generarTablas(padre,data,ruta,iconos){
             // Generar cabecera de la tabla de datos
             if(controlDeCabecera==0){
                 for(z in cabecera){
-                    if (cabecera[z] != "id"){
+                    if (cabecera[z] != "Id"){
                         $(thead).append($("<th>").text(cabecera[z]));
                     }
                 }
-
                 controlDeCabecera++;
             }
             // Fin de la cabecera
@@ -87,12 +86,7 @@ function generarTablas(padre,data,ruta,iconos){
             // Fin Cuerpo
 
         }
-        /*if (iconos=="Si"){
-            $(thead).append($("<th>").text(" "));
-            generarIconos(fila,data[x]["Ruta"],tipo,data[x]["Nombre"]);    
-        }*/
         $(tabla).append(fila);
-       
     }
     $(padre).append(tabla)
 }
@@ -102,7 +96,8 @@ function obtenerCabecera(data){
     var cabecera =[];
 
     for (x in data[0]){
-        cabecera.push(x)
+        x = (x.charAt(0).toUpperCase() + x.slice(1));
+        cabecera.push(x);  
     }
     return cabecera;
 }
