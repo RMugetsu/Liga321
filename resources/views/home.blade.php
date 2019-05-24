@@ -90,7 +90,6 @@
                     goles[j].push(apellido);
                     goles[j].push(dorsal);
                     goles[j] = goles[j].slice(1);
-
                 }
             }
         }
