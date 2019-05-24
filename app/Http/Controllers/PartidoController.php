@@ -64,7 +64,7 @@ class PartidoController extends Controller
         $entra = jugadore::where("id",$request->input("id2"))->get();
         return $entra;
     }
-    public function marcarGol(Request $request){
+    public function gol(Request $request){
         evento::create([
             "tipo" => $request->input("evento"),
             "minuto" => $request->input("num"),
@@ -72,6 +72,24 @@ class PartidoController extends Controller
             "equipo" => $request->input("equipo"),
             "partido" =>$request->input("idp"),
         ]);
-        return $request;
+        $infopartido = partido::where("id",$request->input("idp"))->get();
+        if($infopartido[0]["equipolocal"]==$request->input("equipo")){
+            $equipo = $infopartido[0]["equipovisitante"];
+            return $equipo;
+        }elseif ($infopartido[0]["equipovisitante"]==$request->input("equipo")) {
+            $equipo = $infopartido[0]["equipolocal"];
+            return $equipo;
+        }
+    }
+    public function traerRivales(Request $request,$id){
+        $equipoDelJugador = jugadore::where("id",$id)->get(["equipo"]);
+        $infopartido = partido::where("id",$request->input("partido"))->get();
+        if($infopartido[0]["equipolocal"]==$equipoDelJugador[0]["equipo"]){
+            $equipo = $infopartido[0]["equipovisitante"];
+        }elseif ($infopartido[0]["equipovisitante"]==$equipoDelJugador[0]["equipo"]) {
+            $equipo = $infopartido[0]["equipolocal"];
+        };
+        $rivales = jugadore::where("equipo",$equipo)->where("posicion","<",12)->get();
+        return $rivales;
     }
 }

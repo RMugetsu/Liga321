@@ -85,9 +85,6 @@ function sumarMinuto(){
     }
 };
 
-function confirmarEvento(){
-
-}
 function abrirModal(event){
     $(".modalEventos").empty();
     obtenerEventosPartido();
@@ -106,10 +103,7 @@ function generarBotonesDeEventosModal(eventos){
             var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},eventoGoles);
             $(padre).append(botonDeEvento);
         }else if(evento["evento"] == "Faltas"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},faltasRealizadas);
-            $(padre).append(botonDeEvento);
-        }else if(evento["evento"] == "Otros"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},otrosEventos);
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},eventoFalta);
             $(padre).append(botonDeEvento);
         }
     });
@@ -194,12 +188,6 @@ function asignarParametrosARealizarCambios(){
         realizarCambio);
     $("#confirmar").attr("disabled", false);
 }
-function faltasRealizadas(){
-
-}
-function otrosEventos(){
-
-}
 function remplazarBotonDeJugador(data,id,posicion){
     var entraJugador = $("<button>").text(data['nombre']+" "+data['apellido'])
         .attr({"posicion":data["posicion"],
@@ -231,8 +219,8 @@ function generarOpcionesDeGolEquipos(){
 }
 function seleccionarEquipo(){
     $(this).text();
-    console.log($(this).text(),$(this).attr("id"));
-    $("#confirmar").on("click",{id:this.id},realizarGol)
+    $("#confirmar").on("click",{id:this.id},realizarGol);
+    $("#confirmar").attr("disabled", false);
 }
 
 function realizarGol(event){
@@ -253,9 +241,82 @@ function realizarGol(event){
         }
         })
         .done(function( data ) {
-            cambiarMarcador();
+            cambiarMarcador(data);
         }).fail(function(error){
             console.log(error);
         });
+}
+function cambiarMarcador(id){
+    var resultado = $("[id='"+id+"'][class='titularDelPartido']");
+    var valorActual = resultado.text();
+    $(resultado).text(parseInt(valorActual,10)+1);
+}
+
+function generarCheckEventos(padre){
+    var labelAmarilla = $("<label>").text("Tarjeta Amarilla");
+    var amarilla = $("<input>").attr("type","checkbox").val("2");
+    var labelRoja = $("<label>").text("Tarjeta Roja");
+    var roja = $("<input>").attr("type","checkbox").val("3");
+    var labelLesion = $("<label>").text("Lesión");
+    var lesion = $("<input>").attr("type","checkbox").val("4");
+    $(padre).append(labelAmarilla);    
+    $(padre).append(amarilla);
+    $(padre).append($("<br>"));
+    $(padre).append(labelRoja);
+    $(padre).append(roja);
+    $(padre).append($("<br>"));
+    $(padre).append(labelLesion);
+    $(padre).append(lesion);
+}
+
+function eventoFalta(event){
+    $("#nombreJugador").attr("eventoId",event.data.id);
+    $(".modalEventos").empty();
+    traerJugadoresEquipoRival(event.data.id);
     
+}
+
+function traerJugadoresEquipoRival(id){
+    var urlRivales = "/api/eventos/partido/rivales/"+id;
+    $.ajax({
+        url: urlRivales,
+        data:{
+            partido :partido["id"],
+        }
+        })
+        .done(function( data ) {
+            generarDatosJugadoresRivales(data);
+            generarCheckEventos(".modalEventos");
+            $("#confirmar").attr("disabled", false);
+            $("#confirmar").on("click",realizarFalta);
+        }).fail(function(error){
+            console.log(error);
+        });
+}
+
+function generarDatosJugadoresRivales(rivales){
+    console.log(rivales);
+    var selectRivales = $("<select>").attr("id","listaSuplentes").on("change",asignarParametrosARealizarFalta);
+    rivales.forEach(rival => {
+        var opcion = $("<option>").text(rival["nombre"]).attr({"idJugador":rival['id']});
+        $(selectRivales).append(opcion);
+    });
+    $(".modalEventos").append($("<h4>").text("Jugadores Rivales"));
+    $(".modalEventos").append(selectRivales);
+}
+
+function asignarParametrosARealizarFalta(){
+    var elegido = $("option:contains("+this.value+")");
+    var identificadorJugador = elegido.attr("idJugador");
+    $("#confirmar").on("click",
+        {
+            id : identificadorJugador,
+        },
+        realizarFalta);
+    $("#confirmar").attr("disabled", false);
+}
+
+function realizarFalta(){
+    var eventos = $("input:checked");
+    console.log(eventos);
 }
