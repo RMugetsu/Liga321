@@ -45,8 +45,15 @@ function checkNulls(){
 }
 
 function generarTablas(padre,data,ruta,iconos){
+    var ranking_jugadores = ['Id','Goles','Nombre','Apellido','Dorsal'];
+
     //console.log("datatabla: "+data);
-    var cabecera = obtenerCabecera(data);
+    if (padre == "#jugadoresRanking"){
+        var cabecera = ranking_jugadores;
+    }
+    else {
+        var cabecera = obtenerCabecera(data);
+    }
     var controlDeCabecera = 0;
     var tabla = $("<table>").attr("class","table table-dark table-striped ranking table-fixed");
     var thead = $("<thead>").attr("class","thead-dark");
