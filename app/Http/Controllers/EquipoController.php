@@ -22,10 +22,16 @@ class EquipoController extends Controller
         $equipoSeleccionado = equipo::where('id',$id)->get();
         $jugadores = jugadore::where('equipo',$id)->orderby('posicion')->get();
         $entrenador = "vacio" ;
-        $id_partido = partido::where('equipolocal', $id)->orWhere('equipovisitante', $id)->orderby('id','DESC')->take(1)->get();
-        $partido = DB::table('eventos')->where('partido', $id_partido[0]['id'])->get();
-        return $partido;
-        return view("equipo", compact('equipoSeleccionado','jugadores','partido'))->with('entrenador', $entrenador);        
+        $partido = partido::where('equipolocal', $id)->orWhere('equipovisitante', $id)->orderby('id')->take(1)->get();
+        $eventos = DB::table('eventos')->where('partido', $partido[0]['id'])->get();
+        if ($partido[0]['equipolocal'] == $id){
+            $nombreContrincante = equipo::where('id',$partido[0]['equipovisitante'])->get();
+        }
+        else {
+            $nombreContrincante = equipo::where('id',$partido[0]['equipolocal'])->get('nombre');
+        }
+        //pasar variable contricante para sacar el nombre
+        return view("equipo", compact('equipoSeleccionado','jugadores','partido','eventos','nombreContrincante'))->with('entrenador', $entrenador);        
     }
 
     public function obtenerEquipoSiendoEntrenador($id){

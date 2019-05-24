@@ -17,6 +17,7 @@ function tabla(mes, partidos, equipos){
       calendario[semana]=array;
     }
   }
+  
   var diaSemana = 7 - calendario[0].length;
   var diaSemanaTd = "<td></td>".repeat(diaSemana);
   var html="<table border='1' align='center' class='table table-sm calendario '><tr class='tituloCalendario'><th colspan='7'><h3><button id='anterior' class='btn btn-primary'><i class='fas fa-chevron-left'></i></button>&nbsp&nbsp"+moment().add(mes, "month").format("MMMM YYYY")+"&nbsp&nbsp<button id='siguiente' class='btn btn-primary'><i class='fas fa-chevron-right'></i></button></h3></th></tr><tr>"
@@ -27,9 +28,9 @@ function tabla(mes, partidos, equipos){
   html+="</tr>"
   for (var semana in calendario){
     if (isNaN(semana)){
-      console.log(semana);
       break;
     }
+    
     html+="<tr>"
     if(semana==0){
     html+=diaSemanaTd;
@@ -65,7 +66,7 @@ function tabla(mes, partidos, equipos){
 function insertarPartidos(mes, partidos, equipos){
 
   var calendario = $(".calendario");
-  for (var i=0; i<partidos.length;i+=2){
+  for (var i=0; i<(partidos.length);i+=2){
     var fecha_partido = partidos[i]['fechainicio'];
     mes_partido = fecha_partido.slice(5,-3);
     dia_partido = fecha_partido.slice(8)
@@ -91,7 +92,6 @@ function insertarPartidos(mes, partidos, equipos){
     partido2.href = "/partido/"+partidos[i+1]['id'] ;
     partido2.className = "partidoscalendario";
 
-      
       var lista_td = $("td");
       for (var dia=0;dia<lista_td.length;dia++){
         var dia_td = $("td")[dia].innerText;
@@ -104,15 +104,23 @@ function insertarPartidos(mes, partidos, equipos){
           var celda = $("td").get(dia);
     
           if (dia_td == dia_partido){
-            var br = document.createElement('br');
-            celda.appendChild(partido);
-            celda.appendChild(br);
-            celda.appendChild(partido2);
-
+            var titulocalendario = ($(".tituloCalendario").text()).split(" ");
+            var año = titulocalendario[titulocalendario.length-1];
+            if (año == moment().year() || año == moment().add("year",1).year()){
+              var fecha_primer_partido = partidos[0]['fechainicio'];
+              mes_primer_partido = fecha_primer_partido.slice(5,-3);
+              if (mes_primer_partido-1 <= moment().add(mes, "month").month() && año == moment().add("year",1).year()){
+                break;
+              }
+              else if (mes_primer_partido-1 <= (moment().add(mes, "month").month()) && año == (moment().year()) || año == moment().add("year",1).year()){
+                var br = document.createElement('br');
+                celda.appendChild(partido);
+                celda.appendChild(br);
+                celda.appendChild(partido2);
+              }  
+            }
           }
       }
-
-    };
-    
+    }; 
   }
 }

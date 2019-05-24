@@ -529,6 +529,7 @@ class DatabaseSeeder extends Seeder
                 'equipo' => 1,
                 'tipo' => 1,
                 'jugador1'=> 1,
+                'minuto'=> 10,
             ]);
 
             DB::table('eventos')->insert([
@@ -536,6 +537,7 @@ class DatabaseSeeder extends Seeder
                 'equipo' => 2,
                 'tipo' => 1,
                 'jugador1'=> 30,
+                'minuto'=>20,
             ]);
 
             DB::table('eventos')->insert([
@@ -543,6 +545,7 @@ class DatabaseSeeder extends Seeder
                 'equipo' => 2,
                 'tipo' => 1,
                 'jugador1'=> 30,
+                'minuto'=>40,
             ]);
 
             DB::table('eventos')->insert([
@@ -550,6 +553,7 @@ class DatabaseSeeder extends Seeder
                 'equipo' => 2,
                 'tipo' => 1,
                 'jugador1'=> 30,
+                'minuto'=>30,
             ]);
 
             DB::table('eventos')->insert([
@@ -557,6 +561,7 @@ class DatabaseSeeder extends Seeder
                 'equipo' => 2,
                 'tipo' => 1,
                 'jugador1'=> 30,
+                'minuto'=>70,
             ]);
 
             /*Schema::create('eventos', function (Blueprint $table) {
