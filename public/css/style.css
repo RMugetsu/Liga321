@@ -11,6 +11,9 @@
 .dropdown-menu {
   background-color: #4F5052;
 }
+.dropdown-item:hover {
+  color: #4F5052 !important;
+}
 
   .Listado{
     margin-left:40% !important;

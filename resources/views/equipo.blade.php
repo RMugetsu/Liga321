@@ -121,7 +121,6 @@
         }
 
         if (equipo[0]['id'] == equipoLocal){
-           // var texto = equipo[0]['nombre'] + " " + golesLocal + " - " + golesVisitante + " " + nombreContrincante ;
             var text = $("<a>").text(equipo[0]['nombre'] + " " + golesLocal + " - " + golesVisitante + " " + nombreContrincante);
         }
         else {
@@ -141,14 +140,7 @@
 
         $(".DivAbajo").append(h3);
         $(".DivAbajo").append(div);
-
-
-
-        /*         <!--[{"id":1,"tipo":1,"minuto":10,"jugador1":1,"jugador2":null,
-                    "equipo":1,"sancion":null,"partido":1,"created_at":null,"updated_at":null},
-                
-                {"id":2,"tipo":1,"minuto":20,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null},{"id":3,"tipo":1,"minuto":40,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null},{"id":4,"tipo":1,"minuto":30,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null},{"id":5,"tipo":1,"minuto":70,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null}]*/
-    }
+ }
 
     else {
 

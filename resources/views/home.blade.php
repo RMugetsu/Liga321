@@ -20,5 +20,16 @@
 
     </div>
     <div class="col-md-6"></div>
+        <div id="jugadoresRanking"></div>
+        <!--<div class="pagelinks">{{$equipos_ranking->links()}}</div>-->
+        <div align="center" id="JugadoresPaginado"></div>
     </div>
 </div>
+
+<script>
+    var jugadores_ranking = {!! json_encode($jugadores_ranking->toArray(), JSON_HEX_TAG) !!} ;
+    var eventos = {!! json_encode($eventos->toArray(), JSON_HEX_TAG) !!} ;
+
+    
+
+</script>
