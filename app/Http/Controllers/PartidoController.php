@@ -7,6 +7,7 @@ use app\User;
 use App\equipo;
 use App\partido;
 use App\jugadore;
+use App\evento;
 use App\tiposdeevento;
 
 
@@ -40,5 +41,27 @@ class PartidoController extends Controller
     public function obtenerEventos(){
         $eventos = tiposDeEvento::get();
         return $eventos;
+    }
+    public function suplentes($id){
+        $equipo = jugadore::where("id",$id)->get(["equipo"]);
+        $suplentes =  jugadore::where("equipo",$equipo[0]["equipo"])->where("posicion",">",11)->get();
+        return $suplentes;
+    }
+    public function intercambioJugadores(Request $request){
+        jugadore::where('id',$request->input("id1"))->update([
+            "posicion"=>$request->input("posc2"),
+        ]);
+        jugadore::where('id',$request->input("id2"))->update([
+            "posicion"=>$request->input("posc1"),
+        ]);
+        evento::create([
+            "tipo" => $request->input("evento"),
+            "minuto" => $request->input("num"),
+            "jugador1" => $request->input("id1"),
+            "jugador2" => $request->input("id2"),
+            "partido" =>$request->input("idp"),
+        ]);
+        $entra = jugadore::where("id",$request->input("id2"))->get();
+        return $entra;
     }
 }

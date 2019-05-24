@@ -24,6 +24,8 @@ Route::get('/info/Equipo/{id}/{id2}','PartidoController@obtenerNombreDelEquipo')
 
 Route::get('/eventos/partido','PartidoController@obtenerEventos');
 
+Route::get('/eventos/partido/suplente/{id}','PartidoController@suplentes');
+
 Route::get('/partido/informacionjugadores/{id}/{id2}', 'PartidoController@infoJugadores');
 
 Route::get('/alexaJugador/{Nombre}/{Apellido}','AlexaController@InformacionJugador');

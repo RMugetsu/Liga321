@@ -3,7 +3,7 @@ function generarPlantilla(jugadores){
     for(var x = 0; x<11;x++){
         $(plantilla).append($("<button>").text(jugadores[x]['nombre']+" "+jugadores[x]['apellido'])
         .attr({"posicion":jugadores[x]["posicion"],
-        "id":jugadores[x]["id"],"type":"button","data-toggle":"modal",
+        "class":jugadores[x]["id"],"type":"button","data-toggle":"modal",
         "data-target":"#exampleModal"}).addClass("btn")
         .on("click",{nombre:jugadores[x]['nombre']+" "+jugadores[x]['apellido'],posicion:jugadores[x]["posicion"],id:jugadores[x]["id"]},
         abrirModal)
@@ -45,23 +45,11 @@ function obtenerNombreEquipo(id,id2,padre){
      }
      ).done(function(res){
         mostrarEquipoEnElTitulo(res[0][0]['nombre'],padre,id,1);
-        mostrarEquipoEnElTitulo(res[1][0]['nombre'],padre,id,2);
+        mostrarEquipoEnElTitulo(res[1][0]['nombre'],padre,id2,2);
      }).fail(function(error){
          console.log(error);
      });
  };
-
- function obtenerEventosPartido(){
-    $.ajax({
-            url:"/api/eventos/partido",
-            },
-    ).done(function(res){
-        console.log(res);
-        generarBotonesDeEventos(res);
-    }).fail(function(error){
-        console.log(error);
-    });
-};
 
 function comprobarDiaDelPartido(fecha,fechaActual){
     if(fecha[0]==fechaActual[2]){
@@ -87,7 +75,6 @@ function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
 
 function tiempoDelPartido() {
     setInterval(sumarMinuto, 60000);
-
     };
 
 function sumarMinuto(){
@@ -101,42 +88,131 @@ function sumarMinuto(){
 function confirmarEvento(){
 
 }
-function generarBotonesDeEventos(eventos){
-    var padre =$(".modal-body")
+function abrirModal(event){
+    $(".modalEventos").empty();
+    obtenerEventosPartido();
+    $("#nombreJugador").text(event.data.nombre).attr({"modal-posicion-jugador":event.data.posicion,"modal-id-jugador":event.data.id});
+    console.log(this);
+    $($(this).attr("data-target")).modal('show');
+}
+
+function generarBotonesDeEventosModal(eventos){
+    var padre =$(".modalEventos");
     eventos.forEach(evento => {
-        var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn");
-        $(padre).append(botonDeEvento);
+        if(evento["evento"] == "Cambio De Jugador"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},cambiarDeJugador);
+            $(padre).append(botonDeEvento);
+        }else if(evento["evento"] == "Gol"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},golesRealizados);
+            $(padre).append(botonDeEvento);
+        }else if(evento["evento"] == "Faltas"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},faltasRealizadas);
+            $(padre).append(botonDeEvento);
+        }else if(evento["evento"] == "Otros"){
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},otrosEventos);
+            $(padre).append(botonDeEvento);
+        }
     });
 }
 
-function abrirModal(event){
-    console.log("Pase por aqui");
-    $("#nombreJugador").text(event.data.nombre);
-    $(".modal-body").append($("<label>").text(event.data.posicion).attr("modal-posicion-jugador",1).hide());
-    $(".modal-body").append($("<label>").text(event.data.id).attr("modal-id-jugador",1).hide());
-    $($(this).attr("data-target")).modal("show");
+function obtenerEventosPartido(){
+    $.ajax({
+            url:"/api/eventos/partido",
+            },
+    ).done(function(res){
+        generarBotonesDeEventosModal(res);
+    }).fail(function(error){
+        console.log(error);
+    });
+};
+
+function cambiarDeJugador(event){
+    $("#nombreJugador").attr("eventoId",event.data.id);
+    $(".modalEventos").empty();
+    var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
+    var posicionJugador1 = $("#nombreJugador").attr("modal-posicion-jugador");
+    traerSuplentes(idJugador1);
+
 }
-//TESTEO
-var ATTRIBUTES = ['myvalue', 'myvar', 'bb'];
-function accionBotonJugador(){
-    $('[data-toggle="modal"]').on('click', function (e) {
-        // convert target (e.g. the button) to jquery object
-        var $target = $(e.target);
-        console.log($target)
-        // modal targeted by the button
-        var modalSelector = $target.data('target');
-        console.log($modalSelector)
-        // iterate over each possible data-* attribute
-        ATTRIBUTES.forEach(function (attributeName) {
-          // retrieve the dom element corresponding to current attribute
-          var $modalAttribute = $(modalSelector + ' #modal-' + attributeName);
-          var dataValue = $target.data(attributeName);
-          
-          // if the attribute value is empty, $target.data() will return undefined.
-          // In JS boolean expressions return operands and are not coerced into
-          // booleans. That way is dataValue is undefined, the left part of the following
-          // Boolean expression evaluate to false and the empty string will be returned
-          $modalAttribute.text(dataValue || '');
+function traerSuplentes(id){
+    var urlSuplente = "/api/eventos/partido/suplente/"+id;
+    $.ajax({
+        url: urlSuplente,
+        })
+        .done(function( data ) {
+            generarSuplentes(data);
+        }).fail(function(error){
+            console.log(error);
         });
-      });
+}
+function generarSuplentes(suplentes){
+    var selectSuplentes = $("<select>").attr("id","listaSuplentes").on("change",asignarParametrosARealizarCambios);
+    suplentes.forEach(suplente => {
+        var opcion = $("<option>").text(suplente["nombre"]).attr({"idJugador":suplente['id'],"posicionJugador":suplente["posicion"]});
+        $(selectSuplentes).append(opcion);
+    });
+    $(".modalEventos").append($("<h4>").text("Jugadores Suplentes"));
+    $(".modalEventos").append(selectSuplentes);
+}
+function realizarCambio(event){
+    var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
+    var posicionJugador1 = $("#nombreJugador").attr("modal-posicion-jugador");
+    var tipoDeEvento = $("#nombreJugador").attr("eventoId");
+    var tiempo = $("#tiempoDelPartido").text();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        type:"post",
+        url: "/intercambio",
+        data:{
+            _token:  token,
+            idp: partido["id"],
+            id1:idJugador1,
+            posc1:posicionJugador1,
+            id2: event.data.id,
+            posc2: event.data.posc,
+            num : tiempo,
+            evento : tipoDeEvento,
+        }
+        })
+        .done(function( data ) {
+            remplazarBotonDeJugador(data[0],idJugador1,posicionJugador1);
+        }).fail(function(error){
+            console.log(error);
+        });
+    
+}
+function asignarParametrosARealizarCambios(){
+    var elegido = $("option:contains("+this.value+")");
+    console.log(elegido.attr("posicionJugador"));
+    var posicion = elegido.attr("posicionJugador");
+    var identificadorJugador = elegido.attr("idJugador");
+    $("#confirmar").on("click",
+        {
+            posc : posicion,
+            id : identificadorJugador,
+        },
+        realizarCambio);
+    $("#confirmar").attr("disabled", false);
+}
+function golesRealizados(){
+
+}
+function faltasRealizadas(){
+
+}
+function otrosEventos(){
+
+}
+function remplazarBotonDeJugador(data,id,posicion){
+    var entraJugador = $("<button>").text(data['nombre']+" "+data['apellido'])
+        .attr({"posicion":data["posicion"],
+        "class":data["id"],"type":"button","data-toggle":"modal",
+        "data-target":"#exampleModal"}).addClass("btn")
+        .on("click",{nombre:data['nombre']+" "+data['apellido'],posicion:data["posicion"],id:data["id"]},
+        abrirModal);
+    var saleJugador = $("."+id+"[posicion='"+posicion+"']");
+    console.log(saleJugador);
+    $(saleJugador).replaceWith(entraJugador);
+    $("#confirmar").modal("hide");
+    $("#confirmar").off("click",realizarCambio);
 }

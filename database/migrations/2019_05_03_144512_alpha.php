@@ -73,13 +73,13 @@ class Alpha extends Migration
             $table->integer('jugador1')->nullable()->unsigned();
             $table->integer('jugador2')->nullable()->unsigned();
             $table->integer('equipo')->nullable()->unsigned();
-            $table->integer('sancion')->nullable()->unsigned();
+            $table->integer('falta')->nullable()->unsigned();
             $table->integer('partido')->unsigned();
             $table->foreign('tipo')->references('id')->on('tiposdeeventos');
             $table->foreign('jugador1')->references('id')->on('jugadores');
             $table->foreign('jugador2')->references('id')->on('jugadores');
             $table->foreign('equipo')->references('id')->on('equipos');
-            $table->foreign('sancion')->references('id')->on('eventos');
+            $table->foreign('falta')->references('id')->on('eventos');
             $table->foreign('partido')->references('id')->on('partidos');
             $table->timestamps();
         });
