@@ -55,3 +55,5 @@ Route::post('/cambiarPosicionJugador/{id}', 'EquipoController@cambiarPosicionJug
 
 
 Route::post('/intercambio','PartidoController@intercambioJugadores');
+
+Route::post('/marcarGol','PartidoController@gol');
