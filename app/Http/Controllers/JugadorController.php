@@ -11,4 +11,9 @@ class JugadorController extends Controller
         $jugador = jugadore::where('id',$id)->get();
         return view("jugador", compact('jugador'));        
     }
+
+    public function obtenerJugadorAjax($id){
+        $jugador = jugadore::where('id',$id)->get();
+        return $jugador;        
+    }
 }

@@ -27,9 +27,37 @@
 </div>
 
 <script>
-    var jugadores_ranking = {!! json_encode($jugadores_ranking->toArray(), JSON_HEX_TAG) !!} ;
     var eventos = {!! json_encode($eventos->toArray(), JSON_HEX_TAG) !!} ;
+    var idjugador_goles_ranking = [];
 
-    
+    for (var i=0; i<eventos.length; i++){
+        var contador = 0;
+        var id_actual = (eventos[i]['jugador1']);
+
+        for (var j=0; j<eventos.length; j++){
+            if (eventos[j]['jugador1'] == id_actual){
+                contador++;
+            }
+        }
+        idjugador_goles_ranking.push([id_actual, contador]);
+    }
+    var jugadores_goles = [];
+    for (var x=0; x<idjugador_goles_ranking.length; x++){
+        var id_actual = idjugador_goles_ranking[x][0];    
+        if (x==0){
+            jugadores_goles.push([idjugador_goles_ranking[x][0], idjugador_goles_ranking[x][1]]);
+        }
+        var control = 0;
+        for (var j=0; j<jugadores_goles.length; j++){
+            if (jugadores_goles[j] != undefined){
+                if(id_actual == jugadores_goles[j][0]){
+                    control = 1;
+                }
+            }
+        }
+        if (x!=0 && control == 0){
+            jugadores_goles.push(idjugador_goles_ranking[x]);
+        }
+     }   
 
 </script>

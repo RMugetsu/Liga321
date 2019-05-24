@@ -562,6 +562,40 @@ class DatabaseSeeder extends Seeder
                 'minuto'=>70,
             ]);
 
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 10,
+                'minuto'=> 10,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 14,
+                'minuto'=> 13,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 12,
+                'minuto'=> 15,
+            ]);
+
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 16,
+                'minuto'=> 10,
+            ]);
+
+
             /*Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id')->unique();
             $table->integer('tipo')->unsigned();
