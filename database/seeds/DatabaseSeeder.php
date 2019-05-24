@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
 
         $jugadores =  [
             //real madrid
+            ['Thibaut','Courtois​',25,1,26,0,6], //portero 1
             ['Sergio','Ramos', 4, 1, 33, 0, 1],
             ['Daniel','Carvajal',2,1,27,0,2],
             ['Marcelo','Vieira',12,1,30,0,3],
             ['Luka','Modric',10,1,33,0,4],
             ['Gareth','Bale',11,1,29,0,5],
-            ['Thibaut','Courtois​',25,1,26,0,6], //portero 1
             ['Raphael','Varane',5,1,26,0,7],
             ['Jesus','Vallejo',3,1,22,0,8],
             ['Nacho','Fernandez',6,1,29,0,9],
@@ -39,9 +39,9 @@ class DatabaseSeeder extends Seeder
             ['Karim','Benzema',9,1,31,0,13],
             ['Mariano','Diaz',7,1,25,0,14],
             ['Brahim','Diaz',21,1,19,0,15],
-            ['Luca','Zidane',30,1,20,0,16], //portero 2
             ['Toni','Kroos',8,1,29,0,17],
             ['Jaime','Seoane',33,1,22,0,18],
+            ['Luca','Zidane',30,1,20,0,16], //portero 2
             //barcelona
             ['Marc-Andre','Ter Stegen',1,2,27,0,1], //portero1
             ['Gerard','Pique',3,2,32,0,2],
@@ -62,12 +62,12 @@ class DatabaseSeeder extends Seeder
             ['Arthur','Melo',8,2,22,0,17],
             ['Jasper','Cillessen',13,2,30,0,18], //portero2
             //atletico Madrid
+            ['Jan','Oblak',13,3,26,0,6], //portero1
             ['Antoine','Griezmann',7,3,28,0,1],
             ['Diego','Godin',2,3,33,0,2],
             ['Alvaro','Morata',22,3,26,0,3],
             ['Rodrigo','Hernandez',14,3,22,0,4],
             ['Diego','Costa',19,3,30,0,5],
-            ['Jan','Oblak',13,3,26,0,6], //portero1
             ['Nikola','Kalinic',9,3,31,0,7],
             ['Saul','Ñiguez',8,3,24,0,8],
             ['Lucas','Hernandez',21,3,23,0,9],
@@ -82,7 +82,6 @@ class DatabaseSeeder extends Seeder
             ['Alex','Dos Santos',25,3,20,0,18], //portero2
             //valencia
             ['Norberto','Murara',13,4,29,0,1], //portero1
-            ['Cristian','Rivero',28,4,21,0,2], //portero2
             ['Rodrigo','Moreno',19,4,28,0,3],
             ['Gonçalo','Guedes',7,4,22,0,4],
             ['Mouctar','Diakhaby',12,4,22,0,5],
@@ -99,9 +98,9 @@ class DatabaseSeeder extends Seeder
             ['Lee','Kang-in',16,4,18,0,16],
             ['Cristiano','Piccini',21,4,26,0,17],
             ['Carlos','Soler',22,4,22,0,18],
+            ['Cristian','Rivero',28,4,21,0,2], //portero2
             //celta de vigo
             ['Ruben','Blanco',13,5,23,0,1], //portero1
-            ['Ivan','Villar',26,5,21,0,2], //portero2
             ['Iago','Aspas',17,5,31,0,3],
             ['Maximiliano','Gomez',9,5,22,0,4],
             ['Emre','Mor',7,5,21,0,5],
@@ -118,9 +117,9 @@ class DatabaseSeeder extends Seeder
             ['Ryad','Boudebouz',24,5,29,0,16],
             ['Lucas','Olaza',15,5,24,0,17],
             ['Wesley','Hoedt',12,5,25,0,18],
+            ['Ivan','Villar',26,5,21,0,2], //portero2
             //real betis
             ['Pau','Lopez',13,6,24,0,1], //portero1
-            ['Joel','Robles',1,6,28,0,2], //portero2
             ['Joaquin','Sanchez',17,6,37,0,3],
             ['Diego','Lainez',22,6,18,0,4],
             ['Giovani','Lo Celso',21,6,23,0,5],
@@ -136,10 +135,10 @@ class DatabaseSeeder extends Seeder
             ['Lorenzo','Moron',16,6,25,0,15],
             ['Sergio','Leon',7,6,30,0,16],
             ['Junior','Firpo',20,6,22,0,17],
-            ['Julio','Alonso',30,6,20,0,18], 
+            ['Julio','Alonso',30,6,20,0,18],
+            ['Joel','Robles',1,6,28,0,2], //portero2
             //sevilla
             ['Tomas','Vaclik',1,7,30,0,1], //portero1
-            ['Juan','Soriano',13,7,21,0,2], //portero2
             ['Pablo','Sarabia',17,7,27,0,3],
             ['Andre','Silva',12,7,23,0,4],
             ['Wissam','Ben Yedder',9,7,28,0,5],
@@ -155,10 +154,10 @@ class DatabaseSeeder extends Seeder
             ['Aleix','Vidal',11,7,29,0,15],
             ['Sergi','Gomez',3,7,27,0,16],
             ['Ibrahim','Amadou',5,7,26,0,17],
-            ['Daniel','Carriço',6,7,30,0,18], 
+            ['Daniel','Carriço',6,7,30,0,18],
+            ['Juan','Soriano',13,7,21,0,2], //portero2
             //athletic
             ['Alex','Remiro',1,8,24,0,1], //portero1
-            ['Unai','Simon',25,8,21,0,2], //portero2
             ['Iñaki','Williams',9,8,24,0,3],
             ['Aritz','Aduriz',20,8,38,0,4],
             ['Markel','Susaeta',14,8,31,0,5],
@@ -175,9 +174,9 @@ class DatabaseSeeder extends Seeder
             ['Oscar','de Marcos',18,8,30,0,16],
             ['Yeray','Alvarez',5,8,24,0,17],
             ['Iago','Herrerin',13,8,31,0,18],
+            ['Unai','Simon',25,8,21,0,2], //portero2
             //getafe
             ['David','Soria',13,9,26,0,1], //portero1
-            ['Ruben','Yañez',25,9,25,0,2], //portero2
             ['Djene','Dakoman',2,9,27,0,3],
             ['Jaime','Mata',7,9,30,0,4],
             ['Gaku','Shibasaki',10,9,26,0,5],
@@ -194,9 +193,9 @@ class DatabaseSeeder extends Seeder
             ['Bruno','Gonzalez',4,9,28,0,16],
             ['Mathias','Olivera',17,9,21,0,17],
             ['Markel','Bergara',5,9,33,0,18],
+            ['Ruben','Yañez',25,9,25,0,2], //portero2
             //villareal
             ['Sergio','Asenjo',1,10,29,0,1], //portero1
-            ['Mariano','Barbosa',25,10,34,0,2], //portero2
             ['Santi','Cazorla',19,10,34,0,3],
             ['Samuel','Chukwueze',30,10,19,0,4],
             ['Carlos','Bacca',9,10,32,0,5],
@@ -213,9 +212,9 @@ class DatabaseSeeder extends Seeder
             ['Bruno','Soriano',21,10,34,0,16],
             ['Mario','Gaspar',2,10,28,0,17],
             ['Daniele','Bonera',23,10,37,0,18],
+            ['Mariano','Barbosa',25,10,34,0,2], //portero2
             //rcd espanyol
             ['Diego','Lopez',13,11,37,0,1], //portero1
-            ['Roberto','Jimenez',1,11,33,0,2], //portero2
             ['Wu','Lei',24,11,27,0,3],
             ['Borja','Iglesias',7,11,26,0,4],
             ['Mario','Hermoso',22,9,23,0,5],
@@ -232,9 +231,9 @@ class DatabaseSeeder extends Seeder
             ['Pablo','Piatti',19,11,30,0,16],
             ['Marc','Roca',21,11,22,0,17],
             ['Hernan','Arsenio',17,11,30,0,18],
+            ['Roberto','Jimenez',1,11,33,0,2], //portero2
             //real vallalodid
             ['Jordi','Masip',1,12,30,0,1], //portero1
-            ['Samuel','Perez',26,12,22,0,2], //portero2
             ['Borja','Fernandez',8,12,38,0,3],
             ['Enes','Unal',9,12,22,0,4],
             ['Sergio','Guardiola',12,9,27,0,5],
@@ -251,9 +250,9 @@ class DatabaseSeeder extends Seeder
             ['Duje','Cop',20,12,29,0,16],
             ['Luismi','Sanchez',6,12,27,0,17],
             ['Francisco','Olivas',4,12,30,0,18],
+            ['Samuel','Perez',26,12,22,0,2], //portero2
              //girona fc
             ['Yassine','Bounou',13,13,28,0,1], //portero1
-            ['Jose','Aurelio',30,13,23,0,2], //portero2
             ['Cristhian','Stuani',7,13,32,0,3],
             ['Cristian','Portugues',9,13,27,0,4],
             ['Alex','Granell',6,9,30,0,5],
@@ -270,9 +269,9 @@ class DatabaseSeeder extends Seeder
             ['Marc','Muniesa',20,13,27,0,16],
             ['Jonas','Ramalho',4,13,25,0,17],
             ['Pere','Pons',8,13,26,0,18],
+            ['Jose','Aurelio',30,13,23,0,2], //portero2
             //rayo vallecano
             ['Alberto','Garcia',1,14,34,0,1], //portero1
-            ['Miguel','Morro',30,14,18,0,2], //portero2
             ['Luis','Advincula',17,14,29,0,3],
             ['Raul','De Tomas',9,14,24,0,4],
             ['Alexandre','Moreno',7,9,25,0,5],
@@ -289,9 +288,9 @@ class DatabaseSeeder extends Seeder
             ['Roberto','Roman',2,14,33,0,16],
             ['Alejandro','Galvez',23,14,29,0,17],
             ['Jordi','Amat',16,14,27,0,18],
+            ['Miguel','Morro',30,14,18,0,2], //portero2
             //real sociedad
             ['Geronimo','Rulli',1,15,27,0,1], //portero1
-            ['Andoni','Zubiaurre',30,15,22,0,2], //portero2
             ['Mikel','Oyarzabal',10,15,22,0,3],
             ['Adnan','Januzaj',11,15,24,0,4],
             ['Juanmi','Jimenez',7,9,26,0,5],
@@ -308,103 +307,102 @@ class DatabaseSeeder extends Seeder
             ['Mikel','Merino',8,15,22,0,16],
             ['Joseba','Zaldua',2,15,26,0,17],
             ['Luca','Sangalli',23,15,24,0,18],
+            ['Andoni','Zubiaurre',30,15,22,0,2], //portero2
             //levante
-            ['','Soria',13,16,26,0,1], //portero1
-            ['','Yañez',25,16,25,0,2], //portero2
-            ['','Dakoman',2,16,27,0,3],
-            ['','Mata',7,16,30,0,4],
-            ['','Shibasaki',16,9,26,0,5],
-            ['','Molina',19,16,37,0,6],
-            ['','Rodriguez',9,16,32,0,7],
-            ['','Portillo',8,16,28,0,8],
-            ['','Flamini',16,16,35,0,9],
-            ['','Antunes',3,16,32,0,16],
-            ['','Cabrera',6,16,27,0,11],
-            ['','Maksimovic',20,16,24,0,12],
-            ['','Suarez',22,16,31,0,13],
-            ['','Arambarri',18,16,23,0,14],
-            ['','Saiz',11,16,28,0,15],
-            ['','Gonzalez',4,16,28,0,16],
-            ['','Olivera',17,16,21,0,17],
-            ['','Bergara',5,16,33,0,18],
+            ['Oier','Olazabal',13,16,29,0,1], //portero1
+            ['Pedro','Lopez',19,16,27,0,3],
+            ['Roger','Marti',9,16,30,0,4],
+            ['Coke','Andujar',12,9,26,0,5],
+            ['Borja','Mayoral',2,16,37,0,6],
+            ['Jason','Remeseiro',23,16,32,0,7],
+            ['Enis','Bardhi',10,16,28,0,8],
+            ['Ruben','Rochina',16,16,35,0,9],
+            ['Jose','Gomez',24,16,32,0,16],
+            ['Antonio','Garcia',3,16,27,0,11],
+            ['Sergio','Postigo',15,16,24,0,12],
+            ['Cheick','Doukoure',5,16,31,0,13],
+            ['Erick','Cabaco',18,16,23,0,14],
+            ['Raphael','Dwamena',20,16,28,0,15],
+            ['Moses','Simon',7,16,28,0,16],
+            ['Roberto','Suarez',4,16,21,0,17],
+            ['Antonio','Luna',22,16,33,0,18],
+            ['Jorge','Ruiz',1,16,25,0,2], //portero2
             //huesca
-            ['','Soria',13,17,26,0,1], //portero1
-            ['','Yañez',25,17,25,0,2], //portero2
-            ['','Dakoman',2,17,27,0,3],
-            ['','Mata',7,17,30,0,4],
-            ['','Shibasaki',17,9,26,0,5],
-            ['','Molina',19,17,37,0,6],
-            ['','Rodriguez',9,17,32,0,7],
-            ['','Portillo',8,17,28,0,8],
-            ['','Flamini',16,17,35,0,9],
-            ['','Antunes',3,17,32,0,17],
-            ['','Cabrera',6,17,27,0,11],
-            ['','Maksimovic',20,17,24,0,12],
-            ['','Suarez',22,17,31,0,13],
-            ['','Arambarri',18,17,23,0,14],
-            ['','Saiz',11,17,28,0,15],
-            ['','Gonzalez',4,17,28,0,16],
-            ['','Olivera',17,17,21,0,17],
-            ['','Bergara',5,17,33,0,18],
+            ['Javi','Varas',1,17,26,0,1], //portero1
+            ['Juan','Camilo',25,17,25,0,2], 
+            ['Ezequiel','Avila',2,17,27,0,3],
+            ['Martin','Mantovani',7,17,30,0,4],
+            ['Juanjo','Camacho',17,9,26,0,5],
+            ['Jorge','Pulido',19,17,37,0,6],
+            ['Gonzalo','Melero',9,17,32,0,7],
+            ['Enric','Gallego',8,17,28,0,8],
+            ['Alex','Gallar',16,17,35,0,9],
+            ['Jorge','Miramon',3,17,32,0,17],
+            ['Xabier','Etxeita',6,17,27,0,11],
+            ['Juanpi','Añor',20,17,24,0,12],
+            ['David','Ferreiro',22,17,31,0,13],
+            ['Moi','Gomez',18,17,23,0,14],
+            ['Damian','Musto',11,17,28,0,15],
+            ['Yangel','Herrera',4,17,28,0,16],
+            ['Carlos','Akapo',17,17,21,0,17],
+            ['Roberto','Santamaria',5,17,33,0,18], //portero2
             //deportivo alaves
-            ['','Soria',13,18,26,0,1], //portero1
-            ['','Yañez',25,18,25,0,2], //portero2
-            ['','Dakoman',2,18,27,0,3],
-            ['','Mata',7,18,30,0,4],
-            ['','Shibasaki',18,9,26,0,5],
-            ['','Molina',19,18,37,0,6],
-            ['','Rodriguez',9,18,32,0,7],
-            ['','Portillo',8,18,28,0,8],
-            ['','Flamini',16,18,35,0,9],
-            ['','Antunes',3,18,32,0,18],
-            ['','Cabrera',6,18,27,0,11],
-            ['','Maksimovic',20,18,24,0,12],
-            ['','Suarez',22,18,31,0,13],
-            ['','Arambarri',18,18,23,0,14],
-            ['','Saiz',11,18,28,0,15],
-            ['','Gonzalez',4,18,28,0,16],
-            ['','Olivera',17,18,21,0,17],
-            ['','Bergara',5,18,33,0,18],
+            ['Fernando','Pacheco',1,18,26,0,1], //portero1
+            ['Jony','Rodriguez',25,18,25,0,2], 
+            ['Takashi','Inui',2,18,27,0,3],
+            ['Jonathan','Calleri',7,18,30,0,4],
+            ['Patrick','Twumasi',18,9,26,0,5],
+            ['John','Guidetti',19,18,37,0,6],
+            ['Guillermo','Maripan',9,18,32,0,7],
+            ['Borja','Baston',8,18,28,0,8],
+            ['Victor','Laguardia',16,18,35,0,9],
+            ['Rodrigo','Ely',3,18,32,0,18],
+            ['Tomas','Pina',6,18,27,0,11],
+            ['Ruben','Duarte',20,18,24,0,12],
+            ['Ximo','Navarro',22,18,31,0,13],
+            ['Diego','Rolan',18,18,23,0,14],
+            ['Carlos','Vigaray',11,18,28,0,15],
+            ['Martin','Aguirregabiria',4,18,28,0,16],
+            ['Adrian','Marin',17,18,21,0,17],
+            ['Alex','Dominguez',5,18,33,0,18], //portero2
             //cd leganes
-            ['','Soria',13,19,26,0,1], //portero1
-            ['','Yañez',25,19,25,0,2], //portero2
-            ['','Dakoman',2,19,27,0,3],
-            ['','Mata',7,19,30,0,4],
-            ['','Shibasaki',19,9,26,0,5],
-            ['','Molina',19,19,37,0,6],
-            ['','Rodriguez',9,19,32,0,7],
-            ['','Portillo',8,19,28,0,8],
-            ['','Flamini',16,19,35,0,9],
-            ['','Antunes',3,19,32,0,19],
-            ['','Cabrera',6,19,27,0,11],
-            ['','Maksimovic',20,19,24,0,12],
-            ['','Suarez',22,19,31,0,13],
-            ['','Arambarri',18,19,23,0,14],
-            ['','Saiz',11,19,28,0,15],
-            ['','Gonzalez',4,19,28,0,16],
-            ['','Olivera',17,19,21,0,17],
-            ['','Bergara',5,19,33,0,18],
+            ['Ivan','Cuellar',13,19,26,0,1], //portero1
+            ['Oscar','Rodriguez',25,19,25,0,2],
+            ['Jonathan','Silva',2,19,27,0,3],
+            ['Diego','Reyes',7,19,30,0,4],
+            ['Guido','Carrillo',19,9,26,0,5],
+            ['Dimitrios','Siovas',19,19,37,0,6],
+            ['Jose','Arnaiz',9,19,32,0,7],
+            ['Ruben','Perez',8,19,28,0,8],
+            ['Juanfran','Moreno',16,19,35,0,9],
+            ['Javier','Eraso',3,19,32,0,19],
+            ['Gerard','Gumbau',6,19,27,0,11],
+            ['Rodrigo','Tarin',20,19,24,0,12],
+            ['Sabin','Merino',22,19,31,0,13],
+            ['Ezequiel','Muñoz',18,19,23,0,14],
+            ['David','Tejero',11,19,28,0,15],
+            ['Javier','Aviles',4,19,28,0,16],
+            ['Michael','Santos',17,19,21,0,17],
+            ['Andres','Prieto',5,19,33,0,18], //portero2
             //sd eibar
-            ['','Soria',13,20,26,0,1], //portero1
-            ['','Yañez',25,20,25,0,2], //portero2
-            ['','Dakoman',2,20,27,0,3],
-            ['','Mata',7,20,30,0,4],
-            ['','Shibasaki',20,9,26,0,5],
-            ['','Molina',19,20,37,0,6],
-            ['','Rodriguez',9,20,32,0,7],
-            ['','Portillo',8,20,28,0,8],
-            ['','Flamini',16,20,35,0,9],
-            ['','Antunes',3,20,32,0,20],
-            ['','Cabrera',6,20,27,0,11],
-            ['','Maksimovic',20,20,24,0,12],
-            ['','Suarez',22,20,31,0,13],
-            ['','Arambarri',18,20,23,0,14],
-            ['','Saiz',11,20,28,0,15],
-            ['','Gonzalez',4,20,28,0,16],
-            ['','Olivera',17,20,21,0,17],
-            ['','Bergara',5,20,33,0,18],
-           
-
+            ['Asier','Riesgo',13,20,26,0,1], //portero1
+            ['Marc','Cucurella',25,20,25,0,2], 
+            ['Pablo','De Blasis',2,20,27,0,3],
+            ['Fabian','Orellana',7,20,30,0,4],
+            ['Sergi','Enrich',20,9,26,0,5],
+            ['Ivan','Ramis',19,20,37,0,6],
+            ['Charles','Dias',9,20,32,0,7],
+            ['Pedro','Leon',8,20,28,0,8],
+            ['Ruben','Peña',16,20,35,0,9],
+            ['Marc','Cardona',3,20,32,0,20],
+            ['Joan','Jordan',6,20,27,0,11],
+            ['Kike','Garcia',20,20,24,0,12],
+            ['Gonzalo','Escalante',22,20,31,0,13],
+            ['Pape','Diop',18,20,23,0,14],
+            ['Pedro','Bigas',11,20,28,0,15],
+            ['Sergio','Alvarez',4,20,28,0,16],
+            ['Paulo','Oliveira',17,20,21,0,17],
+            ['Marko','Dmitrovic',5,20,33,0,18], //portero2
             //20 equipos en total
         ];
             
