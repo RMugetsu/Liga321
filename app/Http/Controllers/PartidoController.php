@@ -64,4 +64,14 @@ class PartidoController extends Controller
         $entra = jugadore::where("id",$request->input("id2"))->get();
         return $entra;
     }
+    public function marcarGol(Request $request){
+        evento::create([
+            "tipo" => $request->input("evento"),
+            "minuto" => $request->input("num"),
+            "jugador1" => $request->input("id1"),
+            "equipo" => $request->input("equipo"),
+            "partido" =>$request->input("idp"),
+        ]);
+        return $request;
+    }
 }

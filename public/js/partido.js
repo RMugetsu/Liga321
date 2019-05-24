@@ -29,12 +29,12 @@ function traerDatosJugadores(id,id2){
 
 function mostrarEquipoEnElTitulo(nombre,padre,id,num){
     if(num=="1"){
-        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido"));
-        $(padre).append($("<label>").text(" 0 ").attr("id",id).addClass("titularDelPartido"));
+        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido local").attr("id",id));
+        $(padre).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
         $(padre).append($("<label>").text(" - ").addClass("titularDelPartido"));
     }else if(num=="2"){
-        $(padre).append($("<label>").text(" 0 ").attr("id",id).addClass("titularDelPartido"));
-        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido"));
+        $(padre).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
+        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido visitante").attr("id",id));
     }
 }
 
@@ -103,7 +103,7 @@ function generarBotonesDeEventosModal(eventos){
             var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},cambiarDeJugador);
             $(padre).append(botonDeEvento);
         }else if(evento["evento"] == "Gol"){
-            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},golesRealizados);
+            var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},eventoGoles);
             $(padre).append(botonDeEvento);
         }else if(evento["evento"] == "Faltas"){
             var botonDeEvento = $("<button>").text(evento["evento"]).addClass("btn").on("click",{id:evento["id"]},faltasRealizadas);
@@ -194,9 +194,6 @@ function asignarParametrosARealizarCambios(){
         realizarCambio);
     $("#confirmar").attr("disabled", false);
 }
-function golesRealizados(){
-
-}
 function faltasRealizadas(){
 
 }
@@ -215,4 +212,50 @@ function remplazarBotonDeJugador(data,id,posicion){
     $(saleJugador).replaceWith(entraJugador);
     $("#confirmar").modal("hide");
     $("#confirmar").off("click",realizarCambio);
+}
+function eventoGoles(event){
+    $("#nombreJugador").attr("eventoId",event.data.id);
+    $(".modalEventos").empty();
+    generarOpcionesDeGolEquipos()
+}
+function generarOpcionesDeGolEquipos(){
+    var nombreLocal = $("[id][class='titularDelPartido local']");
+    var nombreVisitante = $("[id][class='titularDelPartido visitante']");
+    var titulo = $("<label>").text("Equipos: ");
+    var local = $("<button>").attr("id",nombreLocal.attr("id")).addClass("btn equipos").on("click",seleccionarEquipo).text(nombreLocal.text());
+    var visitante = $("<button>").attr("id",nombreVisitante.attr("id")).addClass("btn equipos").on("click",seleccionarEquipo).text(nombreVisitante.text());
+    $(".modalEventos").append(titulo);
+    $(".modalEventos").append($("<br>"));
+    $(".modalEventos").append(local);
+    $(".modalEventos").append(visitante);
+}
+function seleccionarEquipo(){
+    $(this).text();
+    console.log($(this).text(),$(this).attr("id"));
+    $("#confirmar").on("click",{id:this.id},realizarGol)
+}
+
+function realizarGol(event){
+    var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
+    var tipoDeEvento = $("#nombreJugador").attr("eventoId");
+    var tiempo = $("#tiempoDelPartido").text();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        type:"post",
+        url: "/marcarGol",
+        data:{
+            _token:  token,
+            idp: partido["id"],
+            id1:idJugador1,
+            equipo : event.data.id,
+            num : tiempo,
+            evento : tipoDeEvento,
+        }
+        })
+        .done(function( data ) {
+            cambiarMarcador();
+        }).fail(function(error){
+            console.log(error);
+        });
+    
 }
