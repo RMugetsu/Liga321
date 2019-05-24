@@ -9,7 +9,6 @@
         <div class="col-md-6">
             <div class="Cabecera"></div>
             <div class="DivAbajo col-md-12">
-                
                 @if($entrenador!="vacio")
                     @include('alineacion')
                 @endif
@@ -41,10 +40,7 @@
                 }
                 ?>
             @endif
-            @if($entrenador=="vacio")
-            <?php echo($partido);?>
-            @endif
-
+            
             </div>
         </div>
     </div>
@@ -52,6 +48,10 @@
 </div>
 
 <script>
+
+    var eventos = {!! json_encode($eventos) !!}
+    var partido = {!! json_encode($partido) !!}
+
     var lista_alineacion = @json($alineacion);
     
 
@@ -79,7 +79,6 @@
                     repetido: cambioRepetido,
                 }
             }).done(function(res) {
-                console.log("bieen");
                 antiguaPosicion = res;
                 $("#"+cambioRepetido+" option[value='"+ antiguaPosicion +"']").attr("selected",true);
 
@@ -94,15 +93,61 @@
 
     var alineacion = "";
     var entrenador = '{{$entrenador}}' ;
-    console.log("entrenador: "+entrenador);
     var equipo = {!! json_encode($equipoSeleccionado->toArray(), JSON_HEX_TAG) !!} ;
     var jugadores = {!! json_encode($jugadores->toArray(), JSON_HEX_TAG) !!} ;
+    var nombreContrincante = {!! json_encode($nombreContrincante->toArray(), JSON_HEX_TAG) !!}[0]['nombre'] ;
+    
     var tipo = $("#navbarDropdown");
     generarCabeceraEquipo(equipo[0],".Cabecera");
 
     if (entrenador == "vacio"){
        
         generarListaJugadores(jugadores,".Listado");
+
+        var golesLocal = "";
+        var golesVisitante = "";
+        var equipoLocal = partido[0]['equipolocal'];
+        var equipoVisitante = partido[0]['equipovisitante'];
+
+        for(var i=0; i<eventos.length; i++){
+            if (eventos[i]['tipo']==1){
+                if (eventos[i]['equipo'] == equipoLocal){
+                    golesLocal++;
+                }
+                else {
+                    golesVisitante++;
+                }
+            }
+        }
+
+        if (equipo[0]['id'] == equipoLocal){
+           // var texto = equipo[0]['nombre'] + " " + golesLocal + " - " + golesVisitante + " " + nombreContrincante ;
+            var text = $("<a>").text(equipo[0]['nombre'] + " " + golesLocal + " - " + golesVisitante + " " + nombreContrincante);
+        }
+        else {
+            var text = $("<a>").text(nombreContrincante + " " + golesLocal + " - " + golesVisitante + " " + equipo[0]['nombre']);
+        }
+
+        text.attr("href","/partido/"+partido[0]['id']);
+        var titulo = $("<h4>");
+        titulo.append(text);
+
+        var div = $("<div>");
+        div.append(titulo);
+
+        var h3 = $("<h3>").text("Resultado último partido:");
+
+        $(".DivAbajo").append($("<br><br><br><br><br><br><br>"));
+
+        $(".DivAbajo").append(h3);
+        $(".DivAbajo").append(div);
+
+
+
+        /*         <!--[{"id":1,"tipo":1,"minuto":10,"jugador1":1,"jugador2":null,
+                    "equipo":1,"sancion":null,"partido":1,"created_at":null,"updated_at":null},
+                
+                {"id":2,"tipo":1,"minuto":20,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null},{"id":3,"tipo":1,"minuto":40,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null},{"id":4,"tipo":1,"minuto":30,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null},{"id":5,"tipo":1,"minuto":70,"jugador1":30,"jugador2":null,"equipo":2,"sancion":null,"partido":1,"created_at":null,"updated_at":null}]*/
     }
 
     else {

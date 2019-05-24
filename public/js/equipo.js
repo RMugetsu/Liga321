@@ -1,5 +1,4 @@
 function generarListaJugadores(jugadores,padre){
-    console.log(jugadores);
     var tablaJugadores = $("<table>").attr("class","table table-striped table-dark table-sm tablajugadores");
     var thead = $("<thead>").attr("class","thead-dark");
     $(tablaJugadores).append(thead);

@@ -63,14 +63,15 @@ input {
 
 .calendario {
   height: 90%;
+  background-color: white !important;
+
 }
 
 #calendario {
-  /*height: 60%;*/
+  height: 90%;
   width: 90%;
   align-self: center;
   margin-left: 5%;
-  background-color: white !important;
 }
 
 .tituloCalendario {
