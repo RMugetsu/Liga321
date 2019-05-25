@@ -466,6 +466,7 @@ function sumarMinuto(){
     if (minuto>90){
         minuto=90;
     }
+    $("#tempo").text("Minuto : ");
     $("#tiempoDelPartido").text(minuto);
     if(minuto<"91"){
         if (minuto >= "45" && minuto<="59" && contador == 0){
