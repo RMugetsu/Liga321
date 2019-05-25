@@ -88,8 +88,53 @@ class PartidoController extends Controller
             $equipo = $infopartido[0]["equipovisitante"];
         }elseif ($infopartido[0]["equipovisitante"]==$equipoDelJugador[0]["equipo"]) {
             $equipo = $infopartido[0]["equipolocal"];
+        }else{
+            $equipo = $infopartido[0]["equipolocal"];
         };
         $rivales = jugadore::where("equipo",$equipo)->where("posicion","<",12)->get();
         return $rivales;
+    }
+
+    public function faltaTarjetasLesion(Request $request){
+        $ultimoEvento = evento::create([
+            "tipo" => $request->input("falta"),
+            "minuto" => $request->input("min"),
+            "jugador1" => $request->input("id1"),
+            "jugador1" => $request->input("id2"),
+            "partido" =>$request->input("partido"),
+        ]);
+        if($request->input("amarilla")=="2"){
+            evento::create([
+                "tipo" => $request->input("amarilla"),
+                "minuto" => $request->input("min"),
+                "jugador1" => $request->input("id1"),
+                "falta" => $ultimoEvento->id,
+                "partido" =>$request->input("partido"),
+            ]);
+        }
+        if ($request->input("roja")=="3") {
+            evento::create([
+                "tipo" => $request->input("amarilla"),
+                "minuto" => $request->input("min"),
+                "jugador1" => $request->input("id1"),
+                "falta" => $ultimoEvento->id,
+                "partido" =>$request->input("partido"),
+            ]);
+        }
+        if($request->input("lesion")=="4"){
+            evento::create([
+                "tipo" => $request->input("amarilla"),
+                "minuto" => $request->input("min"),
+                "jugador1" => $request->input("id1"),
+                "falta" => $ultimoEvento->id,
+                "partido" =>$request->input("partido"),
+            ]);
+        }
+        $eventosPartido = evento::where("partido",$request->input("partido"))->get();
+        return $eventosPartido;
+    }
+    public function golesPartidoYaJugado(){
+        $eventosGoles =  evento::where("partido",$id)->where("evento",2)->get();
+        return $eventos;
     }
 }
