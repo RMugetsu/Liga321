@@ -148,4 +148,42 @@ class PartidoController extends Controller
         }
         return $lista;
     }
+    public function sumarPuntos(request $request){
+        if($request->input("glocal")==$request->input("gvisitante"))
+        {
+            $elid = equipo::where("id",$request->input("local"))->get();
+            equipo::where("id",$request->input("local"))->update([
+                "puntos"=>$elid[0]["puntos"]+1,
+                "empate"=>$elid[0]["empate"]+1,
+            ]);
+            $evid = equipo::where("id",$request->input("visitante"))->get();
+            equipo::where("id",$request->input("visitante"))->update([
+                "puntos"=>$evid[0]["puntos"]+1,
+                "empate"=>$evid[0]["empate"]+1,
+            ]);
+        }
+        elseif($request->input("glocal")>$request->input("gvisitante"))
+        {
+            $elid = equipo::where("id",$request->input("local"))->get();
+            equipo::where("id",$request->input("local"))->update([
+                "puntos"=>$elid[0]["puntos"]+3,
+                "victoria"=>$elid[0]["victoria"]+1,
+            ]);
+            $evid = equipo::where("id",$request->input("visitante"))->get();
+            equipo::where("id",$request->input("visitante"))->update([
+                "derrota"=>$evid[0]["derrota"]+1,
+            ]);
+        }elseif($request->input("glocal")<$request->input("gvisitante"))
+        {
+            $elid = equipo::where("id",$request->input("local"))->get();
+            equipo::where("id",$request->input("local"))->update([
+                "derrota"=>$elid[0]["derrota"]+1,
+            ]);
+            $evid = equipo::where("id",$request->input("visitante"))->get();
+            equipo::where("id",$request->input("visitante"))->update([
+                "puntos"=>$evid[0]["puntos"]+3,
+                "victoria"=>$evid[0]["victoria"]+1,
+            ]);
+        }
+    }
 }
