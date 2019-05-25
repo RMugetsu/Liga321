@@ -133,8 +133,19 @@ class PartidoController extends Controller
         $eventosPartido = evento::where("partido",$request->input("partido"))->get();
         return $eventosPartido;
     }
-    public function golesPartidoYaJugado(){
-        $eventosGoles =  evento::where("partido",$id)->where("evento",2)->get();
-        return $eventos;
+    public function golesPartidoYaJugado($id){
+        $eventosGoles =  evento::where("partido",$id)->where("tipo","2")->get();
+        return $eventosGoles;
+    }
+    public function partidoJugadoJugadores(request $request){
+        $lista = $request->input("listajugadores");
+        $mida = sizeof($lista);
+        for ($i=0; $i < sizeof($lista)-1 ; $i++) {
+            $temp = jugadore::where("id",$lista[$i])->get();
+            jugadore::where("id",$lista[$i])->update([
+                "partidosjugados"=>$temp[0]["partidosjugados"]+1,
+            ]);
+        }
+        return $lista;
     }
 }
