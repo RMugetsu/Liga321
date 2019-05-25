@@ -44,7 +44,7 @@ function checkNulls(){
     }
 }
 
-function generarTablas(padre,data,ruta,iconos){
+function generarTablas(padre,data,ruta,iconos,array){
     var ranking_jugadores = ['Id','Goles','Nombre','Apellido','Dorsal'];
 
     //console.log("datatabla: "+data);
@@ -80,6 +80,10 @@ function generarTablas(padre,data,ruta,iconos){
                 $(tabla).append(tbody);
                 controlDeCabecera++;
             }
+            if (padre == "#jugadoresRanking"){
+                $(fila).on("click",{url: ruta+array[x]},redirigir);
+            }
+
             if (y=="id" && ruta!=undefined){
                 $(fila).on("click",{url: ruta+data[x][y]},redirigir);
             }

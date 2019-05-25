@@ -79,22 +79,25 @@
 
 
     function juntar_jugadores_goles(jugadores, goles){
+        var array_ids = []
         for (var i=0; i<jugadores.length; i++){
             var nombre = jugadores[i][0]['nombre'];
             var apellido = jugadores[i][0]['apellido'];
             var dorsal = jugadores[i][0]['dorsal'];
 
             for (j=0; j<goles.length; j++){
+                array_ids.push(goles[j].slice(0,1))
                 if (goles[j][0] == jugadores[i][0]['id']){
                     goles[j].push(nombre);
                     goles[j].push(apellido);
                     goles[j].push(dorsal);
+                    
                     goles[j] = goles[j].slice(1);
                 }
             }
         }
         console.log(goles);
-        generarTablas("#jugadoresRanking",goles,"/jugador/"); //crear tabla nuevo contenido
+        generarTablas("#jugadoresRanking",goles,"/jugador/",undefined, array_ids); //crear tabla nuevo contenido
 
     }
 
