@@ -45,8 +45,15 @@ function checkNulls(){
 }
 
 function generarTablas(padre,data,ruta,iconos){
-    console.log("datatabla: "+data);
-    var cabecera = obtenerCabecera(data);
+    var ranking_jugadores = ['Id','Goles','Nombre','Apellido','Dorsal'];
+
+    //console.log("datatabla: "+data);
+    if (padre == "#jugadoresRanking"){
+        var cabecera = ranking_jugadores;
+    }
+    else {
+        var cabecera = obtenerCabecera(data);
+    }
     var controlDeCabecera = 0;
     var tabla = $("<table>").attr("class","table table-dark table-striped ranking table-fixed");
     var thead = $("<thead>").attr("class","thead-dark");
@@ -92,7 +99,7 @@ function generarTablas(padre,data,ruta,iconos){
 }
 
 function obtenerCabecera(data){
-    console.log("data: "+data);
+    //console.log("data: "+data);
     var cabecera =[];
 
     for (x in data[0]){
@@ -187,7 +194,7 @@ function modificartipo(event){
 
 
 function crearPaginado(parent,info){
-    console.log(info);
+    //console.log(info);
     var divPaginado = $("<div>");
     for (var i = 1; i<= info.last_page; i++) {
         if (i==1 && info.current_page!=1) {
@@ -227,7 +234,7 @@ function ajaxRanking(page){
         .done(function(res){
             $('#ranking').empty();
             $("#RankingPaginado").empty();
-            console.log("ajax data: "+res);
+            //console.log("ajax data: "+res);
             generarTablas("#ranking",res.data,"/equipo/"); //crear tabla nuevo contenido
             //AsignarLinks();
             crearPaginado("#RankingPaginado",res);

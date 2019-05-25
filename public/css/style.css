@@ -134,3 +134,11 @@ html, body {
   color: purple;
 }
 
+.tablaInfoJugador{
+  width: 40%;
+}
+
+.btn-verequipo {
+  padding-left: 15%;
+  padding-right: 15%;
+}

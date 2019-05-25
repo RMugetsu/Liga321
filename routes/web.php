@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@obtenerDatosInicio');
 
+Route::get('/home', 'HomeController@obtenerDatosInicio');
+
 Route::get('/Inicio', 'HomeController@obtenerDatosAjax');
 
 Route::get('/calendario', 'CalendarioController@recogerDatos');

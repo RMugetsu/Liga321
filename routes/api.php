@@ -38,3 +38,5 @@ Route::get('/eventos/partido/rivales/{id}','PartidoController@traerRivales');
 
 Route::get('/eventos/partidoyajugado/{id}','PartidoController@golesPartidoYaJugado');
 
+Route::get('/obtenerJugadoresAjax/{id1}/{id2}/{id3}/{id4}/{id5}','JugadorController@obtenerJugadoresAjax');
+

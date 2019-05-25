@@ -31,11 +31,9 @@ class HomeController extends Controller
 
     public function obtenerDatosInicio(){
         $equipos_ranking = equipo::select('id','nombre','logo','victoria','empate','derrota','puntos')->paginate(10);        
-        $jugadores_ranking = jugadore::select('id','nombre','apellido','dorsal','equipo')->paginate(10);
-        $eventos = evento::where("tipo",1)->get();
-        return view("home", compact('equipos_ranking','jugadores_ranking','eventos'));   
-
-        
+        //$jugadores_ranking = jugadore::select('id','nombre','apellido','dorsal','equipo')->paginate(10);
+        $eventos = evento::where("tipo",1)->orderby('jugador1')->get();
+        return view("home", compact('equipos_ranking','eventos'));           
     }
 
     public function obtenerDatosAjax(){
