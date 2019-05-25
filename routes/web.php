@@ -61,3 +61,5 @@ Route::post('/intercambio','PartidoController@intercambioJugadores');
 Route::post('/marcarGol','PartidoController@gol');
 
 Route::post('/falta','PartidoController@faltaTarjetasLesion');
+
+Route::post('/jugadoresdelpartido','PartidoController@partidoJugadoJugadores');

@@ -2,8 +2,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 tituloPartido"></div>
-            <label for="" id="tiempoDelPartido">44</label>
+        <div class="col-md-12 tituloPartido">
+            <h1 id=tituloPartido></h1>
+        </div>
+            <label id="tiempoDelPartido">40</label>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -41,10 +43,6 @@
     $( document ).ready(function() {
         tiempoDelPartido()
         comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual);
-        if(tipo==3){
-            traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);
-            
-        }
     });
 </script>
 

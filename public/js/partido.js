@@ -1,4 +1,5 @@
 function generarPlantilla(jugadores){
+    
     var plantilla = $("<div>").addClass("col-md-5");
     for(var x = 0; x<11;x++){
         $(plantilla).append($("<button>").text(jugadores[x]['nombre']+" "+jugadores[x]['apellido'])
@@ -8,11 +9,12 @@ function generarPlantilla(jugadores){
         .on("click",{nombre:jugadores[x]['nombre']+" "+jugadores[x]['apellido'],posicion:jugadores[x]["posicion"],id:jugadores[x]["id"]},
         abrirModal)
         );
+        idJugadoresJugandoElPartido.push(jugadores[x]["id"]);
         if(x%2==1){
             $(plantilla).append($("<br>"));
         }
     }
-    $(".row filaPlantilla").append(plantilla);
+    $("[class='row filaPlantilla']").append(plantilla);
 }
 function traerDatosJugadores(id,id2){
     var urlDestino2 = "/api/partido/informacionjugadores/"+id+"/"+id2;
@@ -28,14 +30,16 @@ function traerDatosJugadores(id,id2){
 };
 
 function mostrarEquipoEnElTitulo(nombre,padre,id,num){
+    var titulo = $("#tituloPartido");
     if(num=="1"){
-        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido local").attr("id",id));
-        $(padre).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
-        $(padre).append($("<label>").text(" - ").addClass("titularDelPartido"));
+        $(titulo).append($("<label>").text(nombre).addClass("titularDelPartido local").attr("id",id));
+        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
+        $(titulo).append($("<label>").text(" - ").addClass("titularDelPartido"));
     }else if(num=="2"){
-        $(padre).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
-        $(padre).append($("<label>").text(nombre).addClass("titularDelPartido visitante").attr("id",id));
+        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
+        $(titulo).append($("<label>").text(nombre).addClass("titularDelPartido visitante").attr("id",id));
     }
+    $(padre).append(titulo);
 }
 
 function obtenerNombreEquipo(id,id2,padre){
@@ -59,58 +63,65 @@ function comprobarDiaDelPartido(fecha,fechaActual){
                 console.log("se juega el partido hoy");
                 return true;
             }else if(fecha[2]>fechaActual[1]) {
-                partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id'],".tituloPartido");
-                var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+                obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+                var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
                 $(".plantillas").append(mensaje);
     console.log("hola");
 
             return false;
             // Partido por jugar
             }else if(fecha[2]<fechaActual[1]) {
-                obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
-                var mensaje = $("<h3>").text("El partido se jugara jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+                partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+                var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
                 $(".plantillas").append(mensaje);
             return false;
             // Partido ya jugado
             }
         }else if(fecha[1]>fechaActual[1]) {    
-            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id'],".tituloPartido");
-            var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+                obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+                var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
     console.log("hola");
 
             return false;
             // Partido por jugar
         }else if(fecha[1]<fechaActual[1]) {
-            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
-            var mensaje = $("<h3>").text("El partido se jugara jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+                partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+            var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
             // Partido ya jugado
         }
         return false;
     }else if(fecha[0]>fechaActual[2]) {
-            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id'],".tituloPartido");
-            var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+            var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
     console.log("hola");
 
             return false;
             // Partido por jugar
     }else if(fecha[0]<fechaActual[2]) {
-            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
-            var mensaje = $("<h3>").text("El partido se jugara  el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+            var mensaje = $("<h3>").text("El partido se jugo  el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
             // Partido ya jugado
     }
 };
 
-function sumarMinuto(){
-    var tiempoActual = $("#tiempoDelPartido").text();
-    $("#tiempoDelPartido").text(parseInt(tiempoActual,10)+1);
-    if (tiempoActual == "45"){
-        clearInterval()
+function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
+    if (comprobarDiaDelPartido(fecha,fechaActual)){
+        if(hora>horaActual){
+            var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+            $(".plantillas").append(mensaje);
+        }else if(hora==horaActual || hora+1==horaActual){
+            var fila = $("<div>").addClass("row filaPlantilla");
+            $(".plantillas").append(fila);
+            traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);            
+        }else if(hora<horaActual){
+            console.log("ya se ha jugado")    
+        }
     }
 };
 
@@ -171,7 +182,7 @@ function traerSuplentes(id){
 function generarSuplentes(suplentes){
     var selectSuplentes = $("<select>").attr("id","listaSuplentes").on("change",asignarParametrosARealizarCambios);
     suplentes.forEach(suplente => {
-        var opcion = $("<option>").text(suplente["nombre"]).attr({"idJugador":suplente['id'],"posicionJugador":suplente["posicion"]});
+        var opcion = $("<option>").text(suplente["nombre"]+" "+suplente["apellido"]).attr({"idJugador":suplente['id'],"posicionJugador":suplente["posicion"]});
         $(selectSuplentes).append(opcion);
     });
     $(".modalEventos").append($("<h4>").text("Jugadores Suplentes"));
@@ -199,8 +210,10 @@ function realizarCambio(event){
         })
         .done(function( data ) {
             remplazarBotonDeJugador(data[0],idJugador1,posicionJugador1);
+            idJugadoresJugandoElPartido.push(event.data.id);
             $("#confirmar").off("click",realizarCambio);
             $("#exampleModal").modal("hide");
+            
         }).fail(function(error){
             console.log(error);
         });
@@ -330,7 +343,7 @@ function generarDatosJugadoresRivales(rivales){
     console.log(rivales);
     var selectRivales = $("<select>").attr("id","listarivales").on("change",asignarParametrosARealizarFalta);
     rivales.forEach(rival => {
-        var opcion = $("<option>").text(rival["nombre"]).attr({"idJugador":rival['id']});
+        var opcion = $("<option>").text(rival["nombre"]+" "+rival["apellido"]).attr({"idJugador":rival['id']});
         $(selectRivales).append(opcion);
     });
     $(".modalEventos").append($("<h4>").text("Jugadores Rivales"));
@@ -390,41 +403,26 @@ function realizarFalta(event){
         });
 }
 
-function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
-    if (comprobarDiaDelPartido(fecha,fechaActual)){
-        
-        if(hora>horaActual){
-            var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
-            $(".plantillas").append(mensaje);
-        }else if(1==horaActual || hora+1==horaActual){
-            var fila = $("<div>").addClass("row filaPlantilla");
-            $(".plantillas").append(fila);
-            traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);            
-        }else if(hora<horaActual){
-            console.log("ya se ha jugado")    
-        }
-    }
-};
 
-function tiempoDelPartido() {
-    setInterval(sumarMinuto, 60000);
-    };
 
-function partidoYaJugado(local,visitante,partido,padre){
+
+
+function partidoYaJugado(local,visitante,partido){
     console.log("hola");
-    var urlPartido = "/eventos/partidoyajugado/"+partido;
+    var urlPartido = "/api/eventos/partidoyajugado/"+partido;
     $.ajax({
         url: urlPartido,
         })
         .done(function( data ) {
-            mostrarTituloDelPartidoJugado(data,local,visitante,padre)
+            console.log(data);
+            mostrarTituloDelPartidoJugado(data,local,visitante)
         }).fail(function(error){
             console.log(error);
         });
     console.log("hjola");
 };
 
-function mostrarTituloDelPartidoJugado(eventos,local,visitante,padre){
+function mostrarTituloDelPartidoJugado(eventos,local,visitante){
     var golLocal = 0;
     var golVisitante = 0;
     eventos.forEach(evento => {
@@ -437,24 +435,72 @@ function mostrarTituloDelPartidoJugado(eventos,local,visitante,padre){
     obtenerNombreEquipoJugados(local,visitante,golLocal,golVisitante);
     
 }
-function obtenerNombreEquipoJugados(id,id2,padre,glocal,gvisitante){
+function obtenerNombreEquipoJugados(id,id2,glocal,gvisitante){
     var urlDestino = "/api/info/Equipo/"+id+"/"+id2;
      $.ajax({
              url:urlDestino,
      }
      ).done(function(res){
-        generarTituloPartidoJugado(res[0][0]['nombre'],res[1][0]['nombre'],glocal,gvisitante,padre)
+        generarTituloPartidoJugado(res[0][0]['nombre'],res[1][0]['nombre'],glocal,gvisitante,".tituloPartido")
      }).fail(function(error){
          console.log(error);
      });
  };
 function generarTituloPartidoJugado(nlocal,nvisitante,glocal,gvisitante,padre){
+    console.log(nlocal,nvisitante,glocal,gvisitante,padre);
     var titulo = $("<h1>");
-        $(titulo).append($("<label>").text(nlocal).addClass("titularDelPartido local").attr("id",id));
-        $(titulo).append($("<label>").text(glocal).addClass("titularDelPartido").attr("id",id));
+        $(titulo).append($("<label>").text(nlocal).addClass("titularDelPartido local"));
+        $(titulo).append($("<label>").text(glocal).addClass("titularDelPartido"));
         $(titulo).append($("<label>").text(" - ").addClass("titularDelPartido"));
-        $(titulo).append($("<label>").text(gvisitante).addClass("titularDelPartido").attr("id",id));
-        $(titulo).append($("<label>").text(nvisitante).addClass("titularDelPartido visitante").attr("id",id));
+        $(titulo).append($("<label>").text(gvisitante).addClass("titularDelPartido"));
+        $(titulo).append($("<label>").text(nvisitante).addClass("titularDelPartido visitante"));
         $(padre).append(titulo);
         console.log("hola");
+};
+
+function sumarMinuto(){
+    var horaActual2 = parseInt(momento.format("H"),10)
+    var tiempoActual = moment().minutes();
+    var minuto = tiempoActual;
+    if(horaActual2-hora<0){
+        minuto= minuto+60;
+    }
+    $("#tiempoDelPartido").text(parseInt(minuto,10));
+    if(minuto<"91"){
+        if (minuto >= "45"){
+            $(':button').prop('disabled', true);
+            setTimeout(tiempoDelPartido,900000)
+            console.log(idJugadoresJugandoElPartido);
+        }else if(minuto >= "90"){
+            $(':button').prop('disabled', true);
+            clearInterval(tiempo)
+            console.log(idJugadoresJugandoElPartido);
+            sumarPartidoAJugadores(idJugadoresJugandoElPartido);
+        }
+    }
+    
+};
+
+function tiempoDelPartido() {
+    $(':button').prop('disabled', false);
+    tiempo = setInterval(sumarMinuto, 10000);
+    };
+
+var idJugadoresJugandoElPartido = [];
+
+function sumarPartidoAJugadores(jugadores){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        type:"post",
+        url: "/jugadoresdelpartido",
+        data:{
+            _token :  token,
+            listajugadores : jugadores ,
+            }
+        })
+        .done(function( data ) {
+           console.log(data);
+        }).fail(function(error){
+            console.log(error);
+        });
 }
