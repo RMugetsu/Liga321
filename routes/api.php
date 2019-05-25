@@ -35,3 +35,6 @@ Route::get('/alexaPartido/{Equipo}','AlexaController@InformacionPartido');
 Route::get('/alexaEquipo/{Equipo}','AlexaController@InformacionEquipo');
 
 Route::get('/eventos/partido/rivales/{id}','PartidoController@traerRivales');
+
+Route::get('/eventos/partidoyajugado/{id}','PartidoController@golesPartidoYaJugado');
+

@@ -4,9 +4,6 @@
     <div class="row">
         <div class="col-md-12 tituloPartido"></div>
             <label for="" id="tiempoDelPartido">44</label>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -40,12 +37,13 @@
     var fechaActual = momento.format("L").split("/");
     var horaActual = parseInt(momento.format("H"),10);
     var nose = moment("2019-05-22").isSame(fechaActual);
+    console.log(fecha,fechaActual)
     $( document ).ready(function() {
         tiempoDelPartido()
         comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual);
         if(tipo==3){
-            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
             traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);
+            
         }
     });
 </script>
