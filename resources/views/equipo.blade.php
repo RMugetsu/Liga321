@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="Cabecera"></div>
-            <div class="DivAbajo col-md-12">
+            <br><br><br>
+            <div align="center" class="DivAbajo col-md-12">
                 @if($entrenador!="vacio")
                     @include('alineacion')
                 @endif
@@ -119,24 +120,27 @@
                 }
             }
         }
-
+        var link = $("<a>");
         if (equipo[0]['id'] == equipoLocal){
-            var text = $("<a>").text(equipo[0]['nombre'] + " " + golesLocal + " - " + golesVisitante + " " + nombreContrincante);
+            var text = (" " + equipo[0]['nombre'] + " " + golesLocal + " - " + golesVisitante + " " + nombreContrincante + " ");
         }
         else {
-            var text = $("<a>").text(nombreContrincante + " " + golesLocal + " - " + golesVisitante + " " + equipo[0]['nombre']);
+            var text = (nombreContrincante + " " + golesLocal + " - " + golesVisitante + " " + equipo[0]['nombre']);
         }
+        
+        link.text(text);
+        link.attr("href","/partido/"+partido[0]['id']);
 
-        text.attr("href","/partido/"+partido[0]['id']);
         var titulo = $("<h4>");
-        titulo.append(text);
+        titulo.append($("<img>").attr("src","/img/iconosEquipos/"+equipoLocal+".png"))
+        titulo.append(link);
+        titulo.append($("<img>").attr("src","/img/iconosEquipos/"+equipoVisitante+".png"))
 
         var div = $("<div>");
         div.append(titulo);
 
         var h3 = $("<h3>").text("Resultado último partido:");
 
-        $(".DivAbajo").append($("<br><br><br><br><br><br><br>"));
 
         $(".DivAbajo").append(h3);
         $(".DivAbajo").append(div);

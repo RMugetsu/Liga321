@@ -37,8 +37,16 @@ class EquipoController extends Controller
     public function obtenerEquipoSiendoEntrenador($id){
         $equipoSeleccionado = equipo::where('id',$id)->get();
         $jugadores = jugadore::where('equipo',$id)->orderby('posicion')->get();
+        $partido = partido::where('equipolocal', $id)->orWhere('equipovisitante', $id)->orderby('id')->take(1)->get();
+        $eventos = DB::table('eventos')->where('partido', $partido[0]['id'])->get();
         $entrenador = $id ;
-        return view("equipo", compact('equipoSeleccionado','jugadores'))->with('entrenador', $entrenador);    
+        if ($partido[0]['equipolocal'] == $id){
+            $nombreContrincante = equipo::where('id',$partido[0]['equipovisitante'])->get();
+        }
+        else {
+            $nombreContrincante = equipo::where('id',$partido[0]['equipolocal'])->get('nombre');
+        }
+        return view("equipo", compact('equipoSeleccionado','nombreContrincante','jugadores','partido','eventos'))->with('entrenador', $entrenador);    
     }
 
     public function obtenerUsuario($id){

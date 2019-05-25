@@ -21,8 +21,9 @@ function generarListaJugadores(jugadores,padre){
     $(padre).append(tablaJugadores);
 }
 function generarCabeceraEquipo(equipoInfo,padre){
-    var logo = $("<div>").addClass("col md 2").append($("<img>").attr("src",""));
-    var Nombre = $("<h2>").text(equipoInfo["nombre"]);
+    var logo = $("<div>").addClass("col md 2");
+    var Nombre = $("<h2>").text(equipoInfo["nombre"]+" ");
+    Nombre.append($("<img>").attr("src","/img/iconosEquipos/"+equipoInfo['id']+".png"));
     var Campo = $("<div>").addClass("col md 8").text(equipoInfo["direcciondelcampo"]);
     //var Nombre = $("<div>").addClass("col md 8").text(equipoInfo["Nombre"]+","+equipoInfo["Direccion_del_campo"]);
     var Equipacion = $("<div>").addClass("col md 2");
