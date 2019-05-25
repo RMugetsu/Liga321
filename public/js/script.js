@@ -89,10 +89,19 @@ function generarTablas(padre,data,ruta,iconos,array){
             }
             
            if( y!="id" ) {
-                $(fila).append($("<td>").text(data[x][y]))
-                if (y=="tipo"){
+                
+                if (y=="logo"){
+                    var num = parseInt(x);
+                    var src = "/img/iconosEquipos/"+(num+1)+".png";
+                    $(fila).append($("<td>").append($("<img>").attr("src",src)));
+                }
+                else if (y=="tipo"){
                     var tipo = data[x][y];
                 }
+                else {
+                   $(fila).append($("<td>").text(data[x][y]))
+                }
+
            }
             // Fin Cuerpo
 
