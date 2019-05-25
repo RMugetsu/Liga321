@@ -37,7 +37,7 @@ class HomeController extends Controller
     }
 
     public function obtenerDatosAjax(){
-        $equipos_ranking = equipo::select('id','nombre','logo','victoria','empate','derrota','puntos')->paginate(10);        
+        $equipos_ranking = equipo::select('id','nombre','logo','victoria','empate','derrota','puntos')->orderby('puntos','desc')->paginate(10);        
         return $equipos_ranking;
 
         

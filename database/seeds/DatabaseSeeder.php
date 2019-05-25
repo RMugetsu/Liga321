@@ -431,7 +431,7 @@ class DatabaseSeeder extends Seeder
                     'victoria' => 0,
                     'empate' => 0,
                     'derrota' => 0,
-                    'puntos' => 0,
+                    'puntos' => sizeof($equipos)-$i,
                 ]);
             }
 
