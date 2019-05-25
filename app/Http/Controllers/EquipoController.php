@@ -77,15 +77,20 @@ class EquipoController extends Controller
         $antiguaPosicion = jugadore::where('id',$id)->get('posicion');
         $antiguaPosicion = $antiguaPosicion[0]['posicion'] ;
         $posicion = $request->input('posicion');
-        $id_repetido = $request->input('repetido');
+        
 
         DB::table('jugadores')
         ->where('id', $id)
         ->update(['posicion' => $posicion]);
 
+        if ($request->input('repetido') != "" && $request->input('repetido')!="undefined"){
+            $id_repetido = $request->input('repetido');
+        
         DB::table('jugadores')
         ->where('id', $id_repetido)
         ->update(['posicion' => $antiguaPosicion]);
+    }
+        
 
         return $antiguaPosicion ;
 

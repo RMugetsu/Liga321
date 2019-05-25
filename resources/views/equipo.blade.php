@@ -22,9 +22,9 @@
                 <?php 
                 for ($i=0;$i<sizeof($jugadores);$i++){                    
                     if ($jugadores[$i]['posicion'] < 12) {
-                        echo ("<select onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
+                        echo ("<select name='".$i."' onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
                     } else {
-                        echo ("<select style='background-color: #ECCEFF;' onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
+                        echo ("<select name='".$i."' style='background-color: #ECCEFF;' onchange='cambiarPosicion(".$jugadores[$i]['id'].")' width=50% class='posiciones' id='".$jugadores[$i]['id']."'>");
                     }
                         echo ("<option value='".$jugadores[$i]['posicion']."'>".$jugadores[$i]['posicion']."</option>");
                     for ($j=1;$j<19;$j++){
@@ -57,20 +57,30 @@
     
 
     function cambiarPosicion(id){
+        //console.log($("#"+id+" option:selected").val());
         var ruta = "/cambiarPosicionJugador/"+id ;
-        var valor_select_cambiado = $("#"+id+" option:selected").val();
+        //console.log("id "+id);
+        var valor_select_cambiado = ($("#"+id +" option:selected").val());
         var cambioRepetido = "";
-        for (var i=0; i<19; i++){
-            var valor = $("#"+i+" option:selected").val();
+        for (var i=0; i<17; i++){
+            //console.log(i);
+            var valor = $("[name='"+i+"'] option:selected").val();
             if (valor == valor_select_cambiado){
-                if (i!=id){
-                    cambioRepetido = i ;
-                }
+                var id_valor = document.getElementsByName(i)[1];
+                
+                if (id_valor!=id){
+                    if (id_valor != undefined){
+                    
+                        cambioRepetido = id_valor.id ;
+                        break;
+                    }
+                }   
             }
         }
         
-        var antiguaPosicion = "";
-
+        // var antiguaPosicion = "";
+        console.log(valor_select_cambiado);
+        console.log(cambioRepetido);
         $.ajax({
                 url: ruta,
                 type: "post",
@@ -79,17 +89,15 @@
                     posicion: valor_select_cambiado,
                     repetido: cambioRepetido,
                 }
-            }).done(function(res) {
-                antiguaPosicion = res;
-                $("#"+cambioRepetido+" option[value='"+ antiguaPosicion +"']").attr("selected",true);
-
+            }).done(function(res) {  
+                var antiguaPosicion = res;     
+                if (cambioRepetido != undefined && cambioRepetido != ""){
+                    $("#"+cambioRepetido+" option[value='"+ antiguaPosicion +"']").attr("selected",true);
+                }
             }).fail(function(e) {
                 console.log("error" );
                 console.log(e );
             });
-
-
-
     }
 
     var alineacion = "";
