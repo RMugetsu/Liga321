@@ -14,8 +14,12 @@ class AlexaController extends Controller
 {
     //espacios en ruta: %20
 
-    public function InformacionJugador($nombre, $apellido){
-        $jugador = jugadore::where('nombre',$nombre)->where('apellido',$apellido)->get();
+    public function InformacionJugador($nombre){
+        $var = explode(" ",$nombre);
+        $nombre_jugador = ucfirst($var[0]);
+        $apellido = ucfirst($var[1]);
+
+        $jugador = jugadore::where('nombre','LIKE', '%'.$nombre_jugador.'%')->where('apellido','LIKE', '%'.$apellido.'%')->get();
         return $jugador;
     }
 

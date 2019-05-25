@@ -514,105 +514,6 @@ class DatabaseSeeder extends Seeder
                 return $fechas;
             }
 
-            DB::table('partidos')->insert([
-                'arbitro' => 'arbitro1',
-                'equipolocal' => 1,
-                'equipovisitante' => 2,
-                'fechainicio' => "2019/05/23",
-                'horadeinicio' => 19,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 1,
-                'tipo' => 1,
-                'jugador1'=> 1,
-                'minuto'=> 10,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
-                'tipo' => 1,
-                'jugador1'=> 30,
-                'minuto'=>20,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
-                'tipo' => 1,
-                'jugador1'=> 30,
-                'minuto'=>40,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
-                'tipo' => 1,
-                'jugador1'=> 30,
-                'minuto'=>30,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
-                'tipo' => 1,
-                'jugador1'=> 30,
-                'minuto'=>70,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 1,
-                'tipo' => 1,
-                'jugador1'=> 10,
-                'minuto'=> 10,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 1,
-                'tipo' => 1,
-                'jugador1'=> 14,
-                'minuto'=> 13,
-            ]);
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 1,
-                'tipo' => 1,
-                'jugador1'=> 12,
-                'minuto'=> 15,
-            ]);
-
-
-            DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 1,
-                'tipo' => 1,
-                'jugador1'=> 16,
-                'minuto'=> 10,
-            ]);
-
-
-            /*Schema::create('eventos', function (Blueprint $table) {
-            $table->increments('id')->unique();
-            $table->integer('tipo')->unsigned();
-            $table->integer('minuto');
-            $table->integer('jugador1')->nullable()->unsigned();
-            $table->integer('jugador2')->nullable()->unsigned();
-            $table->integer('equipo')->nullable()->unsigned();
-            $table->integer('sancion')->nullable()->unsigned();
-            $table->integer('partido')->unsigned();
-            $table->foreign('tipo')->references('id')->on('tiposdeeventos');
-            $table->foreign('jugador1')->references('id')->on('jugadores');
-            $table->foreign('jugador2')->references('id')->on('jugadores');
-            $table->foreign('equipo')->references('id')->on('equipos');
-            $table->foreign('sancion')->references('id')->on('eventos');
-            $table->foreign('partido')->references('id')->on('partidos');
-            $table->timestamps();
-        });*/
 
             function temporada(){
                 $fechas = generar_fechas();
@@ -698,5 +599,79 @@ class DatabaseSeeder extends Seeder
                 }
                 $num--;
             }
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 1,
+                'minuto'=> 10,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 2,
+                'tipo' => 1,
+                'jugador1'=> 30,
+                'minuto'=>20,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 2,
+                'tipo' => 1,
+                'jugador1'=> 30,
+                'minuto'=>40,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 2,
+                'tipo' => 1,
+                'jugador1'=> 30,
+                'minuto'=>30,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 2,
+                'tipo' => 1,
+                'jugador1'=> 30,
+                'minuto'=>70,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 10,
+                'minuto'=> 10,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 14,
+                'minuto'=> 13,
+            ]);
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 12,
+                'minuto'=> 15,
+            ]);
+
+
+            DB::table('eventos')->insert([
+                'partido' => 1,
+                'equipo' => 1,
+                'tipo' => 1,
+                'jugador1'=> 16,
+                'minuto'=> 10,
+            ]);
+
     }
 }
