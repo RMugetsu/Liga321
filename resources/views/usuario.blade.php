@@ -13,11 +13,16 @@
             <div class="col-md-12">
                 <h5>E-mail: <?php echo (auth()->user()->email);?></h5><br>
             </div>
-
+            @if ($id_equipo!="vacio")
             <div class="col-md-12">
-                <h5 class="h5equipo"> <?php echo("<a href='/equipo/".$equipo[0]['id']."'>")?>Tu equipo: <?php echo($equipo[0]["nombre"])?></a></h5>
+                <?php if(isset($equipo[0]['id'])){
+                echo ('<h5 class="h5equipo">');
+                echo("<a href='/equipo/".$equipo[0]['id']."'> Tu equipo: " . $equipo[0]["nombre"]);
+                }?>
+                </a></h5>
                 <br>
             </div>
+            @endif
         </div>
         <div align="right" class="col-md-6">
             <div class="col-md-12">
@@ -29,8 +34,11 @@
             </div>
             <br>
             <div class="col-md-12">
-            <?php echo("<a class='btn btn-success' href='/equipo/".$equipo[0]['id']."'>")?>Ir a tu equipo <?php echo($equipo[0]["Nombre"])?></a>
-            </div>
+            <?php if(isset($equipo[0]['id'])){
+                echo("<a class='btn btn-success' href='/equipo/".$equipo[0]['id']."'> Ir a tu equipo ".$equipo[0]["Nombre"]);};
+            ?></a>
+            
+        </div>
         </div>
 
     </div>
