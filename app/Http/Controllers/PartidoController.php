@@ -114,7 +114,7 @@ class PartidoController extends Controller
         }
         if ($request->input("roja")=="3") {
             evento::create([
-                "tipo" => $request->input("amarilla"),
+                "tipo" => $request->input("roja"),
                 "minuto" => $request->input("min"),
                 "jugador1" => $request->input("id1"),
                 "falta" => $ultimoEvento->id,
@@ -123,9 +123,9 @@ class PartidoController extends Controller
         }
         if($request->input("lesion")=="4"){
             evento::create([
-                "tipo" => $request->input("amarilla"),
+                "tipo" => $request->input("lesion"),
                 "minuto" => $request->input("min"),
-                "jugador1" => $request->input("id1"),
+                "jugador1" => $request->input("id2"),
                 "falta" => $ultimoEvento->id,
                 "partido" =>$request->input("partido"),
             ]);
