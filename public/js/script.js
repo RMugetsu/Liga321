@@ -92,7 +92,7 @@ function generarTablas(padre,data,ruta,iconos,array){
                 
                 if (y=="logo"){
                     var num = parseInt(x);
-                    var src = "/img/iconosEquipos/"+(num+1)+".png";
+                    var src = "/img/iconosEquipos/"+data[x]['id']+".png";
                     $(fila).append($("<td>").append($("<img>").attr("src",src)));
                 }
                 else if (y=="tipo"){
