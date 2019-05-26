@@ -6,7 +6,7 @@
             <h1 id=tituloPartido></h1>
         </div>
             <div class="tempo">
-                <h2 id="tempo"><label id="tiempoDelPartido"></label></h2>
+                <h2 id="tempo"></h2>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -41,8 +41,7 @@
     var fechaActual = momento.format("L").split("/");
     var horaActual = parseInt(momento.format("H"),10);
     var nose = moment("2019-05-22").isSame(fechaActual);
-    $( document ).ready(function() {
-        comprobarHorarioDelPartido(fecha,fechaActual,14,horaActual);
-    });
+    console.log(fecha,fechaActual,hora,horaActual)
+    comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual);
 </script>
 

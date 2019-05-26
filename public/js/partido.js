@@ -35,10 +35,10 @@ function mostrarEquipoEnElTitulo(nombre,padre,id,num){
     if(num=="1"){
         $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+id+".png").addClass("titularDelPartido").attr("id",id));
         $(titulo).append($("<label>").text(nombre).addClass("titularDelPartido local").attr("id",id));
-        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido marcador local").attr("id",id));
+        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido marcador local").attr("id","equipo"+id));
         $(titulo).append($("<label>").text(" - ").addClass("titularDelPartido"));
     }else if(num=="2"){
-        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido marcador visitante").attr("id",id));
+        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido marcador visitante").attr("id","equipo"+id));
         $(titulo).append($("<label>").text(nombre).addClass("titularDelPartido visitante").attr("id",id));
         $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+id+".png").addClass("titularDelPartido").attr("id",id));
     }
@@ -60,8 +60,11 @@ function obtenerNombreEquipo(id,id2,padre){
 
 function comprobarDiaDelPartido(fecha,fechaActual){
     if(fecha[0]==fechaActual[2]){
+        console.log(fecha[0],fechaActual[2]);
         if(fecha[1]==fechaActual[0]){
+            console.log(fecha[1],fechaActual[0]);
             if(fecha[2]==fechaActual[1]){
+                console.log(fecha[2],fechaActual[1]);
                 obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
                 return true;
             }else if(fecha[2]>fechaActual[1]) {
@@ -103,10 +106,8 @@ function comprobarDiaDelPartido(fecha,fechaActual){
 
 function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
     if (comprobarDiaDelPartido(fecha,fechaActual)){
-        if(hora>horaActual){
-            var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
-            $(".plantillas").append(mensaje);
-        }else if(hora==horaActual || hora+1==horaActual){
+        console.log(hora,horaActual);
+        if(hora==horaActual || parseInt(hora,10)+1==horaActual){
             if(tipo == 3){
                 var fila = $("<div>").addClass("row filaPlantilla");
                 $(".plantillas").append(fila);
@@ -116,7 +117,11 @@ function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
                 $(".plantillas").append(mensaje);
             }
 
-        }else if(hora<horaActual){
+        }else if(hora>horaActual){
+            var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
+            $(".plantillas").append(mensaje);
+        }
+         else if(hora<horaActual){
             var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
         }
@@ -187,7 +192,7 @@ function realizarCambio(event){
     var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
     var posicionJugador1 = $("#nombreJugador").attr("modal-posicion-jugador");
     var tipoDeEvento = $("#nombreJugador").attr("eventoId");
-    var tiempo = $("#tiempoDelPartido").text();
+    var tiempo = $("#tempo").text().split(":")[1];
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         type:"post",
@@ -255,6 +260,7 @@ function generarOpcionesDeGolEquipos(){
 }
 function seleccionarEquipo(){
     $(this).text();
+    $("#confirmar").off("click",realizarGol)
     $("#confirmar").on("click",{id:this.id},realizarGol);
     $("#confirmar").attr("disabled", false);
 }
@@ -262,7 +268,7 @@ function seleccionarEquipo(){
 function realizarGol(event){
     var idJugador1 = $("#nombreJugador").attr("modal-id-jugador");
     var tipoDeEvento = $("#nombreJugador").attr("eventoId");
-    var tiempo = $("#tiempoDelPartido").text();
+    var tiempo = $("#tempo").text().split(":")[1];
     var token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         type:"post",
@@ -285,7 +291,7 @@ function realizarGol(event){
         });
 }
 function cambiarMarcador(id){
-    var resultado = $("[id='"+id+"'][class='titularDelPartido']");
+    var resultado = $("[id='equipo"+id+"']");
     var valorActual = resultado.text();
     $(resultado).text(parseInt(valorActual,10)+1);
 }
@@ -363,11 +369,16 @@ function realizarFalta(event){
     if(eventos[0]!=undefined){
         evento1 = eventos[0]["value"];
     }
-
+    if(eventos[1]!=undefined){
+        evento1 = eventos[1]["value"];
+    }
     if(eventos[2]!=undefined){
         evento3 = eventos[2]["value"];
     }
-    var tiempo = $("#tiempoDelPartido").text();
+    var tiempo = $("#tempo").text().split(":")[1];
+    if(parseInt(tiempo,10)>60){
+        tiempo=parseInt(tiempo,10)-15;
+    }
     $.ajax({
         type:"post",
         url: "/falta",
@@ -384,8 +395,10 @@ function realizarFalta(event){
             }
         })
         .done(function( data ) {
-            if(eventos[1]!=undefined){
+            console.log(evento1);
+            if(evento1!=undefined){
                 var expulsion = $("button."+idJugador1);
+                console.log(expulsion);
                 $(expulsion).remove();
             }
             $("#confirmar").off("click",realizarFalta);
@@ -449,23 +462,23 @@ function generarTituloPartidoJugado(nlocal,nvisitante,glocal,gvisitante,padre){
 };
 
 var contador = 0
+var parte1= 0;
 function sumarMinuto(){
     var horaActual2 = parseInt(momento.format("H"),10)
     var tiempoActual = moment().minutes();
     var minuto = tiempoActual;
-    if(horaActual2-hora<0){
+    if(horaActual2-hora==1){
         minuto= minuto+60;
     }
     if (minuto>90){
         minuto=90;
     }
-    $("#tempo").text("Minuto : ");
-    $("#tiempoDelPartido").text(minuto);
-    if(minuto<"91"){
-        if (minuto >= "45" && minuto<="59" && contador == 0){
+    $("#tempo").text("Minuto : "+minuto);
+    if(minuto<"106"){
+        if (minuto >= "45" && minuto<="59"){
             $(':button').prop('disabled', true);
-            contador++
-        }else if(minuto >= "90" && (contador == 1 || contador == 0 )){
+            parte1++
+        }else if(minuto >= "105" && contador == 0){
             $(':button').prop('disabled', true);
             clearInterval(tiempo)
             sumarPartidoAJugadores(idJugadoresJugandoElPartido);

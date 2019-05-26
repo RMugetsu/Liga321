@@ -484,7 +484,35 @@ class DatabaseSeeder extends Seeder
                     'notificaciontipo' => 3,
                     'tipo' => 3 ,
                 ]);
-                
+            DB::table('partidos')->insert([
+                'arbitro' => 'arbitro1',
+                'equipolocal' => 3,
+                'equipovisitante' => 4,
+                'fechainicio' => "2019-05-27",
+                'horadeinicio' => 13,
+            ]);
+            DB::table('partidos')->insert([
+                'arbitro' => 'arbitro1',
+                'equipolocal' => 2,
+                'equipovisitante' => 1,
+                'fechainicio' => "2019-05-27",
+                'horadeinicio' => 17,
+            ]);
+            DB::table('partidos')->insert([
+                'arbitro' => 'arbitro1',
+                'equipolocal' => 3,
+                'equipovisitante' => 4,
+                'fechainicio' => "2019-05-27",
+                'horadeinicio' => 13,
+            ]);
+            DB::table('partidos')->insert([
+                'arbitro' => 'arbitro1',
+                'equipolocal' => 2,
+                'equipovisitante' => 1,
+                'fechainicio' => "2019-05-27",
+                'horadeinicio' => 17,
+            ]);
+
 
             $lista_equipos = array();
             for ($i=0; $i<sizeof($equipos);$i++){
@@ -672,6 +700,7 @@ class DatabaseSeeder extends Seeder
                 'jugador1'=> 16,
                 'minuto'=> 10,
             ]);
+
 
     }
 }
