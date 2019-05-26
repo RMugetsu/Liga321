@@ -49,4 +49,8 @@ class HomeController extends Controller
         return $equipos_ranking;   
         
     }
+
+    public function manual(){
+        return view("manual");
+    }
 }

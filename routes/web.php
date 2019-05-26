@@ -17,6 +17,8 @@ Route::get('/home', 'HomeController@obtenerDatosInicio');
 
 Route::get('/Inicio', 'HomeController@obtenerDatosAjax');
 
+Route::get('/manual', 'HomeController@manual');
+
 Route::get('/calendario', 'CalendarioController@recogerDatos');
 
 Route::get('/administracion','UsuarioController@obtenerUsuarios');
@@ -28,6 +30,7 @@ Route::get('/equipo/{id}','EquipoController@obtenerUsuario');
 Route::get('/partido/{id}','PartidoController@obtenerInfoPartido');
 
 Route::get('/jugador/{id}','JugadorController@obtenerJugadorInfo');
+
 
 Route::get('/logged', function () {
     return view('logged');
