@@ -31,7 +31,7 @@ class UsuarioController extends Controller
         $tipo = auth()->user()->tipo;
         if ($tipo == 0 || $tipo == 2){
             $id_equipo = "vacio" ;
-            $equipo = equipo::where("id",'=',$id_equipo)->get(['nombre','id']);
+            // $equipo = equipo::where("id",'=',$id_equipo)->get(['nombre','id']);
             return view("usuario")->with('id_equipo',$id_equipo);
         }
         else {
