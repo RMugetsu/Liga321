@@ -194,6 +194,9 @@ function realizarCambio(event){
     var tipoDeEvento = $("#nombreJugador").attr("eventoId");
     var tiempo = $("#tempo").text().split(":")[1];
     var token = $('meta[name="csrf-token"]').attr('content');
+    if(parseInt(tiempo,10)>=60){
+        tiempo=parseInt(tiempo,10)-15;
+    }
     $.ajax({
         type:"post",
         url: "/intercambio",
@@ -270,6 +273,9 @@ function realizarGol(event){
     var tipoDeEvento = $("#nombreJugador").attr("eventoId");
     var tiempo = $("#tempo").text().split(":")[1];
     var token = $('meta[name="csrf-token"]').attr('content');
+    if(parseInt(tiempo,10)>=60){
+        tiempo=parseInt(tiempo,10)-15;
+    }
     $.ajax({
         type:"post",
         url: "/marcarGol",
@@ -376,7 +382,7 @@ function realizarFalta(event){
         evento3 = eventos[2]["value"];
     }
     var tiempo = $("#tempo").text().split(":")[1];
-    if(parseInt(tiempo,10)>60){
+    if(parseInt(tiempo,10)>=60){
         tiempo=parseInt(tiempo,10)-15;
     }
     $.ajax({
