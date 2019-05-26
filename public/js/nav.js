@@ -21,7 +21,7 @@ function menuDeUsuario(tipo,padre,equipo,id){
 function generarLinks(ruta,id){
     if (id==undefined){
         if (ruta == "memoria"){
-            var linkmemoria = "https://drive.google.com/file/d/1LPe8m9JeKqcQy-LPVWZW5HNvjuEEGhya/view?usp=sharing";
+            var linkmemoria = "https://drive.google.com/file/d/1ra0IdCJLsEdY9S4FdM6dmNaEdQOzLNaJ/view?usp=sharing";
             var a = $("<a>").addClass("dropdown-item").attr("href",linkmemoria).attr("target","_blank").text(ruta);
         }
         else {

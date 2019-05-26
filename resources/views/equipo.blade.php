@@ -68,7 +68,7 @@
             if (valor == valor_select_cambiado){
                 var id_valor = document.getElementsByName(i)[1];
                 
-                if (id_valor!=id){
+                if (id_valor.id!=id){
                     if (id_valor != undefined){
                     
                         cambioRepetido = id_valor.id ;

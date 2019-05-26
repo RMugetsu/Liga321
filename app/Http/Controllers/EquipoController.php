@@ -74,6 +74,10 @@ class EquipoController extends Controller
     }
 
     public function cambiarPosicionJugador(request $request, $id){
+
+        if ($id ==$request->input("repetido")){
+            return "ei";
+        }
         $antiguaPosicion = jugadore::where('id',$id)->get('posicion');
         $antiguaPosicion = $antiguaPosicion[0]['posicion'] ;
         try {
