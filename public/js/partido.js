@@ -68,43 +68,36 @@ function comprobarDiaDelPartido(fecha,fechaActual){
                 obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
                 var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
                 $(".plantillas").append(mensaje);
-
             return false;
-            // Partido por jugar
             }else if(fecha[2]<fechaActual[1]) {
                 partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
                 var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
                 $(".plantillas").append(mensaje);
             return false;
-            // Partido ya jugado
             }
-        }else if(fecha[1]>fechaActual[1]) {
-                obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+        }else if(fecha[1]<fechaActual[1]) {
+            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
                 var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
-            // Partido por jugar
-        }else if(fecha[1]<fechaActual[1]) {
-                partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+        }else if(fecha[1]>fechaActual[1]) {
+            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
             var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
-            // Partido ya jugado
         }
         return false;
-    }else if(fecha[0]>fechaActual[2]) {
-            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+    }else if(fecha[0]<fechaActual[2]) {
+            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
             var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
 
             return false;
-            // Partido por jugar
-    }else if(fecha[0]<fechaActual[2]) {
-            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+    }else if(fecha[0]>fechaActual[2]) {
+            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
             var mensaje = $("<h3>").text("El partido se jugo  el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
-            // Partido ya jugado
     }
 };
 
@@ -476,6 +469,7 @@ function sumarMinuto(){
             $(':button').prop('disabled', true);
             clearInterval(tiempo)
             sumarPartidoAJugadores(idJugadoresJugandoElPartido);
+            sumarPuntos()
             contador++;
         }
     }

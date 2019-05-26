@@ -8,7 +8,6 @@
             <div class="tempo">
                 <h2 id="tempo"><label id="tiempoDelPartido"></label></h2>
             </div>
-            <button onclick="sumarPuntos()">Sumar puntos</button>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
