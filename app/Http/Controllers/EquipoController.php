@@ -76,21 +76,17 @@ class EquipoController extends Controller
     public function cambiarPosicionJugador(request $request, $id){
         $antiguaPosicion = jugadore::where('id',$id)->get('posicion');
         $antiguaPosicion = $antiguaPosicion[0]['posicion'] ;
-        $posicion = $request->input('posicion');
-        
-
-        DB::table('jugadores')
-        ->where('id', $id)
-        ->update(['posicion' => $posicion]);
-
-        if ($request->input('repetido') != "" && $request->input('repetido')!="undefined"){
-            $id_repetido = $request->input('repetido');
-        
-        DB::table('jugadores')
-        ->where('id', $id_repetido)
-        ->update(['posicion' => $antiguaPosicion]);
-    }
-        
+        try {
+            jugadore::where('id',$id)->update([
+            "posicion"=>$request->input("posicion"),
+            ]);
+            jugadore::where('id',$request->input("repetido"))->update([
+                "posicion"=>$antiguaPosicion,
+                ]);
+        }
+        catch (Exception $e) {
+            return "NO";
+        }
 
         return $antiguaPosicion ;
 

@@ -488,8 +488,8 @@ class DatabaseSeeder extends Seeder
                 'arbitro' => 'arbitro1',
                 'equipolocal' => 3,
                 'equipovisitante' => 4,
-                'fechainicio' => "2019-05-27",
-                'horadeinicio' => 13,
+                'fechainicio' => "2019-05-26",
+                'horadeinicio' => 17,
             ]);
             DB::table('partidos')->insert([
                 'arbitro' => 'arbitro1',
