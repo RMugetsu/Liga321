@@ -29,6 +29,7 @@ Route::get('/partido/{id}','PartidoController@obtenerInfoPartido');
 
 Route::get('/jugador/{id}','JugadorController@obtenerJugadorInfo');
 
+
 Route::get('/logged', function () {
     return view('logged');
 });
