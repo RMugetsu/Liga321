@@ -17,6 +17,8 @@ Route::get('/home', 'HomeController@obtenerDatosInicio');
 
 Route::get('/Inicio', 'HomeController@obtenerDatosAjax');
 
+Route::get('/manual', 'HomeController@manual');
+
 Route::get('/calendario', 'CalendarioController@recogerDatos');
 
 Route::get('/administracion','UsuarioController@obtenerUsuarios');

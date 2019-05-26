@@ -11,6 +11,8 @@ function menuDeUsuario(tipo,padre,equipo,id){
     $(padre).append(link);
     link = generarLinks("usuario",id);
     $(padre).append(link);
+    link = generarLinks("manual");
+    $(padre).append(link);
     link = generarLinks("memoria");
     $(padre).append(link);
     link = generarLinks("logout");

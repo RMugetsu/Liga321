@@ -127,6 +127,14 @@ html, body {
   box-shadow: 3px 5px rgb(79, 80, 82, 0.6);
 }
 
+.manual {
+  top:0%;
+  background-color: rgb(255,255,255,0.9);
+  padding-top: 0.5%;
+  padding-bottom: 1%;
+  box-shadow: 3px 5px rgb(79, 80, 82, 0.6);
+}
+
 
 /* Select posiciones de jugadores en equipo */
 
