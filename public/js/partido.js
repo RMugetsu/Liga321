@@ -1,5 +1,5 @@
 function generarPlantilla(jugadores){
-    
+
     var plantilla = $("<div>").addClass("col-md-5");
     for(var x = 0; x<11;x++){
         $(plantilla).append($("<button>").text(jugadores[x]['nombre']+" "+jugadores[x]['apellido'])
@@ -33,14 +33,14 @@ function traerDatosJugadores(id,id2){
 function mostrarEquipoEnElTitulo(nombre,padre,id,num){
     var titulo = $("#tituloPartido");
     if(num=="1"){
-        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+id+".png").addClass("titularDelPartido local").attr("id",id));
+        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+id+".png").addClass("titularDelPartido").attr("id",id));
         $(titulo).append($("<label>").text(nombre).addClass("titularDelPartido local").attr("id",id));
-        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
+        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido marcador local").attr("id",id));
         $(titulo).append($("<label>").text(" - ").addClass("titularDelPartido"));
     }else if(num=="2"){
-        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido").attr("id",id));
+        $(titulo).append($("<label>").text(" 0 ").addClass("titularDelPartido marcador visitante").attr("id",id));
         $(titulo).append($("<label>").text(nombre).addClass("titularDelPartido visitante").attr("id",id));
-        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+id+".png").addClass("titularDelPartido visitante").attr("id",id));
+        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+id+".png").addClass("titularDelPartido").attr("id",id));
     }
     $(padre).append(titulo);
 }
@@ -68,43 +68,36 @@ function comprobarDiaDelPartido(fecha,fechaActual){
                 obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
                 var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
                 $(".plantillas").append(mensaje);
-
             return false;
-            // Partido por jugar
             }else if(fecha[2]<fechaActual[1]) {
                 partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
                 var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
                 $(".plantillas").append(mensaje);
             return false;
-            // Partido ya jugado
             }
-        }else if(fecha[1]>fechaActual[1]) {    
-                obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+        }else if(fecha[1]<fechaActual[1]) {
+            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
                 var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
-            // Partido por jugar
-        }else if(fecha[1]<fechaActual[1]) {
-                partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+        }else if(fecha[1]>fechaActual[1]) {
+            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
             var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
-            // Partido ya jugado
         }
         return false;
-    }else if(fecha[0]>fechaActual[2]) {
-            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
+    }else if(fecha[0]<fechaActual[2]) {
+            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
             var mensaje = $("<h3>").text("El partido se jugara el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
 
             return false;
-            // Partido por jugar
-    }else if(fecha[0]<fechaActual[2]) {
-            partidoYaJugado(partido['equipolocal'],partido['equipovisitante'],partido['id']);
+    }else if(fecha[0]>fechaActual[2]) {
+            obtenerNombreEquipo(partido['equipolocal'],partido['equipovisitante'],".tituloPartido");
             var mensaje = $("<h3>").text("El partido se jugo  el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
             return false;
-            // Partido ya jugado
     }
 };
 
@@ -117,12 +110,12 @@ function comprobarHorarioDelPartido(fecha,fechaActual,hora,horaActual){
             if(tipo == 3){
                 var fila = $("<div>").addClass("row filaPlantilla");
                 $(".plantillas").append(fila);
-                traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);   
+                traerDatosJugadores(partido['equipolocal'],partido['equipovisitante']);
             }else{
                 var mensaje = $("<h3>").text("El partido se esta jugando en este momento");
                 $(".plantillas").append(mensaje);
             }
-         
+
         }else if(hora<horaActual){
             var mensaje = $("<h3>").text("El partido se jugo el "+fecha[2]+" del "+fecha[1]+" de "+fecha[0]+" a las "+hora+"H");
             $(".plantillas").append(mensaje);
@@ -215,7 +208,7 @@ function realizarCambio(event){
             idJugadoresJugandoElPartido.push(event.data.id);
             $("#confirmar").off("click",realizarCambio);
             $("#exampleModal").modal("hide");
-            
+
         }).fail(function(error){
             console.log(error);
         });
@@ -304,7 +297,7 @@ function generarCheckEventos(padre){
     var roja = $("<input>").attr("type","checkbox").val("3");
     var labelLesion = $("<label>").text("Lesión");
     var lesion = $("<input>").attr("type","checkbox").val("4");
-    $(padre).append(labelAmarilla);    
+    $(padre).append(labelAmarilla);
     $(padre).append(amarilla);
     $(padre).append($("<br>"));
     $(padre).append(labelRoja);
@@ -318,7 +311,7 @@ function eventoFalta(event){
     $("#nombreJugador").attr("eventoId",event.data.id);
     $(".modalEventos").empty();
     traerJugadoresEquipoRival($("#nombreJugador").attr("modal-id-jugador"));
-    
+
 }
 
 function traerJugadoresEquipoRival(id){
@@ -430,7 +423,7 @@ function mostrarTituloDelPartidoJugado(eventos,local,visitante){
         }
     });
     obtenerNombreEquipoJugados(local,visitante,golLocal,golVisitante);
-    
+
 }
 function obtenerNombreEquipoJugados(id,id2,glocal,gvisitante){
     var urlDestino = "/api/info/Equipo/"+id+"/"+id2;
@@ -445,13 +438,13 @@ function obtenerNombreEquipoJugados(id,id2,glocal,gvisitante){
  };
 function generarTituloPartidoJugado(nlocal,nvisitante,glocal,gvisitante,padre){
     var titulo = $("<h1>");
-        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+nlocal[0]['id']+".png").addClass("titularDelPartido local"));
+        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+nlocal[0]['id']+".png").addClass("titularDelPartido"));
         $(titulo).append($("<label>").text(nlocal[0]['nombre']).addClass("titularDelPartido local"));
         $(titulo).append($("<label>").text(glocal).addClass("titularDelPartido"));
         $(titulo).append($("<label>").text(" - ").addClass("titularDelPartido"));
         $(titulo).append($("<label>").text(gvisitante).addClass("titularDelPartido"));
         $(titulo).append($("<label>").text(nvisitante[0]['nombre']).addClass("titularDelPartido visitante"));
-        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+nvisitante[0]['id']+".png").addClass("titularDelPartido visitante"));
+        $(titulo).append($("<img>").attr("src","/img/iconosEquipos/"+nvisitante[0]['id']+".png").addClass("titularDelPartido"));
         $(padre).append(titulo);
 };
 
@@ -476,10 +469,11 @@ function sumarMinuto(){
             $(':button').prop('disabled', true);
             clearInterval(tiempo)
             sumarPartidoAJugadores(idJugadoresJugandoElPartido);
+            sumarPuntos()
             contador++;
         }
     }
-    
+
 };
 
 function tiempoDelPartido() {
@@ -503,4 +497,29 @@ function sumarPartidoAJugadores(jugadores){
         }).fail(function(error){
             console.log(error);
         });
-}
+};
+
+function sumarPuntos(){
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var equipoLocal = $("[class='titularDelPartido local']").attr("id");
+    var golesLocal = $("[class='titularDelPartido marcador local']").text();
+    var equipoVisitante = $("[class='titularDelPartido visitante']").attr("id");
+    var golesVisitante = $("[class='titularDelPartido marcador visitante']").text();
+    console.log(equipoLocal,golesLocal,equipoVisitante,golesVisitante)
+    $.ajax({
+        type:"post",
+        url: "/sumarPuntosAEquipo",
+        data:{
+            _token :  token,
+            local : equipoLocal ,
+            glocal : golesLocal,
+            visitante : equipoVisitante,
+            gvisitante : golesVisitante,
+            }
+        })
+        .done(function( data ) {
+            console.log("hecho");
+        }).fail(function(error){
+            console.log(error);
+        });
+};

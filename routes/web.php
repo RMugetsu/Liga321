@@ -66,3 +66,5 @@ Route::post('/marcarGol','PartidoController@gol');
 Route::post('/falta','PartidoController@faltaTarjetasLesion');
 
 Route::post('/jugadoresdelpartido','PartidoController@partidoJugadoJugadores');
+
+Route::post('/sumarPuntosAEquipo','PartidoController@sumarPuntos');
