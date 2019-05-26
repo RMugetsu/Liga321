@@ -134,7 +134,7 @@ class PartidoController extends Controller
         return $eventosPartido;
     }
     public function golesPartidoYaJugado($id){
-        $eventosGoles =  evento::where("partido",$id)->where("tipo","2")->get();
+        $eventosGoles =  evento::where("partido",$id)->where("tipo","1")->get();
         return $eventosGoles;
     }
     public function partidoJugadoJugadores(request $request){

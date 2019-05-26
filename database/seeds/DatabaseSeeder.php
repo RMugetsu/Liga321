@@ -217,7 +217,7 @@ class DatabaseSeeder extends Seeder
             ['Diego','Lopez',13,11,37,0,1], //portero1
             ['Wu','Lei',24,11,27,0,3],
             ['Borja','Iglesias',7,11,26,0,4],
-            ['Mario','Hermoso',22,9,23,0,5],
+            ['Mario','Hermoso',22,11,23,0,5],
             ['Roberto','Rosales',8,11,30,0,6],
             ['Sergio','Garcia',9,11,35,0,7],
             ['Adria','Pedrosa',28,11,21,0,8],
@@ -236,7 +236,7 @@ class DatabaseSeeder extends Seeder
             ['Jordi','Masip',1,12,30,0,1], //portero1
             ['Borja','Fernandez',8,12,38,0,3],
             ['Enes','Unal',9,12,22,0,4],
-            ['Sergio','Guardiola',12,9,27,0,5],
+            ['Sergio','Guardiola',12,12,27,0,5],
             ['Daniele','Verde',11,12,22,0,6],
             ['Keko','Gontan',24,12,27,0,7],
             ['Fernando','Calero',5,12,23,0,8],
@@ -255,7 +255,7 @@ class DatabaseSeeder extends Seeder
             ['Yassine','Bounou',13,13,28,0,1], //portero1
             ['Cristhian','Stuani',7,13,32,0,3],
             ['Cristian','Portugues',9,13,27,0,4],
-            ['Alex','Granell',6,9,30,0,5],
+            ['Alex','Granell',6,13,30,0,5],
             ['Anthony','Lozano',19,13,26,0,6],
             ['Patrick','Roberts',17,13,22,0,7],
             ['Borja','Garcia',10,13,28,0,8],
@@ -274,7 +274,7 @@ class DatabaseSeeder extends Seeder
             ['Alberto','Garcia',1,14,34,0,1], //portero1
             ['Luis','Advincula',17,14,29,0,3],
             ['Raul','De Tomas',9,14,24,0,4],
-            ['Alexandre','Moreno',7,9,25,0,5],
+            ['Alexandre','Moreno',7,14,25,0,5],
             ['Tiago','Dias',14,14,28,0,6],
             ['Gael','Kakuta',10,14,27,0,7],
             ['Adrian','Embarba',11,14,27,0,8],
@@ -293,7 +293,7 @@ class DatabaseSeeder extends Seeder
             ['Geronimo','Rulli',1,15,27,0,1], //portero1
             ['Mikel','Oyarzabal',10,15,22,0,3],
             ['Adnan','Januzaj',11,15,24,0,4],
-            ['Juanmi','Jimenez',7,9,26,0,5],
+            ['Juanmi','Jimenez',7,15,26,0,5],
             ['Ander','Barrenetxea',34,15,17,0,6],
             ['Willian','Jose',12,15,27,0,7],
             ['Theo','Hernandez',19,15,21,0,8],
@@ -312,7 +312,7 @@ class DatabaseSeeder extends Seeder
             ['Oier','Olazabal',13,16,29,0,1], //portero1
             ['Pedro','Lopez',19,16,27,0,3],
             ['Roger','Marti',9,16,30,0,4],
-            ['Coke','Andujar',12,9,26,0,5],
+            ['Coke','Andujar',12,16,26,0,5],
             ['Borja','Mayoral',2,16,37,0,6],
             ['Jason','Remeseiro',23,16,32,0,7],
             ['Enis','Bardhi',10,16,28,0,8],
@@ -332,7 +332,7 @@ class DatabaseSeeder extends Seeder
             ['Juan','Camilo',25,17,25,0,2], 
             ['Ezequiel','Avila',2,17,27,0,3],
             ['Martin','Mantovani',7,17,30,0,4],
-            ['Juanjo','Camacho',17,9,26,0,5],
+            ['Juanjo','Camacho',17,17,26,0,5],
             ['Jorge','Pulido',19,17,37,0,6],
             ['Gonzalo','Melero',9,17,32,0,7],
             ['Enric','Gallego',8,17,28,0,8],
@@ -344,14 +344,14 @@ class DatabaseSeeder extends Seeder
             ['Moi','Gomez',18,17,23,0,14],
             ['Damian','Musto',11,17,28,0,15],
             ['Yangel','Herrera',4,17,28,0,16],
-            ['Carlos','Akapo',17,17,21,0,17],
+            ['Carlos','Akapo',37,17,21,0,17],
             ['Roberto','Santamaria',5,17,33,0,18], //portero2
             //deportivo alaves
             ['Fernando','Pacheco',1,18,26,0,1], //portero1
             ['Jony','Rodriguez',25,18,25,0,2], 
             ['Takashi','Inui',2,18,27,0,3],
             ['Jonathan','Calleri',7,18,30,0,4],
-            ['Patrick','Twumasi',18,9,26,0,5],
+            ['Patrick','Twumasi',18,18,26,0,5],
             ['John','Guidetti',19,18,37,0,6],
             ['Guillermo','Maripan',9,18,32,0,7],
             ['Borja','Baston',8,18,28,0,8],
@@ -360,7 +360,7 @@ class DatabaseSeeder extends Seeder
             ['Tomas','Pina',6,18,27,0,11],
             ['Ruben','Duarte',20,18,24,0,12],
             ['Ximo','Navarro',22,18,31,0,13],
-            ['Diego','Rolan',18,18,23,0,14],
+            ['Diego','Rolan',28,18,23,0,14],
             ['Carlos','Vigaray',11,18,28,0,15],
             ['Martin','Aguirregabiria',4,18,28,0,16],
             ['Adrian','Marin',17,18,21,0,17],
@@ -370,8 +370,8 @@ class DatabaseSeeder extends Seeder
             ['Oscar','Rodriguez',25,19,25,0,2],
             ['Jonathan','Silva',2,19,27,0,3],
             ['Diego','Reyes',7,19,30,0,4],
-            ['Guido','Carrillo',19,9,26,0,5],
-            ['Dimitrios','Siovas',19,19,37,0,6],
+            ['Guido','Carrillo',19,19,26,0,5],
+            ['Dimitrios','Siovas',29,19,37,0,6],
             ['Jose','Arnaiz',9,19,32,0,7],
             ['Ruben','Perez',8,19,28,0,8],
             ['Juanfran','Moreno',16,19,35,0,9],
@@ -389,7 +389,7 @@ class DatabaseSeeder extends Seeder
             ['Marc','Cucurella',25,20,25,0,2], 
             ['Pablo','De Blasis',2,20,27,0,3],
             ['Fabian','Orellana',7,20,30,0,4],
-            ['Sergi','Enrich',20,9,26,0,5],
+            ['Sergi','Enrich',20,20,26,0,5],
             ['Ivan','Ramis',19,20,37,0,6],
             ['Charles','Dias',9,20,32,0,7],
             ['Pedro','Leon',8,20,28,0,8],
@@ -629,7 +629,7 @@ class DatabaseSeeder extends Seeder
             }
 
             DB::table('eventos')->insert([
-                'partido' => 1,
+                'partido' => 5,
                 'equipo' => 1,
                 'tipo' => 1,
                 'jugador1'=> 1,
@@ -637,39 +637,39 @@ class DatabaseSeeder extends Seeder
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
+                'partido' => 5,
+                'equipo' => 20,
                 'tipo' => 1,
-                'jugador1'=> 30,
+                'jugador1'=> 330,
                 'minuto'=>20,
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
+                'partido' => 5,
+                'equipo' => 20,
                 'tipo' => 1,
-                'jugador1'=> 30,
+                'jugador1'=> 330,
                 'minuto'=>40,
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
+                'partido' => 5,
+                'equipo' => 20,
                 'tipo' => 1,
-                'jugador1'=> 30,
+                'jugador1'=> 330,
                 'minuto'=>30,
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
-                'equipo' => 2,
+                'partido' => 5,
+                'equipo' => 20,
                 'tipo' => 1,
-                'jugador1'=> 30,
+                'jugador1'=> 330,
                 'minuto'=>70,
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
+                'partido' => 5,
                 'equipo' => 1,
                 'tipo' => 1,
                 'jugador1'=> 10,
@@ -677,7 +677,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
+                'partido' => 5,
                 'equipo' => 1,
                 'tipo' => 1,
                 'jugador1'=> 14,
@@ -685,7 +685,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             DB::table('eventos')->insert([
-                'partido' => 1,
+                'partido' => 5,
                 'equipo' => 1,
                 'tipo' => 1,
                 'jugador1'=> 12,
@@ -694,7 +694,7 @@ class DatabaseSeeder extends Seeder
 
 
             DB::table('eventos')->insert([
-                'partido' => 1,
+                'partido' => 5,
                 'equipo' => 1,
                 'tipo' => 1,
                 'jugador1'=> 16,
