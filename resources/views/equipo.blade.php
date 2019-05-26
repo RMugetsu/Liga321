@@ -57,24 +57,30 @@
     
 
     function cambiarPosicion(id){
+        //console.log($("#"+id+" option:selected").val());
         var ruta = "/cambiarPosicionJugador/"+id ;
+        //console.log("id "+id);
         var valor_select_cambiado = ($("#"+id +" option:selected").val());
         var cambioRepetido = "";
-        for (var i=0; i<18; i++){
+        for (var i=0; i<17; i++){
+            //console.log(i);
             var valor = $("[name='"+i+"'] option:selected").val();
             if (valor == valor_select_cambiado){
                 var id_valor = document.getElementsByName(i)[1];
                 
-                //if (id_valor!=id){
+                if (id_valor!=id){
                     if (id_valor != undefined){
                     
                         cambioRepetido = id_valor.id ;
                         break;
                     }
-                //}   
+                }   
             }
         }
         
+        // var antiguaPosicion = "";
+        console.log(valor_select_cambiado);
+        console.log(cambioRepetido);
         $.ajax({
                 url: ruta,
                 type: "post",
@@ -84,16 +90,13 @@
                     repetido: cambioRepetido,
                 }
             }).done(function(res) {  
-                var antiguaPosicion = res;
-                var option = "option:eq("+antiguaPosicion+")";
-                console.log(res);
-                  if (cambioRepetido != undefined && cambioRepetido != ""){
-                     var cambio = $("#"+cambioRepetido+" "+option);
-                      cambio.prop("selected",true);
-                  }
+                var antiguaPosicion = res;     
+                if (cambioRepetido != undefined && cambioRepetido != ""){
+                    $("#"+cambioRepetido+" option[value='"+ antiguaPosicion +"']").attr("selected",true);
+                }
             }).fail(function(e) {
-                console.log(e);
-                console.log(valor_select_cambiado);
+                console.log("error" );
+                console.log(e );
             });
     }
 
